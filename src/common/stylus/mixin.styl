@@ -1,0 +1,48 @@
+$base-url = "../../images/"
+// 不换行
+no-wrap()
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap
+
+// 扩展点击区域
+extend-click()
+  position: relative
+  &:before
+    content: ''
+    position: absolute
+    top: -10px
+    left: -10px
+    right: -10px
+    bottom: -10px
+
+// 定位上下剧中
+pos-y-center()
+  position absolute
+  left 0
+  top 50%
+  transform translate3d(0, -50%, 0)
+
+// flex水平垂直剧中
+center-child()
+  display flex
+  align-items: center
+  justify-content: center
+
+// 图片路径
+img-url($img)
+  background-image: url($base-url + $img);
+
+// cover背景
+cover-img($img)
+  img-url($img) 
+  background-repeat: no-repeat
+  background-position: center
+  background-size: cover
+
+// 100背景
+bg-100img($img)
+  img-url($img) 
+  background-repeat: no-repeat
+  background-position: center
+  background-size: 100%
