@@ -17,13 +17,13 @@ module.exports = {
       }
     }
   },
+
   // 打包资源路径
   baseUrl: debug ? '/' : './',
 
   productionSourceMap: false,
-
   lintOnSave: undefined,
-  
+
   chainWebpack: config => {
     config.resolve.alias
     .set("@", resolve("src"))
@@ -36,5 +36,12 @@ module.exports = {
     .set("@images", resolve("src/images"))
     .set("@socket", resolve("src/socket"))
     .set("@views", resolve("src/views"))
+  },
+
+  pluginOptions: {
+    'cube-ui': {
+      postCompile: true,
+      theme: true
+    }
   }
 }
