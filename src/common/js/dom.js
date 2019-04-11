@@ -11,3 +11,7 @@ export function hasClass(el, className) {
   let reg = new RegExp("(^|\\s)" + className + "(\\s|$)");
   return reg.test(className);
 }
+
+export function getEle(el) {
+  return document.querySelector(el);
+}

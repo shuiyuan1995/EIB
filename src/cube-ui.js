@@ -45,7 +45,8 @@ import {
   Swipe,
   Sticky,
   ScrollNav,
-  ScrollNavBar
+  ScrollNavBar,
+  RecycleList
 } from 'cube-ui'
 
 Vue.use(Button)
@@ -84,3 +85,4 @@ Vue.use(Swipe)
 Vue.use(Sticky)
 Vue.use(ScrollNav)
 Vue.use(ScrollNavBar)
+Vue.use(RecycleList)
