@@ -28,7 +28,7 @@
       display block
   // 基础信息
   .basis-message
-    height 3.32rem
+    height 3.76rem
     border-top 1px solid #9bb3d2
     border-bottom 1px solid #9bb3d2
     display flex
@@ -123,14 +123,17 @@
         <p>{{item.text}}</p>
       </router-link>
     </nav>
+    <myfooter></myfooter>
   </div>
 </template>
 
 <script>
 import myheader from '@components/myheader.vue'
+import myfooter from '@components/myfooter.vue'
 export default {
   components: {
-    myheader
+    myheader,
+    myfooter
   },
   data() {
     return {

@@ -4,6 +4,9 @@ import Home from '@views/Home.vue'
 import login from '@views/login.vue'
 import register from '@views/register.vue'
 import investment from '@views/investment.vue'
+import investmentinfo from '@views/investmentinfo.vue'
+import investmentmoney from '@views/investmentmoney.vue'
+import investmentgo from '@views/investmentgo.vue'
 
 Vue.use(Router)
 
@@ -31,6 +34,21 @@ export default new Router({
       path: '/investment',
       name: 'investment',
       component:investment
+    },
+    {
+      path: '/investmentinfo',
+      name: 'investmentinfo',
+      component:investmentinfo
+    },
+    {
+      path: '/investmentmoney',
+      name: 'investmentmoney',
+      component:investmentmoney
+    },
+    {
+      path: '/investmentgo',
+      name: 'investmentgo',
+      component:investmentgo
     }
   ]
 })

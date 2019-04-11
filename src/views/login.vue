@@ -18,7 +18,7 @@
           right 0.6rem
           left auto
   .logininput
-    width 10.58rem
+    width 12.16rem
     height 1.18rem
     border solid 1px #404040
     font-family MicrosoftYaHei
@@ -72,16 +72,19 @@
       <router-link class="link" to="/">忘记密码？</router-link>
       <p>还没账户吗？<router-link class="link" to="/register">立即注册</router-link></p>
     </div>
+    <myfooter></myfooter>
   </div>
 </template>
 
 <script>
 import slider from '@components/slider.vue'
 import myheader from '@components/myheader.vue'
+import myfooter from '@components/myfooter.vue'
 export default {
   components:{
     slider,
-    myheader
+    myheader,
+    myfooter
   }
 }
 </script>

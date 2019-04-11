@@ -26,7 +26,7 @@
     left 0
     top 0
     width  40px
-    height  1.12rem
+    height  1.2rem
     border  1px solid #ccc
     background  #fff
     text-align  center

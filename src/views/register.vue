@@ -33,7 +33,7 @@
           left auto
   .logininput
     outline none
-    width 10.58rem
+    width 12.16rem
     height 1.18rem
     border solid 1px #404040
     font-family MicrosoftYaHei
@@ -102,12 +102,14 @@
       </label>
       <button class="registerbtn">确认注册</button>
     </form>
+    <myfooter></myfooter>
   </div>
 </template>
 
 <script>
 import myheader from '@components/myheader.vue'
 import slider from '@components/slider.vue'
+import myfooter from '@components/myfooter.vue'
 export default {
   data(){
     return{
@@ -116,7 +118,8 @@ export default {
   },
   components:{
     myheader,
-    slider
+    slider,
+    myfooter
   },
   methods:{
     changeregister(isnav){

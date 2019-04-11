@@ -15,3 +15,7 @@ export function hasClass(el, className) {
 export function getEle(el) {
   return document.querySelector(el);
 }
+
+export function getEles(el) {
+  return document.querySelectorAll(el);
+}

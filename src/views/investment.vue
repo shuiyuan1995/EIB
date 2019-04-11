@@ -17,7 +17,10 @@
         color #5570a6
         border-bottom 2px solid #546fa5
   .view-wrapper
-    height 300px
+    position absolute
+    width 100%
+    top 84px
+    bottom 0px
   .item
     height 4rem
     min-width 15rem
@@ -142,12 +145,11 @@
                 </div>
                 <span>{{Math.floor(data.remaining/data.allmoney*100)}}%</span>
               </div>
-              <span class="tenderbtn" :class="data.tender?'old':''">{{data.tender?'已投标':'立即投标'}}</span>
+              <span @click="$router.push('/investmentinfo')" class="tenderbtn" :class="data.tender?'old':''">{{data.tender?'已投标':'立即投标'}}</span>
             </div>
           </div>
         </template>
-        <!-- <div slot="spinner">Loading Data</div>  -->
-        <div slot="noMore">没有更多数据了</div>
+        <myfooter slot="noMore"></myfooter>
       </cube-recycle-list>
     </div>
   </div>
@@ -155,6 +157,7 @@
 
 <script>
 import myheader from '@components/myheader.vue'
+import myfooter from '@components/myfooter.vue'
 export default {
   data(){
     return{
@@ -164,7 +167,8 @@ export default {
     }
   },
   components:{
-    myheader
+    myheader,
+    myfooter
   },
   methods: {
     onFetch() {
@@ -173,7 +177,7 @@ export default {
         console.log('请求')
         // 模拟请求 50 条数据，因为 size 设置为 50
         setTimeout(() => {
-          for (let i = 0; i < 30; i++) {
+          for (let i = 0; i < 19; i++) {
             items.push({
               id: i,
               type:'信',
