@@ -7,6 +7,9 @@ import investment from '@views/investment.vue'
 import investmentinfo from '@views/investmentinfo.vue'
 import investmentmoney from '@views/investmentmoney.vue'
 import investmentgo from '@views/investmentgo.vue'
+import account from '@views/account.vue'
+import ranking from '@views/ranking.vue'
+import security from '@views/security.vue'
 
 Vue.use(Router)
 
@@ -49,6 +52,21 @@ export default new Router({
       path: '/investmentgo',
       name: 'investmentgo',
       component:investmentgo
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component:account
+    },
+    {
+      path: '/ranking',
+      name: 'ranking',
+      component:ranking
+    },
+    {
+      path: '/security',
+      name: 'security',
+      component:security
     }
   ]
 })

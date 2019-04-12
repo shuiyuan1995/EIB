@@ -168,7 +168,7 @@ export default {
           text:'我要投资'
         },
         {
-          to:'/login',
+          to:'/account',
           icon:'icon-zhanghuzhongxin',
           text:'账户中心'
         },
@@ -178,12 +178,12 @@ export default {
           text:'邀请好友'
         },
         {
-          to:'/login',
+          to:'/ranking',
           icon:'icon-paixing',
           text:'收益排行'
         },
         {
-          to:'/login',
+          to:'/security',
           icon:'icon-anquan',
           text:'安全中心'
         },
