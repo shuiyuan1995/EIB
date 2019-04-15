@@ -10,6 +10,11 @@ import investmentgo from '@views/investmentgo.vue'
 import account from '@views/account.vue'
 import ranking from '@views/ranking.vue'
 import security from '@views/security.vue'
+import securitysetting from '@views/securitysetting.vue'
+import bulletin from '@views/bulletin.vue'
+import bulletinlist from '@views/bulletinlist.vue'
+import bulletinnotice from '@views/bulletinnotice.vue'
+import help from '@views/help.vue'
 
 Vue.use(Router)
 
@@ -67,6 +72,31 @@ export default new Router({
       path: '/security',
       name: 'security',
       component:security
+    },
+    {
+      path: '/securitysetting/:type',
+      name: 'securitysetting',
+      component:securitysetting
+    },
+    {
+      path: '/bulletin',
+      name: 'bulletin',
+      component:bulletin
+    },
+    {
+      path: '/bulletinlist',
+      name: 'bulletinlist',
+      component:bulletinlist
+    },
+    {
+      path: '/bulletinnotice',
+      name: 'bulletinnotice',
+      component:bulletinnotice
+    },
+    {
+      path: '/help',
+      name: 'help',
+      component:help
     }
   ]
 })

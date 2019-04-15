@@ -61,7 +61,7 @@
 
 <template>
   <header>
-    <router-link v-if="left" class="link icon icon-pagepreview" to="/"></router-link>
+    <i v-if="left" class="link icon icon-pagepreview" @click="$router.back(-1)"></i>
     <span v-else class="logo">EIB</span>
     <span class="text" v-show="center">{{center}}</span>
     <router-link v-if="right" class="link right" to="/">{{right}}</router-link>

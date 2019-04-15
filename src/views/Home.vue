@@ -188,7 +188,7 @@ export default {
           text:'安全中心'
         },
         {
-          to:'/login',
+          to:'/bulletin',
           icon:'icon-xiaoxi',
           text:'消息及公告'
         },
@@ -203,7 +203,7 @@ export default {
           text:'关于我们'
         },
         {
-          to:'/login',
+          to:'/help',
           icon:'icon-bangzhuzhongxin',
           text:'帮助中心'
         },

@@ -21,34 +21,40 @@
   <div class="security">
     <myheader left="prev" center="安全信息"></myheader>
     <div class="securitylist">
-      <router-link class="item" to="/register">
-        <span class="icon icon-anquanyanzheng"></span>
-        <span>用户名</span>
+      <router-link class="item" to="/securitysetting/0">
+        <span class="icon icon-idinput"></span>
+        <span>用户名修改</span>
         <span>已设置</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
-      <router-link class="item" to="/register">
-        <span class="icon icon-anquanyanzheng"></span>
+      <router-link class="item" to="/securitysetting/1">
+        <span class="icon icon-shimingrenzheng"></span>
         <span>实名认证</span>
         <span>已设置</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
-      <router-link class="item" to="/register">
+      <router-link class="item" to="/securitysetting/2">
         <span class="icon icon-anquanyanzheng"></span>
         <span>登录密码</span>
         <span>已设置</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
-      <router-link class="item" to="/register">
-        <span class="icon icon-anquanyanzheng"></span>
+      <router-link class="item" to="/securitysetting/3">
+        <span class="icon icon-jiaoyimima"></span>
         <span>交易密码</span>
         <span>已设置</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
-      <router-link class="item" to="/register">
-        <span class="icon icon-anquanyanzheng"></span>
-        <span>安全验证</span>
-        <span>已设置</span>
+      <router-link class="item" to="/securitysetting/4">
+        <span class="icon icon-shoujibangding"></span>
+        <span>手机绑定</span>
+        <span>已绑定</span>
+        <span class="icon icon-pagenext"></span>
+      </router-link>
+      <router-link class="item" to="/securitysetting/5">
+        <span class="icon icon-youxiangbangding"></span>
+        <span>邮箱绑定</span>
+        <span>已绑定</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
     </div>

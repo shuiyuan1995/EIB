@@ -75,7 +75,7 @@
       </nav>
       <ul class="tablelist">
         <li v-for="item in 10" :key="item">
-          <span :class="item<4?'good':''" class="icon icon-shouye"></span>
+          <span :class="item<4?'good':''" class="icon icon-B-paihangbang"></span>
           <span>a*****</span>
           <span>5,154.94</span>
         </li>
