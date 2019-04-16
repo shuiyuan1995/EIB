@@ -15,6 +15,9 @@ import bulletin from '@views/bulletin.vue'
 import bulletinlist from '@views/bulletinlist.vue'
 import bulletinnotice from '@views/bulletinnotice.vue'
 import help from '@views/help.vue'
+import helpfinancial from '@views/helpfinancial.vue'
+import helpoperation from '@views/helpoperation.vue'
+import helplist from '@views/helplist.vue'
 
 Vue.use(Router)
 
@@ -97,6 +100,21 @@ export default new Router({
       path: '/help',
       name: 'help',
       component:help
+    },
+    {
+      path: '/helpfinancial/:page',
+      name: 'helpfinancial',
+      component:helpfinancial
+    },
+    {
+      path: '/helpoperation',
+      name: 'helpoperation',
+      component:helpoperation
+    },
+    {
+      path: '/helplist/:page',
+      name: 'helplist',
+      component:helplist
     }
   ]
 })

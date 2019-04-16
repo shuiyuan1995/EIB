@@ -34,19 +34,19 @@
   <div class="help">
     <myheader left="prev" center="帮助"></myheader>
     <nav class="helpnav">
-      <div @click="$router.push('/helpfinancial')">
+      <div @click="$router.push('/helpfinancial/a')">
         <i class="icon icon-anquan"></i>
         <p>理财问题</p>
       </div>
-      <div>
+      <div @click="$router.push('/helpoperation')">
         <i class="icon icon-anquan"></i>
         <p>操作流程</p>
       </div>
-      <div>
+      <div @click="$router.push('/helplist/a')">
         <i class="icon icon-anquan"></i>
         <p>账户问题</p>
       </div>
-      <div>
+      <div @click="$router.push('/helplist/b')">
         <i class="icon icon-anquan"></i>
         <p>安全问题</p>
       </div>
