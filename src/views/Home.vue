@@ -193,12 +193,12 @@ export default {
           text:'消息及公告'
         },
         {
-          to:'/login',
+          to:'/cooperation',
           icon:'icon-hezuo',
           text:'招商合作'
         },
         {
-          to:'/login',
+          to:'/about',
           icon:'icon-women',
           text:'关于我们'
         },

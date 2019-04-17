@@ -8,6 +8,11 @@ import investmentinfo from '@views/investmentinfo.vue'
 import investmentmoney from '@views/investmentmoney.vue'
 import investmentgo from '@views/investmentgo.vue'
 import account from '@views/account.vue'
+import accountRecharge from '@views/accountRecharge.vue'
+import accountExtract from '@views/accountExtract.vue'
+import accountHistory from '@views/accountHistory.vue'
+import accountitem from '@views/accountitem.vue'
+import accountsetting from '@views/accountsetting.vue'
 import ranking from '@views/ranking.vue'
 import security from '@views/security.vue'
 import securitysetting from '@views/securitysetting.vue'
@@ -18,6 +23,8 @@ import help from '@views/help.vue'
 import helpfinancial from '@views/helpfinancial.vue'
 import helpoperation from '@views/helpoperation.vue'
 import helplist from '@views/helplist.vue'
+import cooperation from '@views/cooperation.vue'
+import about from '@views/About.vue'
 
 Vue.use(Router)
 
@@ -65,6 +72,31 @@ export default new Router({
       path: '/account',
       name: 'account',
       component:account
+    },
+    {
+      path: '/accountRecharge',
+      name: 'accountRecharge',
+      component:accountRecharge
+    },
+    {
+      path: '/accountExtract',
+      name: 'accountExtract',
+      component:accountExtract
+    },
+    {
+      path: '/accountHistory',
+      name: 'accountHistory',
+      component:accountHistory
+    },
+    {
+      path: '/accountitem',
+      name: 'accountitem',
+      component:accountitem
+    },
+    {
+      path: '/accountsetting',
+      name: 'accountsetting',
+      component:accountsetting
     },
     {
       path: '/ranking',
@@ -115,6 +147,16 @@ export default new Router({
       path: '/helplist/:page',
       name: 'helplist',
       component:helplist
+    },
+    {
+      path: '/cooperation',
+      name: 'cooperation',
+      component:cooperation
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component:about
     }
   ]
 })

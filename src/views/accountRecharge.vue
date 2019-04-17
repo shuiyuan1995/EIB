@@ -1,0 +1,85 @@
+<style lang="stylus" scoped>
+  h2
+    font-size 0.72rem
+    padding 0.56rem 0.8rem
+  .changemoney
+    margin 0 0.8rem
+    padding 0 0.4rem
+    height 1.2rem
+    background-color #e5e5e5
+    font-size 0.56rem
+    display flex
+    align-items center
+    color #8e8e8e
+    span:first-of-type
+      flex 1
+      color #000000
+  .main
+    .img
+      width 5.6rem
+      height 5.6rem
+      background-color #e5e5e5
+      margin 1rem auto 0.56rem
+    .save
+      font-size 0.56rem
+      color #5570a6
+      text-align center
+      margin-bottom 1.08rem
+    .title
+      font-size 0.56rem
+      margin-bottom 0.28rem
+      text-align center
+  .rechargeBottom
+    background-color #9bb6d3
+    border-radius 0.2rem
+    margin 0.56rem
+    font-size 0.48rem
+    padding 0.4rem
+    line-height 0.72rem
+    h3
+      font-size 0.56rem
+      margin-bottom 0.16rem
+</style>
+
+<template>
+  <div class="accountRecharge">
+    <myheader left="prev" center="EOS充币"></myheader>
+    <h2>EOS充币</h2>
+    <div class="changemoney">
+      <span>EOS</span>
+      <span>选择币种</span>
+      <i class="icon icon-pagenext"></i>
+    </div>
+    <div class="main">
+      <div class="img"></div>
+      <p class="save">保存二维码</p>
+      <p class="title">EIBdeposit</p>
+      <p class="save">复制地址</p>
+      <p class="title">1111111</p>
+      <p class="save">复制Tag</p>
+    </div>
+    <div class="rechargeBottom">
+      <h3>充值须知</h3>
+      <p>1.请勿向上述地址充值任何非EOS1资产，否则资产将不可找回。</p>
+      <p>2.通过MEMO方式充值EOS1时，需填写我们提供的数字形式的MEMO标签，非法MEMO充值会导致交易失败，请您谅解。</p>
+      <p>3.EOS暂不支持lnline方式的转账充值，通过lnline方式的转账充值将不会上账，请您谅解。</p>
+      <p>4.请务必填写并仔细核对地址标签，这是您账户的唯一标识，否则资产将不可找回。</p>
+      <p>5.您充值至上述地址后，需要整个网络节点的确认，1次网络确认后到账，1次网络确认后可提币。</p>
+      <p>6.最小充值金额: 0.1EOS1，小于最小金额的充值将不会上账且无法退回。</p>
+      <p>7.您的充值地址不会经常，可以重复充值；如有更改，我们会尽量通过网站公告或邮件通知您。</p>
+      <p>8.请务必确认电脑浏览器安全，防止信息被篡改或泄露。</p>
+    </div>
+    <myfooter></myfooter>
+  </div>
+</template>
+
+<script>
+import myheader from '@components/myheader.vue'
+import myfooter from '@components/myfooter.vue'
+export default {
+  components:{
+    myheader,
+    myfooter
+  },
+}
+</script>

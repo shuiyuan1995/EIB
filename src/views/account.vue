@@ -80,6 +80,21 @@
       color #ffffff
       font-size 0.48rem
       background-color #7eaad0
+  .accountnav
+    display flex
+    padding 0.56rem 0
+    border-bottom 8px solid #eeeeee
+    &>div
+      flex 1
+      text-align center
+      color #0a3ea6
+    .icon
+      font-size 1.2rem
+    p
+      font-size 0.56rem
+      margin-top 0.16rem
+  .thetable
+    padding 0 0.6rem 0 0.72rem
 </style>
 
 <template>
@@ -118,6 +133,25 @@
       </div>
       <router-link class="investmentbtn" to="/">立即投资</router-link>
     </div>
+    <div class="accountnav">
+      <div @click="$router.push('/accountRecharge')">
+        <i class="icon icon-chongzhi1"></i>
+        <p>充值</p>
+      </div>
+      <div @click="$router.push('/accountExtract')">
+        <i class="icon icon-tixian"></i>
+        <p>提现</p>
+      </div>
+      <div @click="$router.push('/accountsetting')">
+        <i class="icon icon-nengtoutouziguanlixitongtubiao_tongjifenxi"></i>
+        <p>投资管理</p>
+      </div>
+      <div @click="$router.push('/accountHistory')">
+        <i class="icon icon-jilu2-copy"></i>
+        <p>交易记录</p>
+      </div>
+    </div>
+    <accounttable class="thetable"></accounttable>
     <myfooter></myfooter>
   </div>
 </template>
@@ -125,10 +159,12 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import accounttable from '@components/accounttable.vue'
 export default {
   components:{
     myheader,
-    myfooter
+    myfooter,
+    accounttable
   },
 }
 </script>
