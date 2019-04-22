@@ -25,6 +25,10 @@ import helpoperation from '@views/helpoperation.vue'
 import helplist from '@views/helplist.vue'
 import cooperation from '@views/cooperation.vue'
 import about from '@views/About.vue'
+import invitation from '@views/invitation.vue'
+import invitationpromote from '@views/invitationpromote.vue'
+import invitationranking from '@views/invitationranking.vue'
+import invitationreward from '@views/invitationreward.vue'
 
 Vue.use(Router)
 
@@ -97,6 +101,26 @@ export default new Router({
       path: '/accountsetting',
       name: 'accountsetting',
       component:accountsetting
+    },
+    {
+      path: '/invitation',
+      name: 'invitation',
+      component:invitation
+    },
+    {
+      path: '/invitationpromote',
+      name: 'invitationpromote',
+      component:invitationpromote
+    },
+    {
+      path: '/invitationranking',
+      name: 'invitationranking',
+      component:invitationranking
+    },
+    {
+      path: '/invitationreward',
+      name: 'invitationreward',
+      component:invitationreward
     },
     {
       path: '/ranking',

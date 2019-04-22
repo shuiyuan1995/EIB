@@ -3,10 +3,8 @@ const state = {
   access_token: "",
   // 用户信息
   userInfo: {},
-  // 邀请人电话
-  invite_tel: "",
-  // 邀请经销商
-  dealer: ""
+  // 帮助中心数据
+  helpdata:{}
 };
 
 export default state;

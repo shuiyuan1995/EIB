@@ -1,0 +1,63 @@
+<style lang="stylus" scoped>
+  .bg
+    width 100%
+    height 5.92rem
+    background url('../assets/images/invitation.jpg') no-repeat center
+    background-size 100%
+    padding 10px
+    p
+      font-size 14px
+  .title
+    font-size 0.56rem
+    padding 0.4rem
+    line-height 0.72rem
+  .copy
+    display flex
+    padding 0.4rem
+    .btn
+      flex 0 0 100px
+      padding-top 10px
+      padding-bottom 10px
+      background #9bb6d5
+    .input
+      flex 1
+  .img
+    width 104px
+    height 104px
+    background-color #e8edeb
+    margin 0.8rem auto
+  .savebtn
+    width 90%
+    margin 0 auto
+    background #9bb6d5
+</style>
+
+<template>
+  <div class="invitationpromote">
+    <myheader left="prev" center="邀请好友"></myheader>
+    <div class="bg">
+      <p>方法一：通过微信邀请</p>
+    </div>
+    <p class="title">方法二：复制下面的邀请链接发送给好友，邀请朋友加入EOS。</p>
+    <div class="copy">
+      <cube-input class="input" v-model="value" readonly></cube-input>
+      <cube-button class="btn">点击复制</cube-button>
+    </div>
+    <p class="title">方法三：邀请好友加入EOS，注册时输入您注册使用的手机号码。</p>
+    <p class="title">方法四：通过自己的二维码邀请好友注册。</p>
+    <div class="img"></div>
+    <cube-button class="savebtn">点击保存</cube-button>
+    <myfooter></myfooter>
+  </div>
+</template>
+
+<script>
+import myheader from '@components/myheader.vue'
+import myfooter from '@components/myfooter.vue'
+export default {
+  components:{
+    myheader,
+    myfooter
+  },
+}
+</script>

@@ -9,6 +9,10 @@ const mutations = {
   [types.SET_USER_INFO](state, userInfo) {
     state.userInfo = userInfo;
   },
+  // 设置帮助中心数据
+  [types.SET_HELPDATA](state, helpdata) {
+    state.helpdata = helpdata;
+  },
   // 设置邀请人电话
   [types.SET_INVITE_TEL](state, invite_tel) {
     state.invite_tel = invite_tel;

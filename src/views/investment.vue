@@ -156,14 +156,23 @@
 </template>
 
 <script>
+import {get} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 export default {
+  created(){
+    // get('/api/help').then(json=>{
+    //   let {phone,qq} = json.data.information
+    //   this.phone = phone
+    //   this.qq = qq
+    // })
+  },
   data(){
     return{
       size: 20,
       infinite: true,
-      offset:100
+      offset:100,
+      thisitem:[],
     }
   },
   components:{
@@ -176,21 +185,29 @@ export default {
       return new Promise((resolve) => {
         console.log('请求')
         // 模拟请求 50 条数据，因为 size 设置为 50
-        setTimeout(() => {
-          for (let i = 0; i < 19; i++) {
-            items.push({
-              id: i,
-              type:'信',
-              title:'暖宝宝-EOS过冬理财计划',
-              allmoney:'100.0000',
-              Rate:'13%',
-              day:'30',
-              remaining:'10.0000',
-              tender:false
-            })
-          }
+        get('/api/bid_list').then(json=>{
+          console.log(json)
+          this.thisitem.push(json.data[0].data)
           resolve(items)
-        }, 1000)
+          // let {phone,qq} = json.data.information
+          // this.phone = phone
+          // this.qq = qq
+        })
+        // setTimeout(() => {
+        //   for (let i = 0; i < 21; i++) {
+        //     items.push({
+        //       id: i,
+        //       type:'信',
+        //       title:'暖宝宝-EOS过冬理财计划',
+        //       allmoney:'100.0000',
+        //       Rate:'13%',
+        //       day:'30',
+        //       remaining:'10.0000',
+        //       tender:false
+        //     })
+        //   }
+        // resolve(items)
+        // }, 1000)
       })
     }
   }

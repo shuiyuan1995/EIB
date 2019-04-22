@@ -6,7 +6,7 @@
   <div class="helpoperation">
     <myheader left="prev" center="投资流程"></myheader>
     <div class="helpoperationmain">
-      <img src="../assets/images/helpoperation.jpg" alt="" srcset="">
+      <img :src="helpdata.operation" alt="" srcset="">
     </div>
     <myfooter></myfooter>
   </div>
@@ -15,10 +15,16 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {mapGetters} from 'vuex';
 export default {
   components:{
     myheader,
     myfooter
   },
+  computed:{
+    ...mapGetters([
+      "helpdata"
+    ]),
+  }
 }
 </script>

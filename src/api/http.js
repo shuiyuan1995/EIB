@@ -6,12 +6,12 @@ import store from "@store";
 const http = axios.create({
   baseURL:
     process.env.NODE_ENV !== "production"
-      ? "http://chuangan.abcdefg.fun/api"
-      : "http://chuangan.abcdefg.fun/api", // 基础路径
+      ? "http://192.168.1.50/api"
+      : "http://192.168.1.50/api", // 基础路径
   timeout: 30000, // 请求延时
 });
 
-// 请求拦截
+// // 请求拦截
 http.interceptors.request.use(config => {
   // 参数解析
   config.method === "post"
@@ -20,10 +20,12 @@ http.interceptors.request.use(config => {
   // 数据类型
   config.headers["Accept"] = "application/json";
   // token
-  config.headers["Authorization"] =
+  if(store.state.access_token){
+    config.headers["Authorization"] =
     process.env.NODE_ENV !== "production"
       ? `Bearer ${store.state.access_token}`
       : `Bearer ${store.state.access_token}`;
+  }
   return config;
 });
 

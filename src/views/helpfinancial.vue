@@ -28,9 +28,7 @@
     <ul>
       <li class="list" v-for="(item,index) in thislist" :key="index" @click="thisactive=index">
         <p><i class="point"></i><span>{{item.title}}</span><i class="icon icon-pagenext"></i></p>
-        <div class="item" v-show="thisactive==index">
-          <p v-for="(it,ind) in item.txt" :key="ind">{{it}}</p>
-          <img v-if="item.img" :src="item.img">
+        <div class="item" v-show="thisactive==index" v-html="item.content">
         </div>
       </li>
     </ul>
@@ -41,6 +39,7 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {mapGetters} from 'vuex';
 export default {
   data(){
     return{
@@ -289,8 +288,11 @@ export default {
     myfooter
   },
   computed:{
+    ...mapGetters([
+      "helpdata"
+    ]),
     thislist(){
-      return this.data[this.$route.params.page]
+      return this.helpdata.list[this.$route.params.page]
     }
   }
 }

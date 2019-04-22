@@ -28,7 +28,7 @@
       display block
   // 基础信息
   .basis-message
-    height 3.76rem
+    // height 3.76rem
     border-top 1px solid #9bb3d2
     border-bottom 1px solid #9bb3d2
     display flex
@@ -36,6 +36,7 @@
     color #4b4b4b
     text-align center
     padding-top 0.32rem
+    padding-bottom 0.24rem
     &>div
       flex 0 0 33%
     .basis-title
@@ -78,7 +79,7 @@
   <div class="home">
     <myheader></myheader>
     <!-- 轮播 -->
-    <cube-slide class="swper" :data="items">
+    <cube-slide class="swper" :data="img">
       <template class="dots" slot="dots" slot-scope="props">
         <span class="my-dot" :class="{active: props.current === index}" v-for="(item, index) in props.dots" :key="index">{{index + 1}}</span>
       </template>
@@ -86,8 +87,8 @@
     <!-- 广播 -->
     <div class="message">
       <i class="icon icon-laba"></i>
-      <cube-slide direction="vertical" :showDots="false" class="swper1" :data="lists">
-        <cube-slide-item v-for="(item, index) in lists" :key="index">
+      <cube-slide direction="vertical" :showDots="false" class="swper1" :data="investment_msg">
+        <cube-slide-item v-for="(item, index) in investment_msg" :key="index">
           <span class="message-txt">{{item}}</span>
         </cube-slide-item>
       </cube-slide>
@@ -97,23 +98,23 @@
       <div>
         <p class="basis-title">累计成交金额</p>
         <span class="icon icon-EOS">EOS</span>
-        <p class="basis-eos">111111111.00</p>
-        <p class="basis-price">≈￥1.333</p>
-        <p class="basis-num">项目：12 个</p>
+        <p class="basis-eos">{{trading_amount.EOS}}</p>
+        <p class="basis-price">≈￥{{trading_amount.money}}</p>
+        <!-- <p class="basis-num">项目：12 个</p> -->
       </div>
       <div>
         <p class="basis-title">累计创造收益</p>
         <span class="icon icon-EOS">EOS</span>
-        <p class="basis-eos">111111111.00</p>
-        <p class="basis-price">≈￥1.333</p>
-        <p class="basis-num">投资：12 笔</p>
+        <p class="basis-eos">{{areate_amount.EOS}}</p>
+        <p class="basis-price">≈￥{{areate_amount.money}}</p>
+        <!-- <p class="basis-num">投资：12 笔</p> -->
       </div>
       <div>
         <p class="basis-title">已还本金</p>
         <span class="icon icon-EOS">EOS</span>
-        <p class="basis-eos">111111111.00</p>
-        <p class="basis-price">≈￥1.333</p>
-        <p class="basis-num">坏账率：0.0%</p>
+        <p class="basis-eos">{{repayment.EOS}}</p>
+        <p class="basis-price">≈￥{{repayment.money}}</p>
+        <!-- <p class="basis-num">坏账率：0.0%</p> -->
       </div>
     </div>
     <!-- 功能列表 -->
@@ -128,34 +129,31 @@
 </template>
 
 <script>
+import {get} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 export default {
+  created(){
+    get('/api/index').then(json=>{
+      let {img,investment_msg,areate_amount,repayment,trading_amount} = json.data
+      this.img = img
+      this.investment_msg = investment_msg
+      this.areate_amount = areate_amount
+      this.repayment = repayment
+      this.trading_amount = trading_amount
+    })
+  },
   components: {
     myheader,
     myfooter
   },
   data() {
     return {
-      items: [
-        {
-          url: 'http://www.didichuxing.com/',
-          image: require('../assets/images/01.jpg')
-        },
-        {
-          url: 'http://www.didichuxing.com/',
-          image: require('../assets/images/02.jpg')
-        },
-        {
-          url: 'http://www.didichuxing.com/',
-          image: require('../assets/images/01.jpg')
-        },
-        {
-          url: 'http://www.didichuxing.com/',
-          image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide03.png'
-        }
-      ],
-      lists: ['xxx投资了yyy','zzz投资了yyy','rrr投资了yyy','vvv投资了yyy',],
+      img:[],
+      investment_msg:[],
+      areate_amount:{},
+      repayment:{},
+      trading_amount:{},
       navlists: [
         {
           to:'/login',
@@ -173,7 +171,7 @@ export default {
           text:'账户中心'
         },
         {
-          to:'/login',
+          to:'/invitation',
           icon:'icon-weibiaoti-',
           text:'邀请好友'
         },
