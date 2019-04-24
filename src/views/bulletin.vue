@@ -81,8 +81,8 @@
       <span @click="changetable(true)" :class="thisbulletin?'active':''">消息</span>
     </div>
     <ul class="tablelist" v-show="!thisbulletin">
-      <li v-for="item in 10" :key="item" @click="$router.push('/bulletinlist')">
-        <span>暖宝宝-EOS过冬理财计划...</span><span>2018-04-19</span>
+      <li v-for="(item,index) in notice" :key="index" @click="$router.push('/bulletinlist')">
+        <span>{{item.title}}</span><span>2018-04-19</span>
       </li>
     </ul>
     <div class="tablelist1" v-show="thisbulletin">
@@ -110,16 +110,25 @@
 </template>
 
 <script>
+import {get} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 export default {
+  // created(){
+  //   get('/login/message').then(json=>{
+  //     let {notice} = json.data
+
+  //     this.notice = [...notice]
+  //   })
+  // },
   components:{
     myheader,
     myfooter
   },
   data(){
     return{
-      thisbulletin:true
+      thisbulletin:false,
+      notice:[],
     }
   },
   methods:{

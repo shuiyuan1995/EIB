@@ -6,10 +6,11 @@ import store from "@store";
 const http = axios.create({
   baseURL:
     process.env.NODE_ENV !== "production"
-      ? "http://192.168.1.50/api"
-      : "http://192.168.1.50/api", // 基础路径
+      ? "http://www.eosfinance.com/api"
+      : "http://www.eosfinance.com/api", // 基础路径
   timeout: 30000, // 请求延时
 });
+http.defaults.withCredentials = true;
 
 // // 请求拦截
 http.interceptors.request.use(config => {
@@ -21,10 +22,11 @@ http.interceptors.request.use(config => {
   config.headers["Accept"] = "application/json";
   // token
   if(store.state.access_token){
-    config.headers["Authorization"] =
-    process.env.NODE_ENV !== "production"
-      ? `Bearer ${store.state.access_token}`
-      : `Bearer ${store.state.access_token}`;
+    // config.headers["Authorization"] =
+    // process.env.NODE_ENV !== "production"
+    //   ? `Bearer ${store.state.access_token}`
+    //   : `Bearer ${store.state.access_token}`;
+    config.headers.Authorization = `token ${store.state.access_token}`;
   }
   return config;
 });

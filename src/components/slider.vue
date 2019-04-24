@@ -2,7 +2,7 @@
   .sliderbox
     position relative
     width 12rem
-    height 1.2rem
+    height 1.6rem
     margin 0 auto
     margin-bottom 1.24rem
     background-color #e8e8e8
@@ -12,12 +12,12 @@
     left 0
     top 0
     width 1.6rem
-    height  1.2rem
+    height  1.6rem
   .txt
     position  absolute
     width  100%
-    height  1.2rem
-    line-height  1.2rem
+    height  1.6rem
+    line-height  1.6rem
     font-size  0.48rem
     color  #000
     text-align  center
@@ -25,8 +25,8 @@
     position  absolute
     left 0
     top 0
-    width  40px
-    height  1.2rem
+    width  1.6rem
+    height  1.6rem
     border  1px solid #ccc
     background  #fff
     text-align  center
@@ -52,6 +52,7 @@
 import {getEle} from "@common/js";
 export default {
   mounted(){
+    this.isSuccess = false
     this.slider = getEle('.slider');
     let box = getEle(".sliderbox")
     // 鼠标需要移动距离
@@ -69,7 +70,8 @@ export default {
         left:'0px'
       },
       txt:'滑动验证',
-      iconclass:'icon-double-right'
+      iconclass:'icon-double-right',
+      isSuccess:false,
     }
   },
   methods:{
@@ -124,6 +126,15 @@ export default {
       //滑动成功时，移除鼠标按下事件和鼠标移动事件
       this.slider.onmousedown = null;
       document.onmousemove = null;
+    },
+    // 重置滑块
+    resetslider(){
+      this.isSuccess = false
+      this.bgstyle.width = 0 + "px";
+      this.slstyle.left = 0 + "px";
+      this.bgstyle.transition = "width 0.3s linear";
+      this.slstyle.transition = "left 0.3s linear";
+      this.txt = "滑动验证";
     }
   }
 }

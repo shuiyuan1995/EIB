@@ -64,7 +64,7 @@
     <i v-if="left" class="link icon icon-pagepreview" @click="$router.back(-1)"></i>
     <span v-else class="logo">EIB</span>
     <span class="text" v-show="center">{{center}}</span>
-    <router-link v-if="right" class="link right" to="/">{{right}}</router-link>
+    <router-link v-if="right" class="link right" :to="right=='注册'?'/register':'/login'">{{right}}</router-link>
     <span v-else class="menu" @click="changemenu"><i class="icon icon-menu1"></i></span>
     <div class="menulist" v-show="menulist">
       <router-link class="menulist-nav" to="/" v-for="(item, index) in navlists" :key="index">

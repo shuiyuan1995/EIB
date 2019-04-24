@@ -5,13 +5,17 @@ const mutations = {
   [types.SET_TOKEN](state, token) {
     state.access_token = token;
   },
-  // 设置用户信息
-  [types.SET_USER_INFO](state, userInfo) {
-    state.userInfo = userInfo;
-  },
   // 设置帮助中心数据
   [types.SET_HELPDATA](state, helpdata) {
     state.helpdata = helpdata;
+  },
+  
+
+
+  /************************************* */
+  // 设置用户信息
+  [types.SET_USER_INFO](state, userInfo) {
+    state.userInfo = userInfo;
   },
   // 设置邀请人电话
   [types.SET_INVITE_TEL](state, invite_tel) {
