@@ -148,7 +148,7 @@ export default new Router({
       component:bulletinlist
     },
     {
-      path: '/bulletinnotice',
+      path: '/bulletinnotice/:page',
       name: 'bulletinnotice',
       component:bulletinnotice
     },

@@ -69,7 +69,7 @@ export function post(url, data = {}) {
 export function get(url, data = {}) {
   return new Promise((resolve, reject) => {
     http
-      .get(url, data)
+      .get(url, {params:data})
       .then(json => {
         resolve(json);
       })

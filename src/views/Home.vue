@@ -119,6 +119,10 @@
     </div>
     <!-- 功能列表 -->
     <nav class="functionlist">
+      <router-link class="link-nav" :to="this.userInfo?'/investment':'/login'">
+        <div class="linkbox"><i class="icon" :class="this.userInfo?'icon-touzi':'icon-dianji'"></i></div>
+        <p>{{this.userInfo?'我要投资':'登录/注册'}}</p>
+      </router-link>
       <router-link class="link-nav" :to="item.to" v-for="(item, index) in navlists" :key="index">
         <div class="linkbox"><i class="icon" :class="item.icon"></i></div>
         <p>{{item.text}}</p>
@@ -132,6 +136,7 @@
 import {get} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {mapGetters} from 'vuex';
 export default {
   created(){
     get('/api/index').then(json=>{
@@ -155,16 +160,6 @@ export default {
       repayment:{},
       trading_amount:{},
       navlists: [
-        {
-          to:'/login',
-          icon:'icon-dianji',
-          text:'登录/注册'
-        },
-        {
-          to:'/investment',
-          icon:'icon-touzi',
-          text:'我要投资'
-        },
         {
           to:'/account',
           icon:'icon-zhanghuzhongxin',
@@ -207,6 +202,11 @@ export default {
         },
       ],
     }
+  },
+  computed:{
+    ...mapGetters([
+      "userInfo"
+    ]),
   }
 }
 </script>

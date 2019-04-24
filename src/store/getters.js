@@ -2,6 +2,10 @@
 export const access_token = state => state.access_token;
 // 获取帮助中心数据
 export const helpdata = state => state.helpdata;
+// 获取用户通知与私信
+export const userdata = state => state.user_data;
+
+
 /********************************************** */
 
 

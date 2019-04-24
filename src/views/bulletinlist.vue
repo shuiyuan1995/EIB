@@ -32,21 +32,20 @@
   .bulletinmain
     padding 0 0.44rem
     padding-top 0.8rem
+    font-size 0.64rem
+    line-height 0.8rem
 </style>
 
 <template>
   <div class="bulletinlist">
-    <myheader left="prev" center="暖宝宝-EOS过冬理财计划"></myheader>
-    <div class="bulletintitle"><span></span>暖宝宝-EOS过冬理财计划公告</div>
+    <myheader left="prev" :center="title"></myheader>
+    <div class="bulletintitle"><span></span>{{title}}公告</div>
     <div class="bulletintime">
-      <span>网站公告</span>
-      <span>2018-04-19</span>
+      <span>{{type}}</span>
+      <span>{{time}}</span>
     </div>
-    <div class="bulletintop">欢迎广大新老用户前来投资！</div>
-    <div class="bulletinmain">
-      <p>尊敬的用户：</p>
-      <p>您好！</p>
-    </div>
+    <div class="bulletintop">{{abstract}}</div>
+    <div class="bulletinmain" v-html="content"></div>
     <myfooter></myfooter>
   </div>
 </template>
@@ -54,7 +53,30 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {get} from '@api/index'
+import {changedata} from '@common/js/index'
 export default {
+  created(){
+    const {id,title} = this.$route.params
+    this.title = title
+    get('/login/notice_info',{id:id}).then(json=>{
+      console.log(json)
+      const {type,time,abstract,content} = json.data
+      this.type = type
+      this.abstract = abstract
+      this.content = content
+      this.time = changedata(time*1000,'yyyy-MM-dd')
+    })
+  },
+  data(){
+    return{
+      title:'',
+      type:'',
+      time:'',
+      abstract:'',
+      content:'',
+    }
+  },
   components:{
     myheader,
     myfooter

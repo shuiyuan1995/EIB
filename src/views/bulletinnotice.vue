@@ -1,9 +1,4 @@
 <style lang="stylus" scoped>
-  .view-wrapper
-    position absolute
-    width 100%
-    top 1.4rem
-    bottom 0px
   .item
     width 100%
     padding 0 0.88rem 0 0.76rem
@@ -40,36 +35,15 @@
 
 <template>
   <div class="bulletinnotice">
-    <myheader left="prev" center="我的私信"></myheader>
-    <div class="view-wrapper">
-      <cube-recycle-list class="list" :offset="offset" :infinite="infinite" :size="size" :on-fetch="onFetch">
-        <!-- tombstone 的作用域插槽 slot-scope 必须声明 -->
-        <template slot="tombstone" slot-scope="props">
-          <div class="item tombstone">
-            <div class="avatar"></div>
-            <div class="bubble">
-              <p></p>
-              <p></p>
-              <p></p>
-              <div class="meta">
-                <time class="posted-date"></time>
-              </div>
-            </div>
-          </div>
-        </template>
-        <template slot="item" slot-scope="{ data }">
-          <div :id="data.id" class="item">
-            <div class="itemtop">6-12 9:00</div>
-            <div class="itemmain">
-              <div class="mainl">
-                <i class="icon icon-yonghu"></i>
-              </div>
-              <div class="mainr">21415tery3yerhdf</div>
-            </div>
-          </div>
-        </template>
-        <myfooter slot="noMore"></myfooter>
-      </cube-recycle-list>
+    <myheader left="prev" :center="$route.params.page=='1'?'我的私信':'我的通知'"></myheader>
+    <div class="item" v-for="(item,index) in $route.params.page=='1'?userdata.message:userdata.notify" :key="index">
+      <div class="itemtop">{{item.time}}</div>
+      <div class="itemmain">
+        <div class="mainl">
+          <i class="icon icon-yonghu"></i>
+        </div>
+        <div class="mainr">{{item.content}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -77,6 +51,7 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {mapGetters} from 'vuex';
 export default {
   data(){
     return{
@@ -88,6 +63,11 @@ export default {
   components:{
     myheader,
     myfooter
+  },
+  computed:{
+    ...mapGetters([
+      "userdata"
+    ]),
   },
   methods: {
     onFetch() {

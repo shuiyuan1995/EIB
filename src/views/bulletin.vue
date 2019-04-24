@@ -81,12 +81,12 @@
       <span @click="changetable(true)" :class="thisbulletin?'active':''">消息</span>
     </div>
     <ul class="tablelist" v-show="!thisbulletin">
-      <li v-for="(item,index) in notice" :key="index" @click="$router.push('/bulletinlist')">
-        <span>{{item.title}}</span><span>2018-04-19</span>
+      <li v-for="(item,index) in notice" :key="index" @click="go(item)">
+        <span>{{item.title}}</span><span>{{item.time}}</span>
       </li>
     </ul>
     <div class="tablelist1" v-show="thisbulletin">
-      <div @click="$router.push('/bulletinnotice')">
+      <div @click="$router.push('/bulletinnotice/0')">
         <div class="list1-l"></div>
         <div class="list1-c">
           <p>通知</p>
@@ -94,7 +94,7 @@
         </div>
         <i class="icon icon-pagenext"></i>
       </div>
-      <div @click="$router.push('/bulletinnotice')">
+      <div @click="$router.push('/bulletinnotice/1')">
         <div class="list1-l">
           <i class="icon icon-yonghu"></i>
         </div>
@@ -110,17 +110,41 @@
 </template>
 
 <script>
-import {get} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {get} from '@api/index'
+import {changedata} from '@common/js/index'
+import {mapMutations} from 'vuex';
+import {SET_USER_DATA} from "@store/mutation-types"
 export default {
-  // created(){
-  //   get('/login/message').then(json=>{
-  //     let {notice} = json.data
-
-  //     this.notice = [...notice]
-  //   })
-  // },
+  created(){
+    get('/login/message').then(json=>{
+      let {notice,user_data} = json.data
+      this.notice = notice.map(val=>{
+        return {
+          ...val,
+          time:changedata(val.time*1000,'yyyy-MM-dd')
+        }
+      })
+      if(user_data.notify){
+        user_data.notify = user_data.notify.map(val=>{
+          return {
+            ...val,
+            time:changedata(val.time*1000,'MM-dd hh:mm')
+          }
+        })
+      }
+      if(user_data.message){
+        user_data.message = user_data.message.map(val=>{
+          return {
+            ...val,
+            time:changedata(val.time*1000,'MM-dd hh:mm')
+          }
+        })
+      }
+      this.SET_USER_DATA(user_data)
+    })
+  },
   components:{
     myheader,
     myfooter
@@ -134,7 +158,19 @@ export default {
   methods:{
     changetable(b){
       this.thisbulletin = b
-    }
+    },
+    // 路由传参
+    go(item){
+      this.$router.push({
+        name: 'bulletinlist',
+        params: {
+          id: item.id, title:item.title
+        }
+      })
+    },
+    ...mapMutations({
+      SET_USER_DATA
+    }),
   }
 }
 </script>

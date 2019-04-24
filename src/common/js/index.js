@@ -1,7 +1,8 @@
-import {getEle,getEles,addClass} from "./dom.js";
+import {getEle,getEles,addClass,changedata} from "./dom.js";
 
 export {
   getEle,
   getEles,
-  addClass
+  addClass,
+  changedata
 }

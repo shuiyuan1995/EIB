@@ -32,60 +32,6 @@ import {mapGetters} from 'vuex';
 export default {
   data(){
     return{
-      data:{
-        a:[
-          {
-            txt:'登录注册',
-            url:'/b'
-          },
-          {
-            txt:'账户密码',
-            url:'/c'
-          },
-          {
-            txt:'充值',
-            url:'/d'
-          },
-          {
-            txt:'提现',
-            url:'/e'
-          },
-          {
-            txt:'安全认证',
-            url:'/f'
-          },
-          {
-            txt:'消息中心',
-            url:'/g'
-          },
-          {
-            txt:'邀请奖励',
-            url:'/h'
-          }
-        ],
-        b:[
-          {
-            txt:'法律与政策保障',
-            url:'/i'
-          },
-          {
-            txt:'投资审核与风控',
-            url:'/j'
-          },
-          {
-            txt:'账户及隐私安全',
-            url:'/k'
-          },
-          {
-            txt:'用户的自我保护',
-            url:'/l'
-          },
-          {
-            txt:'网站相关协议',
-            url:'/m'
-          },
-        ]
-      }
     }
   },
   components:{
