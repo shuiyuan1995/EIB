@@ -29,12 +29,12 @@
         <span>{{userInfo.nick}}</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
-      <router-link class="item" to="/securitysetting/1">
+      <div class="item" @click="goto(1)">
         <span class="icon icon-qianbao"></span>
         <span>钱包绑定</span>
         <span>{{userInfo.account?userInfo.account:'去绑定'}}</span>
         <span class="icon icon-pagenext"></span>
-      </router-link>
+      </div>
       <router-link class="item" to="/securitysetting/2">
         <span class="icon icon-anquanyanzheng"></span>
         <span>登录密码</span>
@@ -77,6 +77,13 @@ export default {
     ...mapGetters([
       "userInfo"
     ]),
+  },
+  methods:{
+    goto(id){
+      if(this.userInfo.account){
+        return false
+      }
+    }
   }
 }
 </script>

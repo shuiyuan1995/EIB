@@ -66,36 +66,58 @@
       </div>
       <form action="">
         <label for="">
-          <p>短信验证:131**********1233</p>
+          <p>短信验证:{{userInfo.phone}}</p>
           <div class="validationitem">
-            <cube-input class="cubeinput" v-model="value" placeholder="请输入验证码"></cube-input>
-            <cube-button class="btn">发送</cube-button>
+            <cube-input class="cubeinput" v-model="phone" placeholder="请输入验证码"></cube-input>
+            <cube-button class="btn" @click="send('phone_code')">发送</cube-button>
           </div>
         </label>
         <label for="">
-          <p>邮箱验证:FGH**********SGDFD</p>
+          <p>邮箱验证:{{userInfo.email}}</p>
           <div class="validationitem">
-            <cube-input class="cubeinput" v-model="value" placeholder="请输入验证码"></cube-input>
-            <cube-button class="btn">发送</cube-button>
+            <cube-input class="cubeinput" v-model="email" placeholder="请输入验证码"></cube-input>
+            <cube-button class="btn" @click="send('email_code')">发送</cube-button>
           </div>
         </label>
-        <cube-button class="btnok">确  认</cube-button>
+        <cube-button class="btnok" @click="validation">确  认</cube-button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+import {get} from '@api/index'
 export default {
   data(){
     return{
-      value:''
+      phone:'',
+      email:'',
     }
+  },
+  computed:{
+    ...mapGetters([
+      "userInfo"
+    ]),
   },
   methods:{
     close(){
       this.$emit('close',false)
     },
+    send(url){
+      get(`/security/${url}`).then(()=>{})
+    },
+    validation(){
+      if(this.phone==''||this.email==''){
+        this.$createToast({
+          type: 'correct',
+          txt: '验证码不能为空',
+          time: 500
+        }).show()
+        return false
+      }
+      this.$emit('send',{phone_code:this.phone,email_code:this.email})
+    }
     // 发送邮箱验证
   }
 }

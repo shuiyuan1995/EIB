@@ -154,7 +154,6 @@ export default {
     },
     // 投标
     investment(){
-      console.log(this.value.length)
       if(this.value==''||this.value.length!=6){
         this.$createToast({
           txt: `请输入正确支付密码`,
@@ -169,7 +168,15 @@ export default {
         pay_pwd:this.value
       }
       post('/security/investment',data).then(json=>{
-
+        let that = this;
+        this.$createToast({
+          txt: `投标成功`,
+          type: 'txt',
+          time: 500,
+          onTimeout(){
+            that.$router.push('/')
+          }
+        }).show()
       })
     }
   }

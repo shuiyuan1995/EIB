@@ -138,7 +138,7 @@
           </cube-input>
           <cube-validator ref="validator5" class="validator" v-model="valid[5]" :model="phone" :rules="rules0" :messages="messages0"></cube-validator>
         </label>
-        <label v-show="!userInfo.phone">
+        <label>
           <div class="validationitem">
             <cube-input class="cubeinput" v-model="code" placeholder="请输入验证码"></cube-input>
             <cube-button class="btn" @click="getcode">{{codetxt}}</cube-button>
@@ -155,7 +155,7 @@
           </cube-input>
           <cube-validator ref="validator7" class="validator" v-model="valid[7]" :model="email" :rules="rules0" :messages="messages0"></cube-validator>
         </label>
-        <label v-show="!userInfo.email">
+        <label>
           <div class="validationitem">
             <cube-input class="cubeinput" v-model="code1" placeholder="请输入验证码"></cube-input>
             <cube-button class="btn" @click="getcode">{{codetxt1}}</cube-button>
@@ -166,7 +166,7 @@
       <cube-button class="settingbtn" @click="next">确认</cube-button>
     </div>
     <myfooter></myfooter>
-    <validation @close="close" v-show="thevalidation"></validation>
+    <validation @close="close" @send="send" v-show="thevalidation"></validation>
   </div>
 </template>
 
@@ -187,15 +187,17 @@ export default {
   },
   data(){
     return{
+      // 验证组件控制
       thevalidation:false,
+      // 输入框组
       newname:'',
       newpass:'',
       pass:'',
-      oldpaypass:'',
       newpaypass:'',
       paypass:'',
       phone:'',
       email:'',
+      // 验证
       code:'',
       codetxt:'点击获取验证码',
       code1:'',
@@ -208,6 +210,8 @@ export default {
       messages0:{
         required:'昵称不能为空',
       },
+      // 重复点击判断
+      repeat:false,
     }
   },
   computed:{
@@ -243,6 +247,10 @@ export default {
   },
   methods:{
     next(){
+      // 判断重复点击
+      if(this.repeat){
+        return false
+      }
       let id = this.$route.params.type;
       let that = this;
       let url = '';
@@ -261,58 +269,40 @@ export default {
           return false;
         case '2':
           ps = [this.$refs.validator1.validate(),this.$refs.validator2.validate()]
-          url = 'pwd';
-          data = {
-            old:this.oldpass,
-            new:this.newpass
-          }
           break;
         case '3':
-          title = '修改交易密码'
+          ps = [this.$refs.validator3.validate(),this.$refs.validator4.validate()]
           break;
         case '4':
-          if(this.userInfo.phone){
-            ps = [this.$refs.validator5.validate()]
-            data = {
-              phone:this.phone
-            }
-          }else{
-            ps = [this.$refs.validator5.validate(),this.$refs.validator6.validate()]
-            data = {
-              phone:this.phone,
-              code:this.code
-            }
+          ps = [this.$refs.validator5.validate(),this.$refs.validator6.validate()]
+          data = {
+            name:this.phone,
+            phone_code:this.code
           }
-          url = 'phone';
+          url = 'edit_pe';
           break;
         case '5':
-          if(this.userInfo.email){
-            ps = [this.$refs.validator7.validate()]
-            data = {
-              email:this.email
-            }
-          }else{
-            ps = [this.$refs.validator7.validate(),this.$refs.validator8.validate()]
-            data = {
-              email:this.email,
-              code1:this.code1
-            }
+          ps = [this.$refs.validator7.validate(),this.$refs.validator8.validate()]
+          data = {
+            name:this.email,
+            email_code:this.code1
           }
-          url = 'email';
+          url = 'edit_pe';
           break;
         default:
           break;
       }
       Promise.all(ps).then(() => {
         if (this.valid.every(item => item)) {
-          if(Number(id)<1){}
-          // 判断是否是第一次绑定手机或者邮箱
-          if(Number(id)==4&&!this.userInfo.phone||Number(id)==5&&!this.userInfo.email){
-            console.log(1)
-            this.one(Number(id),data,url)
+          if(Number(id)==0){
+            this.gonext(id,url,data)
             return false
           }
-          console.log(2)
+          // 判断第一次绑定
+          if(Number(id)==4&&!this.userInfo.phone||Number(id)==5&&!this.userInfo.email){
+            this.gonext(id,url,data)
+            return false
+          }
           // 判断是否绑定邮箱
           if(!this.userInfo.email){
             this.$createToast({
@@ -337,91 +327,239 @@ export default {
             }).show()
             return false
           }
-          this.thevalidation = true;
-          // post(`/security/${url}`,data).then(json=>{
-          //   let that = this
-          //   switch (id) {
-          //     case '0':
-          //       console.log(json)
-          //       let data = {
-          //         ...this.userInfo,
-          //         nick:json.data.nick
-          //       }
-          //       this.SET_USER_INFO(data)
-          //       this.$createToast({
-          //         type: 'correct',
-          //         txt: '修改成功',
-          //         time: 1000,
-          //         onTimeout(){
-          //           that.$router.back(-1)
-          //         }
-          //       }).show()
-          //       break;
-          //     case '1':
-          //       break;
-          //     case '2':
-          //       this.$createToast({
-          //         type: 'correct',
-          //         txt: '修改成功',
-          //         time: 1000,
-          //         onTimeout(){
-          //           that.$router.back(-1)
-          //         }
-          //       }).show()
-          //       break;
-          //     case '3':
-          //       title = '修改交易密码'
-          //       break;
-          //     case '4':
-          //       title = '手机验证'
-          //       break;
-          //     case '5':
-          //       title = '邮箱验证'
-          //       break;
-          //     default:
-          //       break;
-          //   }
-          // })
+          // 判断修改
+          if(Number(id)==4||Number(id)==5){
+            this.gonext(id,url,data)
+            return false
+          }
+          if(Number(id)==2,Number(id)==3){
+            this.thevalidation = true;
+          }
         }
       })
     },
-    one(){
-
+    // 提交数据
+    gonext(id,url,data){
+      this.repeat = true;
+      post(`/security/${url}`,data).then(json=>{
+        this.repeat = false;
+        let that = this;
+        let data = {};
+        switch (id) {
+          case '0':
+            console.log(json)
+            data = {
+              ...this.userInfo,
+              nick:json.data.nick
+            }
+            this.SET_USER_INFO(data)
+            this.$createToast({
+              type: 'correct',
+              txt: '修改成功',
+              time: 1000,
+              onTimeout(){
+                that.$router.back(-1)
+              }
+            }).show()
+            break;
+          case '2':
+            this.$createToast({
+              type: 'correct',
+              txt: '设置成功',
+              time: 1000,
+              onTimeout(){
+                that.$router.back(-1)
+              }
+            }).show()
+            break;
+          case '3':
+            this.$createToast({
+              type: 'correct',
+              txt: '设置成功',
+              time: 1000,
+              onTimeout(){
+                that.$router.back(-1)
+              }
+            }).show()
+            break;
+          case '4':
+            if(this.userInfo.phone){
+              this.thevalidation = true;
+            }else{
+              this.$createToast({
+                type: 'correct',
+                txt: '绑定成功',
+                time: 1000,
+                onTimeout(){
+                  that.$router.back(-1)
+                }
+              }).show()
+              data = {
+                ...this.userInfo,
+                phone:json.data.phone
+              }
+              this.SET_USER_INFO(data)
+            }
+            break;
+          case '5':
+            if(this.userInfo.email){
+              this.thevalidation = true;
+            }else{
+              this.$createToast({
+                type: 'correct',
+                txt: '绑定成功',
+                time: 1000,
+                onTimeout(){
+                  that.$router.back(-1)
+                }
+              }).show()
+              data = {
+                ...this.userInfo,
+                email:json.data.email
+              }
+              this.SET_USER_INFO(data)
+            }
+            break;
+          default:
+            break;
+        }
+      }).catch(err=>{
+        this.repeat = false;
+      })
+    },
+    send(json){
+      let that = this
+      let id = this.$route.params.type;
+      let data = {};
+      let url = ''
+      this.thevalidation = false;
+      switch (id) {
+        case '2':
+          url = 'pwd';
+          data = {
+            ...json,
+            new:this.newpass
+          }
+          this.gonext(id,url,data)
+          break;
+        case '3':
+          url = 'set_repay_pwd';
+          data = {
+            ...json,
+            new:this.newpaypass
+          }
+          this.gonext(id,url,data)
+          break;
+        case '4':
+          data = {
+            ...json,
+            name:this.phone
+          }
+          post(`/security/edit_pe`,data).then(json=>{
+            this.$createToast({
+              type: 'correct',
+              txt: '修改成功',
+              time: 1000,
+              onTimeout(){
+                that.$router.back(-1)
+              }
+            }).show()
+            data = {
+              ...this.userInfo,
+              phone:json.data.phone
+            }
+            this.SET_USER_INFO(data)
+          })
+          break;
+        case '5':
+          data = {
+            ...json,
+            name:this.email
+          }
+          post(`/security/edit_pe`,data).then(json=>{
+            this.$createToast({
+              type: 'correct',
+              txt: '修改成功',
+              time: 1000,
+              onTimeout(){
+                that.$router.back(-1)
+              }
+            }).show()
+            data = {
+              ...this.userInfo,
+              email:json.data.email
+            }
+            this.SET_USER_INFO(data)
+          })
+          break;
+        default:
+          break;
+      }
     },
     close(bl){
       this.thevalidation = bl
     },
     // 获取验证码
     getcode(){
+      let inter = null;
+      // 判断重复点击
+      if(this.repeat){
+        return false
+      }
       // 判断点击间隙
       if(this.time !== 60){
         return false
       }
+      // 判断验证类型
       if(this.$route.params.type=='4'){
-        get('/security/phone_code',{}).then(json=>{
+        if(this.phone==''){
+          this.$createToast({
+            type: 'txt',
+            txt: '请输入手机号',
+            time: 500
+          }).show()
+          return false
+        }
+        this.repeat = true;
+        post('/security/phone_code',{phone:this.phone}).then(json=>{
+          this.repeat = false;
           // 倒计时
           inter = setInterval(()=>{
-            this.timetxt = `${this.time}秒后可重新发送`;
+            this.codetxt = `${this.time}秒后可重新发送`;
             this.time--;
             if(this.time<=0){
-              this.timetxt = '点击获取验证码';
+              this.codetxt = '点击获取验证码';
               clearInterval(inter)
               this.time = 60
             }
           },1000)
+        }).catch(err=>{
+          this.repeat = false;
         })
       }else{
-        get('/security/email_code').then(json=>{
+        if(this.email==''){
+          this.$createToast({
+            type: 'txt',
+            txt: '请输入邮箱',
+            time: 500
+          }).show()
+          return false
+        }
+        this.repeat = true;
+        post('/security/email_code',{email:this.email}).then(json=>{
+          this.repeat = false;
           // 倒计时
           inter = setInterval(()=>{
-            this.timetxt = `${this.time}秒后可重新发送`;
+            this.codetxt1 = `${this.time}秒后可重新发送`;
             this.time--;
             if(this.time<=0){
-              this.timetxt = '点击获取验证码';
+              this.codetxt1 = '点击获取验证码';
               clearInterval(inter)
               this.time = 60
             }
           },1000)
+        }).catch(err=>{
+          this.repeat = false;
         })
       }
     },

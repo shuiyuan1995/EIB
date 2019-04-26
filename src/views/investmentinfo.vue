@@ -204,7 +204,7 @@
     </div>
     <ul class="investmentinfo-center">
       <li>开标时间：{{info.start}}</li>
-      <li>还款方式：{{info.end}}</li>
+      <li>停标时间：{{info.end}}</li>
       <li>还款日期：{{info.repay}}</li>
       <li>计息方式：{{info.compute}}</li>
       <li>计息币种：{{info.coin}}</li>
