@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import store from "@store";
+
 import Router from 'vue-router'
 import Home from '@views/Home.vue'
 import login from '@views/login.vue'
@@ -32,7 +34,7 @@ import invitationreward from '@views/invitationreward.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode:"history",
   alias: "/",
   routes: [
@@ -184,3 +186,38 @@ export default new Router({
     }
   ]
 })
+
+
+// router.beforeEach((to, from, next) => {
+//   // const list = ['home', 'group', 'user']    // 将需要切换效果的路由名称组成一个数组
+//   // const toName = to.name    // 即将进入的路由名字
+//   // const fromName = from.name    // 即将离开的路由名字
+//   // const toIndex = list.indexOf(toName)    // 进入下标
+//   // const fromIndex = list.indexOf(fromName)   // 离开下标
+//   // let direction = ''
+//   // console.log(to,from)
+//   // const toDepth = to.path.split('/').length
+//   // const fromDepth = from.path.split('/').length
+//   // let transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+//   // console.log(transitionName)
+
+//   // if (toIndex < fromIndex) {          // 如果进入的下标小于离开的下标，那么是左滑
+//   //   direction = 'left'
+//   // } else {
+//   //   direction = 'right'         // 如果进入的下标大于离开的下标，那么是右滑
+//   // }
+
+//   // if (toIndex > -1 && fromIndex > -1) {   // 如果下标都存在
+//   //   if (toIndex < fromIndex) {          // 如果进入的下标小于离开的下标，那么是左滑
+//   //     direction = 'left'
+//   //   } else {
+//   //     direction = 'right'         // 如果进入的下标大于离开的下标，那么是右滑
+//   //   }
+//   // }
+
+//   // store.state.viewDirection = direction  //这里使用vuex进行赋值
+
+//   return next()
+// })
+
+export default router;

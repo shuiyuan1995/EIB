@@ -5,6 +5,12 @@
     height 100%
     top 0px
     left 0px
+  .bg
+    position fixed
+    width 100%
+    height 100%
+    top 0px
+    left 0px
     background rgba(0,0,0,0.2)
   .main
     position absolute
@@ -51,11 +57,12 @@
 
 <template>
   <div class="validation">
+    <div class="bg" @click="close"></div>
     <div class="main">
       <p>若为收到邮件，请检查邮箱垃圾箱</p>
       <div class="title">
         <h2>安全验证</h2>
-        <p>取消</p>
+        <p @click="close">取消</p>
       </div>
       <form action="">
         <label for="">
@@ -80,6 +87,16 @@
 
 <script>
 export default {
-  
+  data(){
+    return{
+      value:''
+    }
+  },
+  methods:{
+    close(){
+      this.$emit('close',false)
+    },
+    // 发送邮箱验证
+  }
 }
 </script>

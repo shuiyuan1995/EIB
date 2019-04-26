@@ -6,7 +6,8 @@ export const SET_USER_INFO = "SET_USER_INFO";
 export const SET_HELPDATA = "SET_HELPDATA";
 // 设置用户通知与私信
 export const SET_USER_DATA = "SET_USER_DATA";
-
+// 设置当前标数据
+export const SET_THIS_BIAO = "SET_THIS_BIAO";
 
 
 /*************************************************** */

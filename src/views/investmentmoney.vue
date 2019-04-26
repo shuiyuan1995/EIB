@@ -47,35 +47,37 @@
     <myheader left="prev" center="投资金额"></myheader>
     <div class="imoney-top">
       <p><i class="icon icon-chuzhijine"></i>还需融资</p>
-      <p>0 币种（EOS)</p>
+      <p>{{thisbiao.item.surplus}} 币种（{{thisbiao.item.need_coin}})</p>
     </div>
     <div class="imoney-center">
-      <h3>币币账户</h3>
-      <accounttable></accounttable>
+      <h3>{{userInfo.nick}}</h3>
+      <accounttable ref="accounttable"></accounttable>
     </div>
     <div class="imoney-bottom">
-      <cube-input v-model="value" class="imoney-input" placeholder='100元起投，金额为1的倍数'>
+      <cube-input v-model="money" type="number" class="imoney-input" :placeholder="`${thisbiao.info.min_eos}${thisbiao.item.need_coin}起投，最大为${thisbiao.info.max_eos}${thisbiao.item.need_coin}，金额为1的倍数`">
         <template slot="append">
-          <p class="inputappend">元</p>
+          <p class="inputappend">{{thisbiao.item.need_coin}}</p>
         </template>
       </cube-input>
-      <p>利息收益：0.00</p>
+      <p>预计利息收益：{{Math.floor(thisbiao.info.proportion*Math.floor(money)*100)/100}} {{thisbiao.info.coin}}</p>
       <!-- <router-link class="investmentinfo-btn" to="/investmentgo">下一步</router-link>s -->
-      <cube-button class="investmentinfo-btn">下一步</cube-button>
+      <cube-button class="investmentinfo-btn" @click="gonext">下一步</cube-button>
     </div>
     <myfooter></myfooter>
   </div>
 </template>
 
 <script>
+import { get } from "@api/index";
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import accounttable from '@components/accounttable.vue'
+import {mapGetters} from 'vuex';
 export default {
   data() {
     return {
       checked:false,
-      value:''
+      money:''
     }
   },
   components:{
@@ -83,5 +85,61 @@ export default {
     myfooter,
     accounttable
   },
+  computed:{
+    ...mapGetters([
+      "userInfo",
+      "thisbiao"
+    ]),
+  },
+  methods:{
+    gonext(){
+      let that = this
+      // 判断输入金额
+      if(this.money==''){
+        this.$createToast({
+          txt: `金额不能为空`,
+          type: 'txt',
+          time: 500,
+        }).show()
+        return false
+      }
+      // 判断最大最小金额
+      if(Math.floor(this.money)<this.thisbiao.info.min_eos){
+        this.$createToast({
+          txt: `数额最小为${this.thisbiao.info.min_eos}${this.thisbiao.item.need_coin}`,
+          type: 'txt',
+          time: 500,
+        }).show()
+        return false
+      }
+      if(Math.floor(this.money)>this.thisbiao.info.max_eos){
+        this.$createToast({
+          txt: `数额最大为${this.thisbiao.info.max_eos}${this.thisbiao.item.need_coin}`,
+          type: 'txt',
+          time: 500,
+        }).show()
+        return false
+      }
+      // 判断余额
+      let yue = this.$refs.accounttable.money[this.thisbiao.item.need_coin]
+      if(!yue || yue.money<this.money){
+        this.$createToast({
+          txt: `余额不足，请充值`,
+          type: 'txt',
+          time: 500,
+          onTimeout(){
+            that.$router.push('/accountRecharge')
+          }
+        }).show()
+        return false
+      }
+      this.$router.push({
+        name: 'investmentgo',
+        params: {
+          mone:this.money
+        }
+      })
+    }
+  }
 }
 </script>

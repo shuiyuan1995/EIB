@@ -88,7 +88,7 @@ import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import {post} from '@api/index'
 import {mapMutations} from 'vuex';
-import {SET_TOKEN,SET_USER_INFO} from "@store/mutation-types"
+import {SET_USER_INFO} from "@store/mutation-types"
 export default {
   data(){
     return{
@@ -134,9 +134,8 @@ export default {
         console.log(this.valid)
         if (this.valid.every(item => item)) {
           post('/login/login',data).then(json=>{
-            let {token,nick} = json.data
-            this.SET_TOKEN(token)
-            this.SET_USER_INFO(nick)
+            let {token,user_info} = json.data
+            this.SET_USER_INFO(user_info)
             let that = this
             this.$createToast({
               type: 'correct',
@@ -157,7 +156,6 @@ export default {
       })
     },
     ...mapMutations({
-      SET_TOKEN,
       SET_USER_INFO
     }),
   }

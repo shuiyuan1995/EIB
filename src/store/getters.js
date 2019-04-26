@@ -4,6 +4,8 @@ export const access_token = state => state.access_token;
 export const helpdata = state => state.helpdata;
 // 获取用户通知与私信
 export const userdata = state => state.user_data;
+// 获取当前标数据
+export const thisbiao = state => state.thisbiao;
 
 
 /********************************************** */

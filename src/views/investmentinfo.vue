@@ -122,6 +122,11 @@
         font-size 0.56rem
         background-color #e9eeec
     .tablebox2
+      min-height 4rem
+      p
+        text-align center
+        font-size 0.56rem
+        margin-top 0.8rem
       li
         display flex
         font-size 12px
@@ -132,6 +137,11 @@
         flex 1
         text-align center
     .tablebox3
+      min-height 4rem
+      p
+        text-align center
+        font-size 0.56rem
+        margin-top 0.8rem
       li
         display flex
         font-size 12px
@@ -160,44 +170,44 @@
     <div class="investmentinfo-top">
       <div class="title">
         <div class="title-left">
-          <span>信</span><p>暖宝宝-EOS过冬理财计划</p>
+          <span>{{type}}</span><p>{{thisbiao.item.title}}</p>
         </div>
-        <p>还需融资：00000</p>
+        <p>还需融资：{{thisbiao.item.surplus}} {{thisbiao.item.need_coin}}</p>
       </div>
       <div class="investmentinfo-type">
         <i></i>
-        <span>进行中</span>
+        <span>{{thisbiao.item.state}}</span>
       </div>
       <div class="investmentinfo-msg">
         <div class="msg-item">
           <i class="icon icon-chuzhijine"></i>
           <p>融资金额</p>
-          <p>0.0000</p>
+          <p>{{thisbiao.item.total}} {{thisbiao.item.need_coin}}</p>
         </div>
         <div class="msg-item">
           <i class="icon icon-zhanghuxinxililv"></i>
           <p>预期利率</p>
-          <p>13%</p>
+          <p>{{info.annual_profit}}</p>
         </div>
         <div class="msg-item">
           <i class="icon icon-shijian1"></i>
           <p>借款期限</p>
-          <p>30天</p>
+          <p>{{info.day}}天</p>
         </div>
       </div>
       <div class="investmentinfo-bar">
-        <p>当前进度：0%</p>
+        <p>当前进度：{{100-Math.floor(thisbiao.item.surplus/thisbiao.item.total*100)}}%</p>
         <div class="bar">
-          <div class="bar-info"></div>
+          <div class="bar-info" :style="{width:`${100-Math.floor(thisbiao.item.surplus/thisbiao.item.total*100)}%`}"></div>
         </div>
       </div>
     </div>
     <ul class="investmentinfo-center">
-      <li>开标时间：</li>
-      <li>还款方式：</li>
-      <li>还款日期：</li>
-      <li>计息方式：</li>
-      <li>计息币种：</li>
+      <li>开标时间：{{info.start}}</li>
+      <li>还款方式：{{info.end}}</li>
+      <li>还款日期：{{info.repay}}</li>
+      <li>计息方式：{{info.compute}}</li>
+      <li>计息币种：{{info.coin}}</li>
     </ul>
     <div class="investmentinfo-table">
       <div class="tabletitle">
@@ -206,9 +216,9 @@
         <span @click="tablechange(2)" :class="istable==2?'active':''">还款周期</span>
       </div>
       <div class="tablebox1" v-show="istable==0">
-        <p class="boxtxt">相关资料</p>
+        <p class="boxtxt" v-html="details.details"></p>
         <p class="boxtitle">基本信息</p>
-        <p class="boxtxt1"></p>
+        <p class="boxtxt1" v-html="details.info"></p>
       </div>
       <ul class="tablebox2" v-show="istable==1">
         <li>
@@ -216,11 +226,12 @@
           <span>金额</span>
           <span>时间</span>
         </li>
-        <li v-for="item in 5" :key="item">
-          <span>xxxxx</span>
-          <span>12eos</span>
-          <span>2017-12-30</span>
+        <li v-for="(item,index) in recode" :key="index">
+          <span>{{item.name}}</span>
+          <span>{{item.money}} {{item.need_coin}}</span>
+          <span>{{item.time}}</span>
         </li>
+        <p v-show="!recode.length">暂未开始</p>
       </ul>
       <ul class="tablebox3" v-show="istable==2">
         <li>
@@ -229,25 +240,39 @@
           <span>还款类型</span>
           <span>状态</span>
         </li>
-        <li v-for="item in 3" :key="item">
-          <span>1</span>
-          <span>2017-12-30</span>
-          <span>本金+利息</span>
-          <span>已还款</span>
+        <li v-for="(item,index) in cycle" :key="index">
+          <span>{{item.phase}}</span>
+          <span>{{item.time}}</span>
+          <span>{{item.type}}</span>
+          <span>{{item.state}}</span>
         </li>
+        <p v-show="!cycle.length">暂未开始</p>
       </ul>
     </div>
-    <router-link class="investmentinfo-btn" to="/investmentmoney">立即投资</router-link>
+    <div class="investmentinfo-btn" @click="gonext">立即投资</div>
     <myfooter></myfooter>
   </div>
 </template>
 
 <script>
+import { get } from "@api/index";
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {changedata} from '@common/js/index'
+import {mapGetters,mapMutations} from 'vuex';
+import {SET_THIS_BIAO} from "@store/mutation-types"
 export default {
+  created(){
+    this.getdata()
+  },
   data(){
     return{
+      type:'',
+      item:{},
+      info:{},
+      details:{},
+      cycle:[],
+      recode:[],
       istable:2
     }
   },
@@ -255,10 +280,50 @@ export default {
     myheader,
     myfooter
   },
+  computed:{
+    ...mapGetters([
+      "thisbiao"
+    ]),
+  },
   methods:{
     tablechange(num){
       this.istable = num
-    }
+    },
+    // 数据获取
+    getdata(){
+      get('/api/bid_info',{id:this.thisbiao.item.id}).then(json=>{
+        const {info,details,cycle,recode} = json.data;
+        this.details = details;
+        this.recode = recode.map(val=>{
+          return {
+            ...val,
+            time:changedata(val.time*1000,'yyyy-MM-dd')
+          }
+        })
+        this.cycle = cycle.map(val=>{
+          return {
+            ...val,
+            time:changedata(val.time*1000,'yyyy-MM-dd')
+          }
+        });
+        this.info = {
+          ...info,
+          start:changedata(info.start*1000,'yyyy-MM-dd'),
+          end:changedata(info.end*1000,'yyyy-MM-dd'),
+          repay:changedata(info.repay*1000,'yyyy-MM-dd')
+        };
+        this.SET_THIS_BIAO({...this.thisbiao,info:this.info})
+      })
+    },
+    gonext(){
+      this.$router.push({
+        name: 'investmentmoney',
+        params: {}
+      })
+    },
+    ...mapMutations({
+      SET_THIS_BIAO
+    }),
   }
 }
 </script>

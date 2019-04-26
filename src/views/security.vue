@@ -10,11 +10,13 @@
       span:nth-of-type(1)
         font-size 0.88rem
         color #5570a6
-        margin-right 0.4rem
+        margin-right 10px
       span:nth-of-type(2)
         flex 1
       span:nth-of-type(4)
         color #a6a6a6
+      span.icon-qianbao
+        margin-right 0.12rem
 </style>
 
 <template>
@@ -23,38 +25,38 @@
     <div class="securitylist">
       <router-link class="item" to="/securitysetting/0">
         <span class="icon icon-idinput"></span>
-        <span>用户名修改</span>
-        <span>已设置</span>
+        <span>用户名</span>
+        <span>{{userInfo.nick}}</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
       <router-link class="item" to="/securitysetting/1">
-        <span class="icon icon-shimingrenzheng"></span>
-        <span>实名认证</span>
-        <span>已设置</span>
+        <span class="icon icon-qianbao"></span>
+        <span>钱包绑定</span>
+        <span>{{userInfo.account?userInfo.account:'去绑定'}}</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
       <router-link class="item" to="/securitysetting/2">
         <span class="icon icon-anquanyanzheng"></span>
         <span>登录密码</span>
-        <span>已设置</span>
+        <span>去修改</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
       <router-link class="item" to="/securitysetting/3">
         <span class="icon icon-jiaoyimima"></span>
         <span>交易密码</span>
-        <span>已设置</span>
+        <span>{{userInfo.pay_password?'去修改':'去设置'}}</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
       <router-link class="item" to="/securitysetting/4">
         <span class="icon icon-shoujibangding"></span>
         <span>手机绑定</span>
-        <span>已绑定</span>
+        <span>{{userInfo.phone?userInfo.phone:'去绑定'}}</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
       <router-link class="item" to="/securitysetting/5">
         <span class="icon icon-youxiangbangding"></span>
         <span>邮箱绑定</span>
-        <span>已绑定</span>
+        <span>{{userInfo.email?userInfo.email:'去绑定'}}</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
     </div>
@@ -65,10 +67,16 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {mapGetters} from 'vuex';
 export default {
   components: {
     myheader,
     myfooter
   },
+  computed:{
+    ...mapGetters([
+      "userInfo"
+    ]),
+  }
 }
 </script>

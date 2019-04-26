@@ -34,21 +34,38 @@
       </cube-checkbox>
     </div>
     <ul>
-      <li v-for="item in 7" :key="item">
-        <span>BTC</span>
-        <span>0</span>
-        <span>冻结 0</span>
+      <li v-for="(value, key, index) in money" :key="index" v-show="!(value.small&&small)">
+        <span>{{key}}</span>
+        <span>{{value.money}}</span>
+        <span>冻结 {{value.frozen}}</span>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import { get } from "@api/index";
 export default {
+  created(){
+    this.getdata()
+  },
   data() {
     return {
+      money:{},
       checked:false,
     }
   },
+  computed:{
+    small(){
+      return this.checked
+    }
+  },
+  methods:{
+    getdata(){
+      get('/api/per_order').then(json=>{
+        this.money = json.data
+      })
+    },
+  }
 }
 </script>

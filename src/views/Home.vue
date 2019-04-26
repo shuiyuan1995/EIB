@@ -119,9 +119,9 @@
     </div>
     <!-- 功能列表 -->
     <nav class="functionlist">
-      <router-link class="link-nav" :to="this.userInfo?'/investment':'/login'">
-        <div class="linkbox"><i class="icon" :class="this.userInfo?'icon-touzi':'icon-dianji'"></i></div>
-        <p>{{this.userInfo?'我要投资':'登录/注册'}}</p>
+      <router-link class="link-nav" :to="this.userInfo.nick?'/investment':'/login'">
+        <div class="linkbox"><i class="icon" :class="this.userInfo.nick?'icon-touzi':'icon-dianji'"></i></div>
+        <p>{{this.userInfo.nick?'我要投资':'登录/注册'}}</p>
       </router-link>
       <router-link class="link-nav" :to="item.to" v-for="(item, index) in navlists" :key="index">
         <div class="linkbox"><i class="icon" :class="item.icon"></i></div>

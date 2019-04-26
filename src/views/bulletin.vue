@@ -20,6 +20,7 @@
         background #a1bedb
         color #fefefe
   .tablelist
+    margin-top 34px
     li
       position relative
       border-bottom 0.06rem solid #dddada
@@ -44,6 +45,7 @@
         text-overflow ellipsis
         white-space nowrap
   .tablelist1
+    margin-top 34px
     &>div
       display flex
       height 2.4rem

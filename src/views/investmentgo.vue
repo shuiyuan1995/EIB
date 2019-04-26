@@ -61,14 +61,13 @@
   <div class="investmentgo">
     <myheader left="prev" center="确认投标"></myheader>
     <div class="investmentgomain">
-      <p><span>借款标题</span><span>暖宝宝-EOS过冬理财计划</span></p>
-      <p><span>借款用途</span><span class="blue">日常消费</span></p>
-      <p><span>预期利率</span><span>0.0%</span></p>
-      <p><span>还款期限</span><span>00天</span></p>
-      <p><span>还款方式</span><span>等额本息</span></p>
-      <p><span>融资金额</span><span>0000元</span></p>
-      <p><span>保障方式</span><span>本金+利息</span></p>
-      <p><span>投资金额</span><span class="red">000元</span></p>
+      <p><span>借款标题</span><span>{{thisbiao.item.title}}</span></p>
+      <p><span>借款用途</span><span class="blue">{{thisbiao.info.purpose}}</span></p>
+      <p><span>预期利率</span><span>{{thisbiao.info.annual_profit}}</span></p>
+      <p><span>还款期限</span><span>{{thisbiao.item.day}}天</span></p>
+      <p><span>还款方式</span><span>{{thisbiao.info.compute}}</span></p>
+      <p><span>融资金额</span><span>{{thisbiao.item.surplus}} {{thisbiao.item.need_coin}}</span></p>
+      <p><span>投资金额</span><span class="red">{{$route.params.mone}} {{thisbiao.item.need_coin}}</span></p>
       <p>如遇流标情况，投资金额将在流标后冻结。</p>
     </div>
     <div class="investmentgopay">
@@ -86,7 +85,7 @@
         </label>
         <input @focus="onfocus" @input="oninput" @blur="onblur" v-model="value" type="password" id="ipt" maxlength="6" >
       </div>
-      <button class="gobtn">确认</button>
+      <button class="gobtn" @click="investment">确认</button>
     </div>
     <myfooter></myfooter>
   </div>
@@ -94,8 +93,10 @@
 
 <script>
 import {getEles} from "@common/js";
+import { post } from "@api/index";
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {mapGetters} from 'vuex';
 export default {
   data(){
     return{
@@ -105,6 +106,11 @@ export default {
   components:{
     myheader,
     myfooter
+  },
+  computed:{
+    ...mapGetters([
+      "thisbiao"
+    ]),
   },
   methods:{
     // 进入密码框焦点
@@ -145,6 +151,26 @@ export default {
       }else{
         list[5].classList.remove("active")
       }
+    },
+    // 投标
+    investment(){
+      console.log(this.value.length)
+      if(this.value==''||this.value.length!=6){
+        this.$createToast({
+          txt: `请输入正确支付密码`,
+          type: 'txt',
+          time: 500,
+        }).show()
+        return false
+      }
+      let data = {
+        bid:this.thisbiao.item.id,
+        money:this.$route.params.mone,
+        pay_pwd:this.value
+      }
+      post('/security/investment',data).then(json=>{
+
+      })
     }
   }
 }

@@ -17,6 +17,10 @@ const mutations = {
   [types.SET_USER_DATA](state, user_data) {
     state.user_data = user_data;
   },
+  // 设置当前标数据
+  [types.SET_THIS_BIAO](state, thisbiao) {
+    state.thisbiao = thisbiao;
+  },
 
 
   /************************************* */
