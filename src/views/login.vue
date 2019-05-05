@@ -86,8 +86,7 @@
 import slider from '@components/slider.vue'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
-import {setCookie,login} from "@common/js";
-import {post} from '@api/index'
+import {login} from "@common/js";
 import {mapMutations} from 'vuex';
 import {SET_USER_INFO} from "@store/mutation-types"
 export default {

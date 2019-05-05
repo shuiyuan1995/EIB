@@ -1,4 +1,6 @@
 <style lang="stylus" scoped>
+  .accountsetting
+    bottom 0rem
   .settingnav
     border-bottom 0.06rem solid #e8edeb
     display flex
@@ -104,6 +106,35 @@
         text-align center
       .cubeswitch
         padding-left 1.2rem
+  .investmentgopay
+    margin 0.56rem 0
+    .passwordDiv
+      display flex
+      justify-content center
+      align-items center
+      width 12.64rem
+      margin 0 auto
+      .passtitle
+        font-size 0.56rem
+        margin-right 0.8rem
+    .passwordLabel
+      height 30px
+      clear both
+      li
+        float left
+        width 30px
+        height 30px
+        line-height 30px
+        text-align center
+        border 1px solid #dedede
+        background #ffffff
+        &.active
+          border 1px solid #0081f7
+    input 
+      width 1px
+      height 1px
+      opacity 0
+      border 0
   .btn
     width 90%
     margin 6px auto 0
@@ -119,16 +150,16 @@
     </div>
     <div class="settingitem" v-show="thisactive">
       <div class="itemtop">
-        <p class="first"><span>累计投资：<i>00</i>笔/<i>00000.00</i> EOS</span><span>立即投资</span></p>
-        <p>待收本金：0笔/00000.00 EOS ≈0.00</p>
-        <p>发放利息：0笔/000.00 EOS ≈0.00</p>
-        <p>待收利息：0笔/000.00 EOS ≈0.00</p>
+        <p class="first"><span>累计投资：<i>{{cumulative.num}}</i>笔/<i>{{cumulative.money}}</i> EOS</span><span @click="$router.push('/investment')">立即投资</span></p>
+        <p>待收本金：{{collected.num}}笔/{{collected.money}} EOS ≈￥{{(collected.money*proportion).toFixed(2)}}</p>
+        <p>发放利息：{{distribute.num}}笔/{{distribute.money}} EOS ≈￥{{(distribute.money*proportion).toFixed(2)}}</p>
+        <p>待收利息：{{coll_record.num}}笔/{{coll_record.money}} EOS ≈￥{{(coll_record.money*proportion).toFixed(2)}}</p>
       </div>
       <div class="itemtable">
         <div class="tablenav">
           <span>投资时间</span>
           <span>状态</span>
-          <span>金额（EOS）</span>
+          <span>金额</span>
           <span>还款日期</span>
         </div>
         <div class="view-wrapper">
@@ -149,10 +180,10 @@
             </template>
             <template slot="item" slot-scope="{ data }">
               <div :id="data.id" class="item">
-                <span>04-23  17:40</span>
-                <span class="blue">已还本金</span>
-                <span>0000.00</span>
-                <span class="red">2018-05-30</span>
+                <span>{{data.up}}</span>
+                <span class="blue">{{data.state}}</span>
+                <span>{{data.name}}</span>
+                <span class="red">{{data.end}}</span>
               </div>
             </template>
             <myfooter slot="noMore"></myfooter>
@@ -177,7 +208,23 @@
           <span><cube-switch :value="item.state" class="cubeswitch" v-model="item.state"></cube-switch></span>
         </li>
       </ul>
-      <cube-button class="btn">确定修改</cube-button>
+      <div class="investmentgopay">
+        <div class="passwordDiv">
+          <span class="passtitle">支付密码</span>
+          <label for="ipt" class="passwordLabel">
+            <ul>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+            </ul>
+          </label>
+          <input @focus="onfocus" @input="oninput" @blur="onblur" v-model="value" type="password" id="ipt" maxlength="6" >
+        </div>
+      </div>
+      <cube-button class="btn" @click="gozidong">确定修改</cube-button>
     </div>
   </div>
 </template>
@@ -185,21 +232,39 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
-import {mapGetters} from 'vuex';
+import {mapGetters,mapMutations} from 'vuex';
+import {get,post} from '@api/index'
+import {changedata,getEles} from '@common/js'
+import {SET_AOTO} from "@store/mutation-types"
 export default {
   created(){
-    this.listval = {
-      ...this.listval
-    }
-    console.log(this.listval)
+    // 复制自动投资管理列表
+    this.listval = JSON.parse(JSON.stringify(this.aoto));
   },
   data(){
     return{
+      // 代收本金
+      collected:'',
+      // 累计投资
+      cumulative:'',
+      // 发放利息
+      distribute:'',
+      // 代收利息
+      coll_record:'',
+      // 货币比列
+      proportion:'',
+      // 自动投资管理列表
+      listval:[],
+      // 自动更新配置
       size: 20,
       infinite: true,
       offset:100,
+      // 切换管理
       thisactive:true,
-      listval:[],
+      // 请求页面
+      page:1,
+      // 支付密码
+      value:'',
     }
   },
   components:{
@@ -212,31 +277,110 @@ export default {
     ]),
   },
   methods: {
-    open(){
-
+    // 进入密码框焦点
+    onfocus(){
+      var list = getEles('.passwordDiv ul li')
+      if(this.value.length<6){
+        list[this.value.length].classList.add("active")
+      }else{
+        list[5].classList.add("active")
+      }
     },
-    onFetch() {
-      let items = []
-      return new Promise((resolve) => {
-        console.log('请求')
-        // 模拟请求 50 条数据，因为 size 设置为 50
-        setTimeout(() => {
-          for (let i = 0; i < 19; i++) {
-            items.push({
-              id: i,
-              type:'信',
-              title:'暖宝宝-EOS过冬理财计划',
-              allmoney:'100.0000',
-              Rate:'13%',
-              day:'30',
-              remaining:'10.0000',
-              tender:false
-            })
+    // 输入密码
+    oninput(){
+      var number = 6;
+      var list = getEles('.passwordDiv ul li')
+      if(this.value.length<6){
+        list[this.value.length].classList.add("active")
+      }
+      for(var i = 0; i < number; i++) {
+        if(this.value[i]) {
+          list[i].innerHTML = '•'
+          if(this.value.length<number){
+            list[i].classList.remove("active")
           }
-          resolve(items)
-        }, 1000)
+        } else {
+          list[i].innerHTML = ''
+          if(i>this.value.length){
+            list[i].classList.remove("active")
+          }
+        }
+      }
+    },
+    // 出去密码框焦点
+    onblur(){
+      var list = getEles('.passwordDiv ul li')
+      if(this.value.length<6){
+        list[this.value.length].classList.remove("active")
+      }else{
+        list[5].classList.remove("active")
+      }
+    },
+    // 开启全部投标
+    open(){
+      for(var i in this.listval) {
+        this.listval[i] = {
+          ...this.listval[i],
+          state:true,
+        }
+      }
+    },
+    // 获取数据
+    onFetch() {
+      return new Promise((resolve) => {
+        get('/api/investment_record',{page:this.page}).then(json=>{
+          if(this.page==1){
+            const {collected,cumulative,distribute,coll_record,proportion} = json.data
+            this.collected = collected
+            this.cumulative = cumulative
+            this.distribute = distribute
+            this.coll_record = coll_record
+            this.proportion = proportion
+          }
+          this.page++
+          let log = json.data.log.map(val=>{
+            return {
+              ...val,
+              up:changedata(val.up*1000,'MM-dd hh:mm'),
+              end:changedata(val.end*1000,'yyyy-MM-dd'),
+            }
+          })
+          resolve(log)
+        })
       })
-    }
+    },
+    // 提交自动登录
+    gozidong(){
+      // 密码验证
+      if(this.value==''||this.value.length!=6){
+        this.$createToast({
+          txt: `请输入正确支付密码`,
+          type: 'txt',
+          time: 500,
+        }).show()
+        return false
+      }
+      let data = {
+        pay_pwd:this.value,
+        name:JSON.stringify(this.listval)
+      }
+      post('/security/set_auto',data).then(()=>{
+        this.$createToast({
+          txt: `修改成功`,
+          type: 'txt',
+          time: 500,
+        }).show()
+        this.value = ''
+        this.oninput()
+      }).catch(()=>{
+        this.value = ''
+        this.oninput()
+      })
+      this.SET_AOTO(this.listval)
+    },
+    ...mapMutations({
+      SET_AOTO
+    }),
   }
 }
 </script>

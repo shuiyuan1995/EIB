@@ -5,7 +5,7 @@ import {SET_USER_INFO} from "@store/mutation-types";
 import {post} from '@api';
 
 // 登陆封装
-const login = (data,cp) => {
+const login = (data) => {
   if(!data&&!document.cookie.length){
     return false
   }
