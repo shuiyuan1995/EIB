@@ -21,6 +21,10 @@ const mutations = {
   [types.SET_THIS_BIAO](state, thisbiao) {
     state.thisbiao = thisbiao;
   },
+  // 设置自动投标管理
+  [types.SET_AOTO](state, aoto) {
+    state.aoto = aoto;
+  },
 
 
   /************************************* */

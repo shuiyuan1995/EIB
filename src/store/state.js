@@ -9,6 +9,8 @@ const state = {
   user_data:{},
   // 当前标数据
   thisbiao:{},
+  // 自动投标管理
+  aoto:[],
 };
 
 export default state;

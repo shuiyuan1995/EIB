@@ -35,6 +35,8 @@
     text-align right 
     i
       font-size 1.36rem
+      z-index 10
+      position relative
   // 头部列表
   .menulist
     position absolute
@@ -67,25 +69,30 @@
     <router-link v-if="right" class="link right" :to="right=='注册'?'/register':'/login'">{{right}}</router-link>
     <span v-else class="menu" @click="changemenu"><i class="icon icon-menu1"></i></span>
     <div class="menulist" v-show="menulist">
-      <router-link class="menulist-nav" to="/" v-for="(item, index) in navlists" :key="index">
+      <router-link class="menulist-nav" :to="item.to" v-for="(item, index) in navlists" :key="index">
         <i class="icon" :class="item.icon"></i>
         <span>{{item.text}}</span>
       </router-link>
-      <div class="menulist-nav">
+      <div class="menulist-nav" @click="thereload">
         <i class="icon icon-refresh"></i>
         <span>刷新页面</span>
       </div>
-      <router-link class="menulist-nav" to="/">
+      <div class="menulist-nav" @click="clearlogin">
         <i class="icon icon-tuichu1"></i>
         <span>退出登录</span>
-      </router-link>
+      </div>
     </div>
-    <div class="mask" v-show="mask" @click="changemenu"></div>
+    <div class="mask" v-show="menulist" @click="changemenu"></div>
   </header>
 </template>
 
 <script>
+import {clearCookie} from "@common/js";
 export default {
+  mounted(){
+    // console.log(this.reload())
+  },
+  inject:['reload'],
   props:{
     left:{
       type:String,
@@ -102,46 +109,57 @@ export default {
   },
   data(){
     return{
-      mask:false,
+      // 列表控制
       menulist:false,
+      // 路由列表
       navlists: [
         {
+          to:'/',
           icon:'icon-dianji',
-          text:'首页'
+          text:'首页',
         },
         {
+          to:'/account',
           icon:'icon-zhanghuzhongxin',
           text:'账户中心'
         },
         {
+          to:'/investment',
           icon:'icon-touzi',
           text:'我要投资'
         },
         {
+          to:'/accountRecharge',
           icon:'icon-chongzhi',
           text:'我要充值'
         },
         {
+          to:'/ranking',
           icon:'icon-paixing',
           text:'收益排行'
         },
         {
+          to:'/cooperation',
           icon:'icon-hezuo',
           text:'招商合作'
         },
         {
+          to:'/bulletin',
           icon:'icon-xiaoxi',
           text:'消息'
         },
         {
+          to:'/about',
           icon:'icon-women',
           text:'关于我们'
         },
         {
+          to:'/security',
           icon:'icon-anquan',
           text:'安全中心'
         },
         {
+          to:'/help',
           icon:'icon-bangzhuzhongxin',
           text:'帮助中心'
         },
@@ -149,9 +167,19 @@ export default {
     }
   },
   methods:{
+    // 菜单控制
     changemenu(){
-      this.mask = !this.mask;
       this.menulist = !this.menulist;
+    },
+    // 刷新当前页面
+    thereload(){
+      this.reload()
+    },
+    // 退出登录
+    clearlogin(){
+      clearCookie();
+      this.$router.push('/')
+      this.reload()
     }
   }
 }

@@ -68,7 +68,6 @@
 </template>
 
 <script>
-import { get } from "@api/index";
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import accounttable from '@components/accounttable.vue'

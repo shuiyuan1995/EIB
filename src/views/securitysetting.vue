@@ -522,6 +522,11 @@ export default {
         }
         this.repeat = true;
         post('/security/phone_code',{phone:this.phone}).then(json=>{
+          this.$createToast({
+            txt: json.data,
+            type: 'txt',
+            time: 10000
+          }).show()
           this.repeat = false;
           // 倒计时
           inter = setInterval(()=>{
@@ -547,6 +552,11 @@ export default {
         }
         this.repeat = true;
         post('/security/email_code',{email:this.email}).then(json=>{
+          this.$createToast({
+            txt: json.data,
+            type: 'txt',
+            time: 10000
+          }).show()
           this.repeat = false;
           // 倒计时
           inter = setInterval(()=>{

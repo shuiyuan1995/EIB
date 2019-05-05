@@ -1,3 +1,3 @@
-import clearRequest, { get, post } from "./http";
+import { get, post } from "./http";
 
-export { get, post, clearRequest };
+export { get, post };

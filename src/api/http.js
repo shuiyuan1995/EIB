@@ -8,8 +8,8 @@ import {SET_TOKEN} from "@store/mutation-types";
 // 请求配置参数
 const http = axios.create({
   baseURL:
-    process.env.NODE_ENV !== "production"
-      ? "http://www.eosfinance.com/api"
+    process.env.NODE_ENV === "production"
+      ? "http://132.148.158.244:24862/api"
       : "http://www.eosfinance.com/api", // 基础路径
   timeout: 30000, // 请求延时
 });
@@ -51,6 +51,11 @@ http.interceptors.response.use(response => {
       }).show()
       router.push('/login')
     }
+    Toast.$create({
+      txt: data.msg,
+      time: 2000,
+      type:'txt'
+    }).show()
     return Promise.reject(data);
   }
 });

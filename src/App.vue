@@ -43,26 +43,49 @@
 <template>
   <div id="app" class="clearfix">
      <transition name="slide-left">
-      <router-view class="pos"/>
+      <router-view class="pos" v-if="isRouterAlive"/>
     </transition>
   </div>
 </template>
 
 <script>
+import {login} from "@common/js";
 export default {
+  created(){
+    // 自动登录
+    login();
+  },
+  provide(){
+    return{
+      reload:this.reload
+    }
+  },
+  data(){
+    return{
+      isRouterAlive:true
+    }
+  },
   computed: {
-      direction () {
-        const viewDir = this.$store.state.viewDirection
-        let tranName = ''
-        if (viewDir === 'left') {
-          tranName = 'view-out'
-        } else if (viewDir === 'right') {
-          tranName = 'view-in'
-        } else {
-          tranName = 'fade'
-        }
-        return tranName
-      },
+    direction () {
+      const viewDir = this.$store.state.viewDirection
+      let tranName = ''
+      if (viewDir === 'left') {
+        tranName = 'view-out'
+      } else if (viewDir === 'right') {
+        tranName = 'view-in'
+      } else {
+        tranName = 'fade'
+      }
+      return tranName
     },
+  },
+  methods:{
+    reload(){
+      this.isRouterAlive = false;
+      this.$nextTick(function(){
+        this.isRouterAlive = true;
+      })
+    }
+  }
 }
 </script>

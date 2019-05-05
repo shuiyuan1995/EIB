@@ -104,6 +104,10 @@
         text-align center
       .cubeswitch
         padding-left 1.2rem
+  .btn
+    width 90%
+    margin 6px auto 0
+    background #9bb6d5
 </style>
 
 <template>
@@ -159,20 +163,21 @@
     <div class="settingitem1" v-show="!thisactive">
       <div class="item1top">
         <span class="icon icon-set">委托投资（自动投资）</span>
-        <span class="topbtn">全部开启</span>
+        <span class="topbtn" @click="open">全部开启</span>
       </div>
       <ul class="item1table">
         <li class="item1title">
           <span>种类</span>
-          <span>数量</span>
+          <span>金额</span>
           <span>自动投资</span>
         </li>
-        <li class="item1info" v-for="item in 6" :key="item">
-          <span>BTC</span>
-          <span>0</span>
-          <span><cube-switch class="cubeswitch" v-model="value"></cube-switch></span>
+        <li class="item1info" v-for="(item,key,index) in listval" :key="index">
+          <span>{{key}}</span>
+          <span>{{item.money}}</span>
+          <span><cube-switch :value="item.state" class="cubeswitch" v-model="item.state"></cube-switch></span>
         </li>
       </ul>
+      <cube-button class="btn">确定修改</cube-button>
     </div>
   </div>
 </template>
@@ -180,21 +185,36 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {mapGetters} from 'vuex';
 export default {
+  created(){
+    this.listval = {
+      ...this.listval
+    }
+    console.log(this.listval)
+  },
   data(){
     return{
       size: 20,
       infinite: true,
       offset:100,
       thisactive:true,
-      value:false
+      listval:[],
     }
   },
   components:{
     myheader,
     myfooter
   },
+  computed:{
+    ...mapGetters([
+      "aoto"
+    ]),
+  },
   methods: {
+    open(){
+
+    },
     onFetch() {
       let items = []
       return new Promise((resolve) => {

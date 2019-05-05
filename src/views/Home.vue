@@ -154,11 +154,15 @@ export default {
   },
   data() {
     return {
+      // 轮播图
       img:[],
+      // 广播列表
       investment_msg:[],
+      // 网站基本信息
       areate_amount:{},
       repayment:{},
       trading_amount:{},
+      // 路由列表
       navlists: [
         {
           to:'/account',

@@ -216,7 +216,12 @@ export default {
           this.time = 60
         }
       },1000)
-      post('/login/get_code',{name:this.num}).then(()=>{
+      post('/login/get_code',{name:this.num}).then(json=>{
+        this.$createToast({
+          txt: json.data,
+          type: 'txt',
+          time: 10000
+        }).show()
       }).catch(()=>{
       })
       // 清空滑块

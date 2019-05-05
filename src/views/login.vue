@@ -56,7 +56,7 @@
     <div class="login-logo">logo</div>
     <form class="loginform">
       <label>
-        <cube-input v-model="num" placeholder="用户名/手机号码/邮箱号码">
+        <cube-input v-model="num" placeholder="手机号码/邮箱号码">
           <template slot="prepend">
             <i class="icon icon-zhanghuzhongxin"></i>
           </template>
@@ -86,15 +86,18 @@
 import slider from '@components/slider.vue'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {setCookie,login} from "@common/js";
 import {post} from '@api/index'
 import {mapMutations} from 'vuex';
 import {SET_USER_INFO} from "@store/mutation-types"
 export default {
   data(){
     return{
-      valid:['undefined','undefined'],
+      // 表单
       num:'',
       passworld:'',
+      // 验证
+      valid:['undefined','undefined'],
       rules0:{
         required: true,
       },
@@ -114,6 +117,7 @@ export default {
   methods:{
     // 登录
     submit(){
+      // 判断滑动
       if(!this.$refs.slider.$data.isSuccess) {
         this.$createToast({
           txt: '请先滑动验证',
@@ -121,6 +125,7 @@ export default {
         }).show()
         return false
       }
+      // 验证
       const p1 = this.$refs.validator0.validate()
       const p2 = this.$refs.validator1.validate()
       const data = {
@@ -131,27 +136,8 @@ export default {
         // 清空滑块
         this.$refs.slider.resetslider()
         // 判断验证
-        console.log(this.valid)
         if (this.valid.every(item => item)) {
-          post('/login/login',data).then(json=>{
-            let {token,user_info} = json.data
-            this.SET_USER_INFO(user_info)
-            let that = this
-            this.$createToast({
-              type: 'correct',
-              txt: '登录成功',
-              time: 1000,
-              onTimeout(){
-                that.$router.push('/')
-              }
-            }).show()
-          }).catch(err=>{
-            this.$createToast({
-              type: 'correct',
-              txt: '登录失败，请重新登录',
-              time: 1000
-            }).show()
-          })
+          login(data)
         }
       })
     },

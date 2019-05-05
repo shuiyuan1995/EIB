@@ -116,7 +116,13 @@ export default {
         }).show()
         return false
       }
-      this.$emit('send',{phone_code:this.phone,email_code:this.email})
+      this.$emit('send',{phone_code:this.phone,email_code:this.email}).then(json=>{
+        this.$createToast({
+          txt: json.data,
+          type: 'txt',
+          time: 10000
+        }).show()
+      })
     }
     // 发送邮箱验证
   }

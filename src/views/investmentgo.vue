@@ -167,7 +167,7 @@ export default {
         money:this.$route.params.mone,
         pay_pwd:this.value
       }
-      post('/security/investment',data).then(json=>{
+      post('/security/investment',data).then(()=>{
         let that = this;
         this.$createToast({
           txt: `投标成功`,

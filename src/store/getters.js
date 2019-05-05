@@ -6,6 +6,8 @@ export const helpdata = state => state.helpdata;
 export const userdata = state => state.user_data;
 // 获取当前标数据
 export const thisbiao = state => state.thisbiao;
+// 获取自动投标管理
+export const aoto = state => state.aoto;
 
 
 /********************************************** */

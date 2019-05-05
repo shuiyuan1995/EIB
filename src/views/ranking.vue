@@ -65,19 +65,12 @@
             <p>奖励排行榜</p>
           </div>
         </div>
-        <div class="tableitem" @click="changeto(2)" :class="isactive==2?'active':''">
-          <span>充值</span>
-          <div>
-            <p>邀请充值</p>
-            <p>奖励排行榜</p>
-          </div>
-        </div>
       </nav>
       <ul class="tablelist">
-        <li v-for="item in 10" :key="item">
-          <span :class="item<4?'good':''" class="icon icon-B-paihangbang"></span>
-          <span>a*****</span>
-          <span>5,154.94</span>
+        <li v-for="(item,index) in itemdata" :key="index">
+          <span :class="index<4?'good':''" class="icon icon-B-paihangbang"></span>
+          <span>{{item.nick}}</span>
+          <span>{{item.sum}}</span>
         </li>
       </ul>
     </div>
@@ -86,12 +79,22 @@
 </template>
 
 <script>
+import {get} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 export default {
+  created(){
+    get('/api/ranking').then(json=>{
+      const {int,inv} = json.data;
+      this.int = int;
+      this.inv = inv;
+    })
+  },
   data(){
     return{
-      isactive:0
+      isactive:0,
+      int:[],
+      inv:[]
     }
   },
   components: {
@@ -101,6 +104,11 @@ export default {
   methods:{
     changeto(num){
       this.isactive = num
+    }
+  },
+  computed:{
+    itemdata(){
+      return this.isactive?this.inv:this.int
     }
   }
 }

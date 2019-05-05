@@ -52,22 +52,87 @@
       <cube-input class="cubeinput" v-model="value" placeholder="公司性质"></cube-input>
       <cube-input class="cubeinput" v-model="value1" placeholder="公司名称"></cube-input>
       <cube-input class="cubeinput" v-model="value2" placeholder="联系人"></cube-input>
-      <cube-input class="cubeinput" v-model="value3" placeholder="联系电话"></cube-input>
+      <cube-input class="cubeinput" v-model="value3" placeholder="联系电话或邮箱"></cube-input>
       <cube-input class="cubeinput" v-model="value4" placeholder="所在地区"></cube-input>
       <p>内容务必真实，我们将尽快电话回复您！</p>
-      <cube-button class="btn">提交申请</cube-button>
+      <cube-button class="btn" @click="goto">提交申请</cube-button>
     </form>
     <myfooter></myfooter>
   </div>
 </template>
 
 <script>
+import {post} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {mapGetters} from 'vuex';
 export default {
+  data(){
+    return{
+      value:'',
+      value1:'',
+      value2:'',
+      value3:'',
+      value4:'',
+    }
+  },
   components:{
     myheader,
     myfooter
   },
+  computed:{
+    ...mapGetters([
+      "userInfo"
+    ]),
+  },
+  methods:{
+    goto(){
+      let that = this
+      if(!this.userInfo.nick){
+        this.$createToast({
+          txt: `请先登录`,
+          type: 'txt',
+          time: 1000,
+          onTimeout(){
+            that.$router.push('/login')
+          }
+        }).show()
+        return false
+      }
+      if(!this.value||!this.value1){
+        this.$createToast({
+          txt: `公司信息不能为空`,
+          type: 'txt',
+          time: 1000,
+        }).show()
+        return false;
+      }
+      if(!this.value2||!this.value3){
+        this.$createToast({
+          txt: `联系人与电话不能为空`,
+          type: 'txt',
+          time: 1000,
+        }).show()
+        return false;
+      }
+      let data = {
+        nature:this.value,
+        name:this.value1,
+        people:this.value2,
+        phone:this.value3,
+        region:this.value4
+      }
+      post('/security/cooperation',data).then(()=>{
+        this.$createToast({
+          txt: `发送成功，我们将尽快联系您`,
+          type: 'txt',
+          time: 1000,
+          onTimeout(){
+            that.$router.push('/')
+          }
+        }).show()
+      })
+    }
+  }
 }
 </script>

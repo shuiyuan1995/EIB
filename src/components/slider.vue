@@ -44,7 +44,7 @@
   <div class="sliderbox">
     <div class="bgColor" :style="bgstyle"></div>
     <div class="txt" >{{txt}}</div>
-    <div id="slider" class="slider" :style="slstyle"><i class="iconfont" :class="iconclass"></i></div>
+    <div ref="slider" id="slider" class="slider" :style="slstyle"><i class="iconfont" :class="iconclass"></i></div>
   </div>
 </template>
 
@@ -53,7 +53,8 @@ import {getEle} from "@common/js";
 export default {
   mounted(){
     this.isSuccess = false
-    this.slider = getEle('.slider');
+    // this.slider = getEle('.slider');
+    this.slider = this.$refs.slider;
     let box = getEle(".sliderbox")
     // 鼠标需要移动距离
     this.successMoveDistance = box.offsetWidth- this.slider.offsetWidth;

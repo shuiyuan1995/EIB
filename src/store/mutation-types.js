@@ -8,7 +8,8 @@ export const SET_HELPDATA = "SET_HELPDATA";
 export const SET_USER_DATA = "SET_USER_DATA";
 // 设置当前标数据
 export const SET_THIS_BIAO = "SET_THIS_BIAO";
-
+// 设置自动投标管理
+export const SET_AOTO = "SET_AOTO";
 
 /*************************************************** */
 

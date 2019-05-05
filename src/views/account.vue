@@ -103,35 +103,35 @@
     <div class="account-name">
       <div class="naleft">
         <i class="icon icon-dengluyonghuming"></i>
-        <p>姓名</p>
+        <p>{{userInfo.nick}}</p>
       </div>
       <div class="nacenter">
         <p>钱包资产估值</p>
-        <p>0.00000000 <span>≈$0.00</span></p>
+        <p>{{sum_money+due}} <span>≈￥{{(porportion*(sum_money+due)).toFixed(2)}}</span></p>
       </div>
       <div class="naright">
-        <p>￥00000.00</p>
+        <p>{{accumulated}} EOS</p>
         <p>累计收益</p>
       </div>
     </div>
     <div class="account-money">
       <div>
-        <p>￥00.00</p>
+        <p>{{sum_money}} EOS</p>
         <p>账户余额</p>
       </div>
       <i class="icon icon-jia"></i>
       <div>
-        <p>￥000.00</p>
+        <p>{{due}}</p>
         <p>待收本金</p>
       </div>
     </div>
     <div class="account-investment">
       <i class="icon icon-zhanghuxinxililv"></i>
       <div class="investment-txt">
-        <p>昨日收益：<span>0.00元</span></p>
-        <p>总收益第xxx名，比前一名仅差00.00元哟！</p>
+        <p v-if="no">总收益第{{no}}名，比前一名仅差{{difference}}元哟！</p>
+        <p v-else>您还没有排名，快去投标吧</p>
       </div>
-      <router-link class="investmentbtn" to="/">立即投资</router-link>
+      <router-link class="investmentbtn" to="/investment">立即投资</router-link>
     </div>
     <div class="accountnav">
       <div @click="$router.push('/accountRecharge')">
@@ -157,14 +157,49 @@
 </template>
 
 <script>
+import {get} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import accounttable from '@components/accounttable.vue'
+import {mapGetters,mapMutations} from 'vuex';
+import {SET_AOTO} from "@store/mutation-types"
 export default {
+  created(){
+    get('/security/center').then(json=>{
+      const {accumulated,difference,no,sum_money,due,porportion,aoto} = json.data;
+      this.accumulated = accumulated;
+      this.difference = difference;
+      this.no = no;
+      this.sum_money = sum_money;
+      this.porportion = porportion;
+      this.due = due;
+      this.SET_AOTO(aoto)
+    })
+  },
+  data(){
+    return{
+      accumulated:'',
+      difference:'',
+      no:'',
+      sum_money:'',
+      due:'',
+      porportion:''
+    }
+  },
   components:{
     myheader,
     myfooter,
-    accounttable
+    accounttable,
   },
+  computed:{
+    ...mapGetters([
+      "userInfo"
+    ]),
+  },
+  methods:{
+    ...mapMutations({
+      SET_AOTO
+    }),
+  }
 }
 </script>
