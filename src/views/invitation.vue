@@ -39,11 +39,6 @@
         <span>好友投资奖励</span>
         <span class="icon icon-pagenext"></span>
       </li>
-      <li @click="$router.push('/invitationranking')">
-        <span class="icon icon-paihangbang"></span>
-        <span>好友收益排名榜</span>
-        <span class="icon icon-pagenext"></span>
-      </li>
     </ul>
     <myfooter></myfooter>
   </div>

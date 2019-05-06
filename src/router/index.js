@@ -29,7 +29,6 @@ import cooperation from '@views/cooperation.vue'
 import about from '@views/About.vue'
 import invitation from '@views/invitation.vue'
 import invitationpromote from '@views/invitationpromote.vue'
-import invitationranking from '@views/invitationranking.vue'
 import invitationreward from '@views/invitationreward.vue'
 
 Vue.use(Router)
@@ -113,11 +112,6 @@ const router = new Router({
       path: '/invitationpromote',
       name: 'invitationpromote',
       component:invitationpromote
-    },
-    {
-      path: '/invitationranking',
-      name: 'invitationranking',
-      component:invitationranking
     },
     {
       path: '/invitationreward',
