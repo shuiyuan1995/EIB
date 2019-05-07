@@ -1,7 +1,9 @@
 <style lang="stylus" scoped>
   .advertising
-    height 4rem
+    width 100%
     background-color #9bb6d3
+    img 
+      width 100%
   .invitationlist
     li
       display flex
@@ -27,7 +29,9 @@
 <template>
   <div class="invitation">
     <myheader left="prev" center="邀请好友"></myheader>
-    <div class="advertising"></div>
+    <div class="advertising">
+      <img :src="img_url" alt="">
+    </div>
     <ul class="invitationlist">
       <li @click="$router.push('/invitationpromote')">
         <span class="icon icon-tuiguangyaoqing"></span>
@@ -47,10 +51,36 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {get} from '@api/index'
+import {mapMutations} from 'vuex';
+import {SET_IMG,SET_URL} from "@store/mutation-types"
 export default {
+  created(){
+    this.getdata()
+  },
+  data(){
+    return{
+      img_url:'',
+    }
+  },
   components:{
     myheader,
     myfooter
   },
+  methods:{
+    getdata(){
+      get('/security/inviation').then(json=>{
+        console.log(json)
+        const {img_url,url,img} = json.data
+        this.img_url = img_url
+        this.SET_IMG(img)
+        this.SET_URL(url)
+      })
+    },
+    ...mapMutations({
+      SET_IMG,
+      SET_URL
+    }),
+  }
 }
 </script>

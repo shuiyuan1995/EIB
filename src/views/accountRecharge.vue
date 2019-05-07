@@ -43,20 +43,26 @@
 
 <template>
   <div class="accountRecharge">
-    <myheader left="prev" center="EOS充币"></myheader>
-    <h2>EOS充币</h2>
-    <div class="changemoney">
+    <myheader left="prev" center="充币"></myheader>
+    <h2>充币</h2>
+    <!-- <div class="changemoney">
       <span>EOS</span>
       <span>选择币种</span>
       <i class="icon icon-pagenext"></i>
-    </div>
+    </div> -->
     <div class="main">
-      <div class="img"></div>
-      <p class="save">保存二维码</p>
-      <p class="title">EIBdeposit</p>
-      <p class="save">复制地址</p>
-      <p class="title">1111111</p>
-      <p class="save">复制Tag</p>
+      <div class="img">
+        <img :src="img" alt="">
+      </div>
+      <p class="save" @click="downloadCodeImg">保存二维码</p>
+      <p class="title">{{account}}</p>
+      <p class="save" v-clipboard:copy="account"
+      v-clipboard:success="onCopy"
+      v-clipboard:error="onError">复制地址</p>
+      <p class="title">{{tag}}</p>
+      <p class="save" v-clipboard:copy="tag"
+      v-clipboard:success="onCopy"
+      v-clipboard:error="onError">复制Tag</p>
     </div>
     <div class="rechargeBottom">
       <h3>充值须知</h3>
@@ -76,10 +82,54 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {get} from '@api/index'
 export default {
+  created(){
+    this.getdata()
+  },
+  data(){
+    return{
+      account:'',
+      img:'',
+      tag:'',
+    }
+  },
   components:{
     myheader,
     myfooter
   },
+  methods:{
+    getdata(){
+      get('/api/recharge').then(json=>{
+        const {account,img,tag} = json.data
+        this.account = account
+        this.img = img
+        this.tag = tag
+      })
+    },
+    // 一键复制链接
+    onCopy(){
+      this.$createToast({
+        txt: `复制成功`,
+        type: 'txt',
+        time: 500,
+      }).show()
+    },
+    onError(){
+      this.$createToast({
+        txt: `复制失败,请重新复制`,
+        type: 'txt',
+        time: 500,
+      }).show()
+    },
+    // 一键保存图片
+    downloadCodeImg(){
+      let a = document.createElement('a')
+      a.download = name || 'pic'
+      // 设置图片地址
+      a.href = this.img;
+      a.click();
+    }
+  }
 }
 </script>

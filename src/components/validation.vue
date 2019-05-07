@@ -65,7 +65,7 @@
         <p @click="close">取消</p>
       </div>
       <form action="">
-        <label for="">
+        <label v-show="thisphone" for="">
           <p>短信验证:{{userInfo.phone}}</p>
           <div class="validationitem">
             <cube-input class="cubeinput" v-model="phone" placeholder="请输入验证码"></cube-input>
@@ -89,6 +89,12 @@
 import {mapGetters} from 'vuex';
 import {get} from '@api/index'
 export default {
+  props:{
+    thisphone:{
+      type:Boolean,
+      default:true
+    }
+  },
   data(){
     return{
       phone:'',
@@ -108,7 +114,7 @@ export default {
       get(`/security/${url}`).then(()=>{})
     },
     validation(){
-      if(this.phone==''||this.email==''){
+      if(this.phone==''&&this.thisphone||this.email==''){
         this.$createToast({
           type: 'correct',
           txt: '验证码不能为空',
@@ -116,13 +122,7 @@ export default {
         }).show()
         return false
       }
-      this.$emit('send',{phone_code:this.phone,email_code:this.email}).then(json=>{
-        this.$createToast({
-          txt: json.data,
-          type: 'txt',
-          time: 10000
-        }).show()
-      })
+      this.$emit('send',{phone_code:this.phone,email_code:this.email})
     }
     // 发送邮箱验证
   }

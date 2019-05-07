@@ -15,7 +15,7 @@ const login = (data) => {
   post('/login/login',data).then(json=>{
     let {user_info} = json.data
     store.commit(SET_USER_INFO, user_info)
-    if(document.cookie.length <= 0){
+    if(document.cookie.length <= 0||window.location.pathname=='/login'){
       setCookie(data.name, data.password, 1)
       Toast.$create({
         type: 'correct',

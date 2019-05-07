@@ -25,6 +25,18 @@ const mutations = {
   [types.SET_AOTO](state, aoto) {
     state.aoto = aoto;
   },
+  // 设置邀请好友链接
+  [types.SET_URL](state, url) {
+    state.url = url;
+  },
+  // 设置邀请好友二维码
+  [types.SET_IMG](state, img) {
+    state.img = img;
+  },
+  // 设置提现手续
+  [types.SET_CONTENT](state, content) {
+    state.content = content;
+  },
 
 
   /************************************* */

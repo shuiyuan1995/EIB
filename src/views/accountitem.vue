@@ -26,15 +26,15 @@
 
 <template>
   <div class="accountitem">
-    <myheader left="prev" center="充币详情"></myheader>
+    <myheader left="prev" center="详情"></myheader>
     <h2>详情</h2>
-    <p class="money">+58.00000000 <span>EOS</span></p>
-    <p class="accitem"><span>类型</span><span>普通充币</span></p>
-    <p class="accitem"><span>地址</span><span>vincentzhang</span></p>
-    <p class="accitem"><span>状态</span><span>已完成</span></p>
-    <p class="accitem"><span>手续费</span><span>0.10000000 EOS</span></p>
-    <p class="accitem"><span>TxID</span><span>6vghdghvnm6ghdfg4hgjdytylkl4454kgjkghkhj65545544dghjd</span></p>
-    <p class="accitem"><span>时间</span><span>14:35:02  12/19/2018</span></p>
+    <p class="money">{{data.symbol?'+':'-'}}{{data.money}} <span>{{data.coin}}</span></p>
+    <p class="accitem"><span>类型</span><span>{{data.type}}</span></p>
+    <p class="accitem" v-show="data.address"><span>地址</span><span>{{data.address}}</span></p>
+    <p class="accitem"><span>状态</span><span>{{data.state}}</span></p>
+    <p class="accitem" v-show="data.fee"><span>手续费</span><span>{{data.fee}} {{data.coin}}</span></p>
+    <p class="accitem" v-show="data.txid"><span>TxID</span><span>{{data.txid}}</span></p>
+    <p class="accitem"><span>时间</span><span>{{data.time}}</span></p>
     <myfooter></myfooter>
   </div>
 </template>
@@ -43,6 +43,14 @@
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 export default {
+  created(){
+    this.data = this.$route.params
+  },
+  data(){
+    return{
+      data:''
+    }
+  },
   components:{
     myheader,
     myfooter

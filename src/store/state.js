@@ -11,6 +11,12 @@ const state = {
   thisbiao:{},
   // 自动投标管理
   aoto:[],
+  // 邀请好友链接
+  url:'',
+  // 邀请好友二维码
+  img:'',
+  // 提现手续
+  content:{},
 };
 
 export default state;

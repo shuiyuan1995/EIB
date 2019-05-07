@@ -1,4 +1,6 @@
 <style lang="stylus" scoped>
+  .accountHistory
+    bottom 0px
   h2
     font-size 16px
     padding 10px 0.6rem
@@ -19,19 +21,21 @@
     height 30px
     padding 0 8px
     color #ffffff
-    font-size 16px
+    font-size 14px
     .icon
       color #cccccc
   .itemcenter,.itembottom
     display flex
     padding 0 8px
-    font-size 14px
     line-height 18px
     border-bottom 1px solid #e5e5e5
     span 
-      flex 1
+      flex 2
       white-space nowrap
       text-align center
+      font-size 0.48rem
+      &:nth-of-type(1),&:nth-of-type(2)
+        flex 1
 </style>
 
 <template>
@@ -57,8 +61,8 @@
         <template slot="item" slot-scope="{ data }">
           <div :id="data.id" class="item">
             <div class="itemtop">
-              <span>转出(eos)</span>
-              <i class="icon icon-pagenext" @click="$router.push('/accountitem')"></i>
+              <span>{{data.type}}({{data.coin}})</span>
+              <i class="icon icon-pagenext" @click="goto(data)"></i>
             </div>
             <div class="itemcenter">
               <span>数量</span>
@@ -66,9 +70,9 @@
               <span>时间</span>
             </div>
             <div class="itembottom">
-              <span>58.00002900</span>
-              <span>已完成</span>
-              <span>14:37  12/19/2018</span>
+              <span>{{data.money}}</span>
+              <span>{{data.state}}</span>
+              <span>{{data.time}}</span>
             </div>
           </div>
         </template>
@@ -81,6 +85,8 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {get} from '@api/index'
+import {changedata} from '@common/js'
 export default {
   data(){
     return{
@@ -97,23 +103,22 @@ export default {
     onFetch() {
       let items = []
       return new Promise((resolve) => {
-        console.log('请求')
-        // 模拟请求 50 条数据，因为 size 设置为 50
-        setTimeout(() => {
-          for (let i = 0; i < 19; i++) {
-            items.push({
-              id: i,
-              type:'信',
-              title:'暖宝宝-EOS过冬理财计划',
-              allmoney:'100.0000',
-              Rate:'13%',
-              day:'30',
-              remaining:'10.0000',
-              tender:false
-            })
-          }
+        get('/api/historical_record').then(json=>{
+          console.log(json)
+          items = json.data.map(val=>{
+            return {
+              ...val,
+              time:changedata(val.time*1000,'hh:mm dd/MM/yyyy')
+            }
+          })
           resolve(items)
-        }, 1000)
+        })
+      })
+    },
+    goto(data){
+      this.$router.push({
+        name:'accountitem',
+        params: data
       })
     }
   }

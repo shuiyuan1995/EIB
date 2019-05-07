@@ -109,17 +109,16 @@
         &.active
           transform rotate(90deg)
     .itemlist
+      transition all 0.5s
+      overflow hidden
       li 
         display flex
         font-size 0.48rem
         height 1.2rem
         border-bottom 0.04rem solid #d2d2d2
         align-items center
+        justify-content space-between
         padding-right 0.6rem
-      span:nth-of-type(1)
-        flex 2
-      span:nth-of-type(2)
-        flex 1
 </style>
 
 <template>
@@ -127,70 +126,51 @@
     <myheader left="prev" center="VIP会员"></myheader>
     <div class="rewardtop">
       <nav>
-        <span class="active">总</span>
-        <span>月</span>
+        <span :class="change?'active':''" @click="change = true">总</span>
+        <span :class="change?'':'active'" @click="change = false">月</span>
       </nav>
       <div class="person">
         <span class="icon icon-750-user"></span>
         <p>
-          <span>VIP会员</span>
-          <span>姓名</span>
+          <span>{{is_super?'VIP':''}}会员</span>
+          <span>{{userInfo.nick}}</span>
         </p>
       </div>
       <div class="message">
         <div class="img">
           <img src="../assets/images/medal.png" alt="">
         </div>
-        <p>第2名</p>
-        <p>收益（元）</p>
-        <p>00000.00</p>
+        <p>第{{thisdata.no}}名</p>
+        <p>收益（EOS）</p>
+        <p>{{thisdata.sum}}</p>
       </div>
       <div class="messagebottom">
         <p>1.直接邀请人收益X10%</p>
-        <p>2.简介邀请人收益X5%</p>
+        <p>2.间接邀请人收益X5%</p>
       </div>
       <div class="btn">
-        <span>提现</span>
-        <span>邀请好友</span>
+        <span @click="$router.push('/account')">提现</span>
+        <span @click="$router.push('/invitationpromote')">邀请好友</span>
       </div>
     </div>
     <div class="rewardmain">
-      <p class="rewarditem"><span>我邀请的好友</span><span>000人</span></p>
-      <p class="rewarditem"><span>用户名</span><span>提供收益（元）</span></p>
+      <p class="rewarditem"><span>我邀请的好友</span><span>{{firend.length}}人</span></p>
+      <p class="rewarditem"><span>用户名</span><span>提供收益（EOS）</span></p>
       <div class="view-wrapper">
-        <cube-recycle-list class="list" :infinite="infinite" :size="size" :on-fetch="onFetch">
-          <!-- tombstone 的作用域插槽 slot-scope 必须声明 -->
-          <template slot="tombstone" slot-scope="props">
-            <div class="item tombstone">
-              <div class="avatar"></div>
-              <div class="bubble">
-                <p></p>
-                <p></p>
-                <p></p>
-                <div class="meta">
-                  <time class="posted-date"></time>
-                </div>
-              </div>
-            </div>
-          </template>
-          <template slot="item" slot-scope="{ data }">
-            <div :id="data.id" class="item" @click="handleClick(data)">
-              <p class="itemp" @click="thisopen=data.id"><span>1235465455679 </span><span>0.01/1笔</span><i class="icon icon-pagenext" :class="thisopen==data.id?'active':''"></i></p>
-              <ul v-show="thisopen==data.id" class="itemlist">
-                <li>
-                  <span>1235465455679 </span><span>X10%</span><span>0.01/1笔</span>
-                </li>
-                <li>
-                  <span>1235465455679 </span><span>X10%</span><span>0.01/1笔</span>
-                </li>
-                <li>
-                  <span>1235465455679 </span><span>X10%</span><span>0.01/1笔</span>
+        <cube-scroll
+          ref="scroll"
+          :data="firend"
+          :options="options"
+          @pulling-up="onPullingUp">
+          <div v-for="(data,index) in firend" :key="index" class="item">
+            <p class="itemp" @click="opento(index)"><span>{{data.nick}}</span><span>{{data.sum}}/{{data.num}}笔</span><i class="icon icon-pagenext" :class="thisopen==index?'active':''"></i></p>
+              <ul class="itemlist" :style="{height:thisopen==index?`${30*data.content.length}px`:'0px'}">
+                <li v-for="(item,index) in data.content" :key="index">
+                  <span>{{item.nick}} </span><span>{{item.sum}}/{{item.num}}笔</span>
                 </li>
               </ul>
-            </div>
-          </template>
-          <myfooter slot="noMore"></myfooter>
-        </cube-recycle-list>
+          </div>
+        </cube-scroll>
       </div>
     </div>
   </div>
@@ -199,12 +179,28 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {get} from '@api/index'
+import {mapGetters} from 'vuex';
 export default {
+  created(){
+    this.getdata(1)
+  },
   data(){
     return{
-      size: 20,
-      infinite: true,
-      offset:100,
+      change:true,
+      is_super:'',
+      month:{},
+      total:{},
+      firend:[],
+      options:{
+        scrollbar: true,
+        pullUpLoad:{
+          more:'正在加载',
+          noMore:'没有更多的了'
+        }
+      },
+      page:1,
+      max_page:1,
       thisopen:null,
     }
   },
@@ -212,24 +208,56 @@ export default {
     myheader,
     myfooter
   },
+  computed:{
+    ...mapGetters([
+      "userInfo",
+    ]),
+    thisdata(){
+      let data
+      if(this.change){
+        data = {
+          no:this.total.no,
+          sum:this.total.sum
+        }
+      }else{
+        data = {
+          no:this.month.no,
+          sum:this.month.sum
+        }
+      }
+      return data
+    }
+  },
   methods: {
-     onFetch() {
-      let items = []
-      return new Promise((resolve) => {
-        // 模拟请求 50 条数据，因为 size 设置为 50
-        setTimeout(() => {
-          for (let i = 0; i < 19; i++) {
-            items.push({
-              id: i,
-              avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/danpliego/128.jpg',
-              msg: '123',
-              time: 'Thu Oct 25 2018 15:02:12 GMT+0800 (中国标准时间)'
-            })
-          }
-          resolve(items)
-        }, 1000)
+    getdata(page){
+      get('/security/inviation_friend_ranking',{page:page}).then(json=>{
+        const {is_super,total,month,firend,page,max_page} = json.data;
+        if(page==1){
+          this.is_super = is_super
+          this.total = total
+          this.month = month
+          this.firend = firend
+        }else{
+          this.firend.push(...firend)
+        }
+        this.page = page
+        this.max_page = max_page
       })
     },
+    onPullingUp() {
+      if(this.page>=this.max_page){
+        this.$refs.scroll.forceUpdate()
+      }else{
+        this.getdata(this.page)
+      }
+    },
+    opento(id) {
+      if(this.thisopen==id){
+        this.thisopen = -1
+      }else{
+        this.thisopen = id
+      }
+    }
   }
 }
 </script>

@@ -64,7 +64,7 @@
         <cube-validator ref="validator0" class="validator" v-model="valid[0]" :model="num" :rules="rules0" :messages="messages0"></cube-validator>
       </label>
       <label>
-        <cube-input type="password" :eye="{open: false,reverse: false}" v-model="passworld" placeholder="请输入密码">
+        <cube-input type="password" autocomplete="off" :eye="{open: false,reverse: false}" v-model="passworld" placeholder="请输入密码">
           <template slot="prepend">
             <i class="icon icon-mima"></i>
           </template>

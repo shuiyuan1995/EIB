@@ -10,6 +10,12 @@ export const SET_USER_DATA = "SET_USER_DATA";
 export const SET_THIS_BIAO = "SET_THIS_BIAO";
 // 设置自动投标管理
 export const SET_AOTO = "SET_AOTO";
+// 设置邀请好友链接
+export const SET_URL = "SET_URL";
+// 设置邀请好友二维码
+export const SET_IMG = "SET_IMG";
+// 设置提现手续
+export const SET_CONTENT = "SET_CONTENT";
 
 /*************************************************** */
 

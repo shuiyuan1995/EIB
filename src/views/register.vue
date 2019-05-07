@@ -218,7 +218,7 @@ export default {
       },1000)
       post('/login/get_code',{name:this.num}).then(json=>{
         this.$createToast({
-          txt: json.data,
+          txt: String(json.data),
           type: 'txt',
           time: 10000
         }).show()

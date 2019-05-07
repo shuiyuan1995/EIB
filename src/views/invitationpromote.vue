@@ -41,12 +41,16 @@
     <p class="title">方法二：复制下面的邀请链接发送给好友，邀请朋友加入EOS。</p>
     <div class="copy">
       <cube-input class="input" v-model="value" readonly></cube-input>
-      <cube-button class="btn">点击复制</cube-button>
+      <cube-button v-clipboard:copy="value"
+      v-clipboard:success="onCopy"
+      v-clipboard:error="onError" class="btn">点击复制</cube-button>
     </div>
     <p class="title">方法三：邀请好友加入EOS，注册时输入您注册使用的手机号码。</p>
     <p class="title">方法四：通过自己的二维码邀请好友注册。</p>
-    <div class="img"></div>
-    <cube-button class="savebtn">点击保存</cube-button>
+    <div class="img">
+      <img :src="img" alt="">
+    </div>
+    <cube-button @click="downloadCodeImg" class="savebtn">点击保存二维码</cube-button>
     <myfooter></myfooter>
   </div>
 </template>
@@ -54,10 +58,51 @@
 <script>
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {mapGetters} from 'vuex';
 export default {
+  created(){
+    this.value = this.url
+  },
+  data(){
+    return{
+      value:''
+    }
+  },
   components:{
     myheader,
     myfooter
   },
+  computed:{
+    ...mapGetters([
+      "img",
+      "url"
+    ]),
+  },
+  methods:{
+    // 一键复制链接
+    onCopy(){
+      this.$createToast({
+        txt: `复制成功`,
+        type: 'txt',
+        time: 500,
+      }).show()
+    },
+    onError(){
+      this.$createToast({
+        txt: `复制失败,请重新复制`,
+        type: 'txt',
+        time: 500,
+      }).show()
+    },
+    // 一键保存图片
+    downloadCodeImg(){
+      console.log('下载图片')
+      var a = document.createElement('a')
+      a.download = name || 'pic'
+      // 设置图片地址
+      a.href = this.img;
+      a.click();
+    }
+  }
 }
 </script>
