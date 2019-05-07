@@ -104,7 +104,6 @@ export default {
       let items = []
       return new Promise((resolve) => {
         get('/api/historical_record').then(json=>{
-          console.log(json)
           items = json.data.map(val=>{
             return {
               ...val,

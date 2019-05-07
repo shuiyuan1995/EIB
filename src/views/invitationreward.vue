@@ -178,7 +178,6 @@
 
 <script>
 import myheader from '@components/myheader.vue'
-import myfooter from '@components/myfooter.vue'
 import {get} from '@api/index'
 import {mapGetters} from 'vuex';
 export default {
@@ -205,8 +204,7 @@ export default {
     }
   },
   components:{
-    myheader,
-    myfooter
+    myheader
   },
   computed:{
     ...mapGetters([

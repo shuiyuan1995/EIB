@@ -161,7 +161,6 @@ import validation from '@components/validation.vue'
 import {mapGetters} from 'vuex';
 import {post} from '@api/index'
 import {getEles} from '@common/js'
-import { posix } from 'path';
 export default {
   created(){
     this.thismoney = Object.keys(this.aoto)[0]
@@ -230,7 +229,6 @@ export default {
     },
     showPicker() {
       if (!this.picker) {
-        console.log(Object.keys(this.aoto))
         let column = Object.keys(this.aoto).map(val=>{
           return {
             text: val, 
@@ -246,7 +244,7 @@ export default {
       }
       this.picker.show()
     },
-    selectHandle(selectedVal, selectedIndex, selectedText) {
+    selectHandle(selectedVal) {
       this.thismoney = selectedVal[0]
     },
     cancelHandle() {
@@ -260,7 +258,7 @@ export default {
         }).show()
         return false;
       }
-      if(this.money<this.aoto[thismoney].withdraw||this.money>this.aoto[this.thismoney].money){
+      if(this.money<this.aoto[this.thismoney].withdraw||this.money>this.aoto[this.thismoney].money){
         this.$createToast({
           txt: `请填写正确金额`,
           type: 'txt',

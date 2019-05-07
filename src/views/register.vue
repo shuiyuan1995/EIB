@@ -131,7 +131,6 @@ import slider from '@components/slider.vue'
 import myfooter from '@components/myfooter.vue'
 import {post} from '@api/index'
 import { setInterval, clearInterval } from 'timers';
-import { constants } from 'fs';
 let inter = null;
 export default {
   created(){
@@ -242,7 +241,7 @@ export default {
       Promise.all([p1, p2, p3, p4]).then(() => {
         // 判断验证
         if (this.valid.every(item => item)) {
-          post('/login/reg',data).then(json=>{
+          post('/login/reg',data).then(()=>{
             let that = this
             this.$createToast({
               type: 'correct',
@@ -252,7 +251,7 @@ export default {
                 that.$router.push('/login')
               }
             }).show()
-          }).catch(err=>{
+          }).catch(()=>{
             this.$createToast({
               type: 'correct',
               txt: '注册失败，请重新注册',
