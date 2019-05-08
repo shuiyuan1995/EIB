@@ -20,6 +20,7 @@
     font-size 0.88rem
     color #ffffff
   .link
+    cursor pointer
     color #ffffff
     display inline-block
     &.right
@@ -34,6 +35,7 @@
     margin-right 0.16rem
     width 3.28rem
     text-align right 
+    cursor pointer
     i
       font-size 1.36rem
       z-index 10
@@ -47,6 +49,7 @@
     right 0
     top 1.38rem
   .menulist-nav
+    cursor pointer
     display flex
     align-items center
     height 1.2rem

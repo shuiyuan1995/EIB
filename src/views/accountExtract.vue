@@ -14,6 +14,8 @@
     span:first-of-type
       flex 1
       color #000000
+    span:last-of-type
+      cursor pointer
   form
     padding 0 0.8rem
     margin-top 0.64rem
@@ -235,6 +237,7 @@ export default {
             lable: val
           }
         })
+        console.log(column)
         this.picker = this.$createPicker({
           title: '币种',
           data: [column],
@@ -244,8 +247,8 @@ export default {
       }
       this.picker.show()
     },
-    selectHandle(selectedVal) {
-      this.thismoney = selectedVal[0]
+    selectHandle(selectedVal, selectedIndex, selectedText) {
+      this.thismoney = selectedText[0]
     },
     cancelHandle() {
     },

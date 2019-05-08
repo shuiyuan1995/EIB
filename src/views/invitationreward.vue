@@ -14,6 +14,7 @@
         flex 1
         text-align center
         font-size 14px
+        cursor pointer
         &:first-of-type
           border-right 1px solid #a6a6a6
         &.active
@@ -75,9 +76,10 @@
         border-radius 0.12rem
         padding 0.16rem 0.4rem
         margin-bottom 0.4rem
+        cursor pointer
   .rewardmain
-    padding 0 0.5rem
     .rewarditem
+      padding 0 0.5rem
       font-size 0.56rem
       display flex
       justify-content space-between
@@ -92,8 +94,8 @@
     .view-wrapper
       position fixed
       width 100%
-      top 330px
-      left 0px
+      max-width 400px
+      top 358px
       bottom 0px
       padding 0 0.5rem
     .itemp
@@ -102,6 +104,7 @@
       height 1.2rem
       border-bottom 0.04rem solid #d2d2d2
       align-items center
+      cursor pointer
       span:first-of-type
         flex 1
       .icon

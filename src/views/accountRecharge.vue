@@ -14,6 +14,8 @@
     span:first-of-type
       flex 1
       color #000000
+    span:last-of-type
+      cursor pointer
   .main
     .img
       width 5.6rem
@@ -25,6 +27,7 @@
       color #5570a6
       text-align center
       margin-bottom 1.08rem
+      cursor pointer
     .title
       font-size 0.56rem
       margin-bottom 0.28rem
@@ -45,14 +48,14 @@
   <div class="accountRecharge">
     <myheader left="prev" center="充币"></myheader>
     <h2>充币</h2>
-    <!-- <div class="changemoney">
-      <span>EOS</span>
-      <span>选择币种</span>
+    <div class="changemoney">
+      <span>{{thismoney}}</span>
+      <span @click="showPicker">选择币种</span>
       <i class="icon icon-pagenext"></i>
-    </div> -->
+    </div>
     <div class="main">
       <div class="img">
-        <img :src="img" alt="">
+        <img :src="img[thismoney]?img[thismoney].img:''" alt="">
       </div>
       <p class="save" @click="downloadCodeImg">保存二维码</p>
       <p class="title">{{account}}</p>
@@ -71,7 +74,7 @@
       <p>3.EOS暂不支持lnline方式的转账充值，通过lnline方式的转账充值将不会上账，请您谅解。</p>
       <p>4.请务必填写并仔细核对地址标签，这是您账户的唯一标识，否则资产将不可找回。</p>
       <p>5.您充值至上述地址后，需要整个网络节点的确认，1次网络确认后到账，1次网络确认后可提币。</p>
-      <p>6.最小充值金额: 0.1EOS1，小于最小金额的充值将不会上账且无法退回。</p>
+      <p>6.最小充值金额: {{img[thismoney]?img[thismoney].min:1}} {{thismoney}}，小于最小金额的充值将不会上账且无法退回。</p>
       <p>7.您的充值地址不会经常，可以重复充值；如有更改，我们会尽量通过网站公告或邮件通知您。</p>
       <p>8.请务必确认电脑浏览器安全，防止信息被篡改或泄露。</p>
     </div>
@@ -90,8 +93,10 @@ export default {
   data(){
     return{
       account:'',
-      img:'',
+      img:{},
       tag:'',
+      thismoney:'',
+      picker:'',
     }
   },
   components:{
@@ -101,11 +106,34 @@ export default {
   methods:{
     getdata(){
       get('/api/recharge').then(json=>{
-        const {account,img,tag} = json.data
-        this.account = account
-        this.img = img
-        this.tag = tag
+        const {account,img,tag} = json.data;
+        this.account = account;
+        this.img = img;
+        this.tag = tag;
+        this.thismoney = Object.keys(img)[0]
       })
+    },
+    showPicker(){
+      if (!this.picker) {
+        let column = Object.keys(this.img).map(val=>{
+          return {
+            text: val, 
+            lable: val
+          }
+        })
+        this.picker = this.$createPicker({
+          title: '币种',
+          data: [column],
+          onSelect: this.selectHandle,
+          onCancel: this.cancelHandle
+        })
+      }
+      this.picker.show()
+    },
+    selectHandle(selectedVal, selectedIndex, selectedText) {
+      this.thismoney = selectedText[0]
+    },
+    cancelHandle() {
     },
     // 一键复制链接
     onCopy(){

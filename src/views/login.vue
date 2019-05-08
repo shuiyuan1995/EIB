@@ -3,6 +3,10 @@
     height 1.6rem
     text-align center
     margin 0.8rem 0 1.4rem
+    cursor pointer
+    img 
+      height 100%
+      margin 0 auto
   .loginform
     text-align center
     label
@@ -53,7 +57,9 @@
 <template>
   <div class="login">
     <myheader left="prev" center="用户登录" right="注册"></myheader>
-    <div class="login-logo">logo</div>
+    <div class="login-logo" @click="$router.push('/')">
+      <img src="../assets/logo.png" alt="">
+    </div>
     <form class="loginform">
       <label>
         <cube-input v-model="num" placeholder="手机号码/邮箱号码">

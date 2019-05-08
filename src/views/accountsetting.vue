@@ -11,6 +11,7 @@
       flex 1
       text-align center
       line-height 1.2rem
+      cursor pointer
       &.active
         border-bottom 0.06rem solid #5570a6
   .settingitem
@@ -32,6 +33,7 @@
         border-radius 0.1rem
         color #ffffff
         padding 0.24rem 0.48rem
+        cursor pointer
     .tablenav
       display flex
       font-size 0.56rem
@@ -84,6 +86,7 @@
         padding 0.24rem 0.56rem
         border-radius 0.84rem
         background #ffffff
+        cursor pointer
     .item1table
       padding 0 0.68rem 0 0.6rem
     .item1title

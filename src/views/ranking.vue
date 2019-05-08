@@ -15,6 +15,7 @@
       align-items center
       color #5570a6
       height 2.48rem
+      cursor pointer
       &.active
         border-bottom 0.12rem solid #5570a6
       span 

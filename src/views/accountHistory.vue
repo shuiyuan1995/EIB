@@ -24,6 +24,7 @@
     font-size 14px
     .icon
       color #cccccc
+      cursor pointer
   .itemcenter,.itembottom
     display flex
     padding 0 8px

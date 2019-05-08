@@ -2,6 +2,7 @@
   .list
     border-bottom 1px solid #e8edeb
     &>p
+      cursor pointer
       display flex
       align-items center
       font-size 0.6rem

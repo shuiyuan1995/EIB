@@ -7,6 +7,7 @@
       font-size 0.48rem
       padding 0 1rem
       height 1.4rem
+      cursor pointer
       span 
         flex 1
     .point

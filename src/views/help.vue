@@ -4,6 +4,7 @@
     margin-top 1.44rem
     margin-bottom 1.44rem
     &>div
+      cursor pointer
       text-align center
       flex 1
     .icon

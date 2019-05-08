@@ -1,13 +1,13 @@
 <style lang="stylus" scoped>
   .account-name
     display flex
-    height 60px
+    height 2.4rem
     align-items center
     border-bottom 1px solid #e5e5e5
     .naleft
       flex 1
       text-align center
-      font-size 14px
+      font-size 0.56rem
       i 
         color #80abd1
         font-size 1.2rem
@@ -15,16 +15,16 @@
       position relative
       flex 2
       text-align center
-      font-size 16px
+      font-size 0.64rem
       background #9bb6d3
-      height 60px
+      height 2.4rem
       color #dddddd
       p:last-of-type
         color #ffffff
       p
-        margin-top 0.32rem
+        margin-top 0.12rem
       span 
-        font-size 12px
+        font-size 0.48rem
         color #dddddd
       &:after
         position absolute
@@ -39,8 +39,8 @@
     .naright
       flex 1
       text-align center
-      font-size 12px
-      line-height 18px
+      font-size 0.48rem
+      line-height 0.72rem
       p:first-of-type
         color #c30101
   .account-money
@@ -83,11 +83,12 @@
   .accountnav
     display flex
     padding 0.56rem 0
-    border-bottom 8px solid #eeeeee
+    border-bottom 0.32rem solid #eeeeee
     &>div
       flex 1
       text-align center
       color #0a3ea6
+      cursor pointer
     .icon
       font-size 1.2rem
     p

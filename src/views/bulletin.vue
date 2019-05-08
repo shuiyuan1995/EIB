@@ -5,6 +5,7 @@
     position fixed
     top 1.4rem
     width 100%
+    max-width 400px
     display flex
     height 1.6rem
     align-items center
@@ -16,6 +17,7 @@
       line-height 1.6rem
       font-size 0.6rem
       color #010101
+      cursor pointer
       &.active
         background #a1bedb
         color #fefefe
@@ -31,6 +33,7 @@
       padding-left 1.2rem
       padding-right 0.52rem
       justify-content space-between
+      cursor pointer
       &:before
         position absolute
         left 0.6rem
@@ -52,6 +55,7 @@
       border-bottom 0.06rem solid #dddada
       align-items center
       padding 0 0.52rem
+      cursor pointer
     .list1-l
       width 1.6rem
       height 1.6rem

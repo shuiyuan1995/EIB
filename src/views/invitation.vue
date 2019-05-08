@@ -12,6 +12,7 @@
       align-items center
       padding 0 0.6rem
       font-size 0.64rem
+      cursor pointer
       span:first-of-type
         width 1.24rem
         height 1.24rem
