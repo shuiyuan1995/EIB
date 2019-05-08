@@ -2,15 +2,16 @@
   .validation
     position fixed
     width 100%
+    max-width 400px
+    margin 0 auto
     height 100%
     top 0px
-    left 0px
   .bg
     position fixed
     width 100%
+    max-width 400px
     height 100%
     top 0px
-    left 0px
     background rgba(0,0,0,0.2)
   .main
     position absolute

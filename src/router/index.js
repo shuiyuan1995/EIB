@@ -40,178 +40,237 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        role: 'all'
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component:login
-      // component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component:login,
+      meta: {
+        role: 'all'
+      }
     },
     {
       path: '/register',
       name: 'register',
-      component:register
+      component:register,
+      meta: {
+        role: 'all'
+      }
     },
     {
       path: '/investment',
       name: 'investment',
-      component:investment
+      component:investment,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/investmentinfo',
       name: 'investmentinfo',
-      component:investmentinfo
+      component:investmentinfo,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/investmentmoney',
       name: 'investmentmoney',
-      component:investmentmoney
+      component:investmentmoney,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/investmentgo',
       name: 'investmentgo',
-      component:investmentgo
+      component:investmentgo,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/account',
       name: 'account',
-      component:account
+      component:account,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/accountRecharge',
       name: 'accountRecharge',
-      component:accountRecharge
+      component:accountRecharge,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/accountExtract',
       name: 'accountExtract',
-      component:accountExtract
+      component:accountExtract,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/accountHistory',
       name: 'accountHistory',
-      component:accountHistory
+      component:accountHistory,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/accountitem',
       name: 'accountitem',
-      component:accountitem
+      component:accountitem,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/accountsetting',
       name: 'accountsetting',
-      component:accountsetting
+      component:accountsetting,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/invitation',
       name: 'invitation',
-      component:invitation
+      component:invitation,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/invitationpromote',
       name: 'invitationpromote',
-      component:invitationpromote
+      component:invitationpromote,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/invitationreward',
       name: 'invitationreward',
-      component:invitationreward
+      component:invitationreward,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/ranking',
       name: 'ranking',
-      component:ranking
+      component:ranking,
+      meta: {
+        role: 'all'
+      }
     },
     {
       path: '/security',
       name: 'security',
-      component:security
+      component:security,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/securitysetting/:type',
       name: 'securitysetting',
-      component:securitysetting
+      component:securitysetting,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/bulletin',
       name: 'bulletin',
-      component:bulletin
+      component:bulletin,
+      meta: {
+        role: 'all'
+      }
     },
     {
       path: '/bulletinlist',
       name: 'bulletinlist',
-      component:bulletinlist
+      component:bulletinlist,
+      meta: {
+        role: 'all'
+      }
     },
     {
       path: '/bulletinnotice/:page',
       name: 'bulletinnotice',
-      component:bulletinnotice
+      component:bulletinnotice,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/help',
       name: 'help',
-      component:help
+      component:help,
+      meta: {
+        role: 'all'
+      }
     },
     {
       path: '/helpfinancial/:page',
       name: 'helpfinancial',
-      component:helpfinancial
+      component:helpfinancial,
+      meta: {
+        role: 'all'
+      }
     },
     {
       path: '/helpoperation',
       name: 'helpoperation',
-      component:helpoperation
+      component:helpoperation,
+      meta: {
+        role: 'all'
+      }
     },
     {
       path: '/helplist/:page',
       name: 'helplist',
-      component:helplist
+      component:helplist,
+      meta: {
+        role: 'all'
+      }
     },
     {
       path: '/cooperation',
       name: 'cooperation',
-      component:cooperation
+      component:cooperation,
+      meta: {
+        role: 'member'
+      }
     },
     {
       path: '/about',
       name: 'about',
-      component:about
+      component:about,
+      meta: {
+        role: 'all'
+      }
     }
   ]
 })
 
 
-// router.beforeEach((to, from, next) => {
-//   // const list = ['home', 'group', 'user']    // 将需要切换效果的路由名称组成一个数组
-//   // const toName = to.name    // 即将进入的路由名字
-//   // const fromName = from.name    // 即将离开的路由名字
-//   // const toIndex = list.indexOf(toName)    // 进入下标
-//   // const fromIndex = list.indexOf(fromName)   // 离开下标
-//   // let direction = ''
-//   // console.log(to,from)
-//   // const toDepth = to.path.split('/').length
-//   // const fromDepth = from.path.split('/').length
-//   // let transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
-//   // console.log(transitionName)
-
-//   // if (toIndex < fromIndex) {          // 如果进入的下标小于离开的下标，那么是左滑
-//   //   direction = 'left'
-//   // } else {
-//   //   direction = 'right'         // 如果进入的下标大于离开的下标，那么是右滑
-//   // }
-
-//   // if (toIndex > -1 && fromIndex > -1) {   // 如果下标都存在
-//   //   if (toIndex < fromIndex) {          // 如果进入的下标小于离开的下标，那么是左滑
-//   //     direction = 'left'
-//   //   } else {
-//   //     direction = 'right'         // 如果进入的下标大于离开的下标，那么是右滑
-//   //   }
-//   // }
-
-//   // store.state.viewDirection = direction  //这里使用vuex进行赋值
-
-//   return next()
-// })
+router.beforeEach((to, from, next) => {
+  if(!store.state.userInfo.nick&&to.meta.role=='member'){
+    next('/')
+  }else{
+    next()
+  }
+})
 
 export default router;

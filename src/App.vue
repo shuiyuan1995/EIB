@@ -1,19 +1,25 @@
 <style lang="stylus">
   #app
     padding-top 1.38rem
+    max-width 400px
+    margin 0 auto
+    // position relative
   // 蒙版
   .mask
     position fixed
     top 0px
-    left 0px
     width 100%
+    max-width 400px
     height 100%
     background rgba(0,0,0,0.3)
   .pos
     position absolute
     width 100%
+    background #fff
+    margin 0 auto
+    max-width 400px
+    min-height 100vh
     top 0px
-    left 0px
     padding-top 1.4rem
   .slide-right-enter-active,
   .slide-right-leave-active,

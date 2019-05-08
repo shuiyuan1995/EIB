@@ -5,6 +5,7 @@
     top 0px
     z-index 9
     width 100%
+    max-width 400px
     height 1.38rem
     background-color #5570a6
     display flex
