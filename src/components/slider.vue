@@ -59,6 +59,7 @@ export default {
     // 鼠标需要移动距离
     this.successMoveDistance = box.offsetWidth- this.slider.offsetWidth;
     this.slider.addEventListener('touchstart', this.mousedownHandler, false);
+    this.slider.addEventListener('mousedown', this.mousedownHandler, false);
   },
   data(){
     return{
@@ -79,16 +80,18 @@ export default {
     // 手指点下
     mousedownHandler(e){
       e = e || window.event || e.which;
-      this.downX = e.changedTouches[0].clientX;
+      this.downX = e.type=='mousedown'?e.clientX:e.changedTouches[0].clientX;
       this.bgstyle.transition = "";
       this.slstyle.transition = "";
       this.slider.addEventListener('touchmove', this.mousemoveHandler, false);
+      document.addEventListener('mousemove', this.mousemoveHandler, false);
       this.slider.addEventListener('touchend', this.mouseupHandler, false);
+      document.addEventListener('mouseup', this.mouseupHandler, false);
     },
     // 手指移动事件
     mousemoveHandler(e){
       e = e || window.event || e.which;
-      let moveX = e.changedTouches[0].clientX;
+      let moveX = e.type=='mousemove'?e.clientX:e.changedTouches[0].clientX;
       let offsetX = this.getOffsetX(moveX - this.downX,0,this.successMoveDistance);
       this.bgstyle.width = offsetX + "px";
       this.slstyle.left = offsetX + "px";
@@ -105,8 +108,10 @@ export default {
         this.bgstyle.transition = "width 0.3s linear";
         this.slstyle.transition = "left 0.3s linear";
       }
-      document.onmousemove = null;
-      document.onmouseup = null;
+      document.removeEventListener('mousemove', this.mousemoveHandler)
+      document.removeEventListener('mouseup', this.mouseupHandler)
+      this.slider.removeEventListener('touchmove', this.mousemoveHandler)
+      this.slider.removeEventListener('touchend', this.mouseupHandler)
     },
     // 鼠标当前需要移动多少距离
     getOffsetX(offset,min,max){
@@ -125,8 +130,10 @@ export default {
       this.slider.className = "slider active";
       this.iconclass = 'icon-xuanzhong'
       //滑动成功时，移除鼠标按下事件和鼠标移动事件
-      this.slider.onmousedown = null;
-      document.onmousemove = null;
+      this.slider.removeEventListener('mousedown', this.mousedownHandler)
+      document.removeEventListener('mousemove', this.mousemoveHandler)
+      this.slider.removeEventListener('touchstart', this.mousedownHandler)
+      this.slider.removeEventListener('touchmove', this.mousemoveHandler)
     },
     // 重置滑块
     resetslider(){

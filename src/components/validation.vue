@@ -12,7 +12,7 @@
     max-width 400px
     height 100%
     top 0px
-    background rgba(0,0,0,0.2)
+    background rgba(0,0,0,0.1)
   .main
     position absolute
     width 100%
@@ -54,36 +54,45 @@
         margin-top 15px
         background #e8edeb
         color #000000
+  .showup-enter-active,
+  .showup-leave-active
+    transition all 0.5s
+  .showup-enter,
+  .showup-leave-to
+    opacity 0
+    transform translateY(100%)
 </style>
 
 <template>
-  <div class="validation">
-    <div class="bg" @click="close"></div>
-    <div class="main">
-      <p>若为收到邮件，请检查邮箱垃圾箱</p>
-      <div class="title">
-        <h2>安全验证</h2>
-        <p @click="close">取消</p>
+  <transition name="showup">
+    <div class="validation">
+      <div class="bg" @click="close"></div>
+      <div class="main">
+        <p>若为收到邮件，请检查邮箱垃圾箱</p>
+        <div class="title">
+          <h2>安全验证</h2>
+          <p @click="close">取消</p>
+        </div>
+        <form action="">
+          <label v-show="thisphone" for="">
+            <p>短信验证:{{userInfo.phone}}</p>
+            <div class="validationitem">
+              <cube-input class="cubeinput" v-model="phone" placeholder="请输入验证码"></cube-input>
+              <cube-button class="btn" @click="send('phone_code')">发送</cube-button>
+            </div>
+          </label>
+          <label for="">
+            <p>邮箱验证:{{userInfo.email}}</p>
+            <div class="validationitem">
+              <cube-input class="cubeinput" v-model="email" placeholder="请输入验证码"></cube-input>
+              <cube-button class="btn" @click="send('email_code')">发送</cube-button>
+            </div>
+          </label>
+          <cube-button class="btnok" @click="validation">确  认</cube-button>
+        </form>
       </div>
-      <form action="">
-        <label v-show="thisphone" for="">
-          <p>短信验证:{{userInfo.phone}}</p>
-          <div class="validationitem">
-            <cube-input class="cubeinput" v-model="phone" placeholder="请输入验证码"></cube-input>
-            <cube-button class="btn" @click="send('phone_code')">发送</cube-button>
-          </div>
-        </label>
-        <label for="">
-          <p>邮箱验证:{{userInfo.email}}</p>
-          <div class="validationitem">
-            <cube-input class="cubeinput" v-model="email" placeholder="请输入验证码"></cube-input>
-            <cube-button class="btn" @click="send('email_code')">发送</cube-button>
-          </div>
-        </label>
-        <cube-button class="btnok" @click="validation">确  认</cube-button>
-      </form>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>

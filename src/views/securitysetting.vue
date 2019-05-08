@@ -95,7 +95,7 @@
       </div>
       <div v-if="$route.params.type==2">
         <label>
-          <cube-input v-model="newpass" placeholder="输入登录密码">
+          <cube-input type="password" v-model="newpass" placeholder="输入登录密码">
             <template slot="prepend">
               <i class="icon icon-mima"></i>
             </template>
@@ -103,7 +103,7 @@
           <cube-validator ref="validator1" class="validator" v-model="valid[1]" :model="newpass" :rules="rules0" :messages="messages0"></cube-validator>
         </label>
         <label>
-          <cube-input v-model="pass" placeholder="再次输入新密码">
+          <cube-input type="password" v-model="pass" placeholder="再次输入新密码">
             <template slot="prepend">
               <i class="icon icon-mima"></i>
             </template>
@@ -113,7 +113,7 @@
       </div>
       <div v-if="$route.params.type==3">
         <label>
-          <cube-input v-model="newpaypass" placeholder="输入交易密码">
+          <cube-input type="password" v-model="newpaypass" placeholder="输入交易密码">
             <template slot="prepend">
               <i class="icon icon-mima"></i>
             </template>
@@ -121,7 +121,7 @@
           <cube-validator ref="validator3" class="validator" v-model="valid[3]" :model="newpaypass" :rules="rules0" :messages="messages0"></cube-validator>
         </label>
         <label>
-          <cube-input v-model="paypass" placeholder="再次输入交易密码">
+          <cube-input type="password" v-model="paypass" placeholder="再次输入交易密码">
             <template slot="prepend">
               <i class="icon icon-mima"></i>
             </template>
@@ -332,7 +332,7 @@ export default {
             this.gonext(id,url,data)
             return false
           }
-          if(Number(id)==2,Number(id)==3){
+          if(Number(id)==2||Number(id)==3){
             this.thevalidation = true;
           }
         }

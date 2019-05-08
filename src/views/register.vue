@@ -252,11 +252,11 @@ export default {
               }
             }).show()
           }).catch(()=>{
-            this.$createToast({
-              type: 'correct',
-              txt: '注册失败，请重新注册',
-              time: 1000
-            }).show()
+            // this.$createToast({
+            //   type: 'correct',
+            //   txt: '注册失败，请重新注册',
+            //   time: 1000
+            // }).show()
           })
         }
       })
