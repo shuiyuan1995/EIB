@@ -130,10 +130,10 @@ export default {
       this.slider.className = "slider active";
       this.iconclass = 'icon-xuanzhong'
       //滑动成功时，移除鼠标按下事件和鼠标移动事件
-      this.slider.removeEventListener('mousedown', this.mousedownHandler)
       document.removeEventListener('mousemove', this.mousemoveHandler)
-      this.slider.removeEventListener('touchstart', this.mousedownHandler)
+      document.removeEventListener('mouseup', this.mouseupHandler)
       this.slider.removeEventListener('touchmove', this.mousemoveHandler)
+      this.slider.removeEventListener('touchend', this.mouseupHandler)
     },
     // 重置滑块
     resetslider(){

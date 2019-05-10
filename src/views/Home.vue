@@ -26,6 +26,7 @@
       font-size 0.6rem
       color #4b4b4b
       display block
+      line-height 0.8rem
   // 基础信息
   .basis-message
     // height 3.76rem
@@ -55,7 +56,7 @@
     flex-wrap wrap
     margin-top 1.12rem
     .link-nav
-      width 3.68rem
+      width 25%
       text-align center
       margin-bottom 1rem
       p

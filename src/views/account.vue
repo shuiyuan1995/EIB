@@ -165,7 +165,7 @@ import accounttable from '@components/accounttable.vue'
 import {mapGetters,mapMutations} from 'vuex';
 import {SET_AOTO,SET_CONTENT} from "@store/mutation-types"
 export default {
-  created(){
+  activated(){
     get('/security/center').then(json=>{
       const {accumulated,difference,no,sum_money,due,porportion,aoto,content} = json.data;
       this.accumulated = accumulated;

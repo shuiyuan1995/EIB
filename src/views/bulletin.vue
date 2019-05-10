@@ -123,33 +123,8 @@ import {changedata} from '@common/js/index'
 import {mapMutations} from 'vuex';
 import {SET_USER_DATA} from "@store/mutation-types"
 export default {
-  created(){
-    get('/login/message').then(json=>{
-      let {notice,user_data} = json.data
-      this.notice = notice.map(val=>{
-        return {
-          ...val,
-          time:changedata(val.time*1000,'yyyy-MM-dd')
-        }
-      })
-      if(user_data.notify){
-        user_data.notify = user_data.notify.map(val=>{
-          return {
-            ...val,
-            time:changedata(val.time*1000,'MM-dd hh:mm')
-          }
-        })
-      }
-      if(user_data.message){
-        user_data.message = user_data.message.map(val=>{
-          return {
-            ...val,
-            time:changedata(val.time*1000,'MM-dd hh:mm')
-          }
-        })
-      }
-      this.SET_USER_DATA(user_data)
-    })
+  activated(){
+    this.getdata()
   },
   components:{
     myheader,
@@ -162,6 +137,34 @@ export default {
     }
   },
   methods:{
+    getdata(){
+      get('/login/message').then(json=>{
+        let {notice,user_data} = json.data
+        this.notice = notice.map(val=>{
+          return {
+            ...val,
+            time:changedata(val.time*1000,'yyyy-MM-dd')
+          }
+        })
+        if(user_data.notify){
+          user_data.notify = user_data.notify.map(val=>{
+            return {
+              ...val,
+              time:changedata(val.time*1000,'MM-dd hh:mm')
+            }
+          })
+        }
+        if(user_data.message){
+          user_data.message = user_data.message.map(val=>{
+            return {
+              ...val,
+              time:changedata(val.time*1000,'MM-dd hh:mm')
+            }
+          })
+        }
+        this.SET_USER_DATA(user_data)
+      })
+    },
     changetable(b){
       this.thisbulletin = b
     },

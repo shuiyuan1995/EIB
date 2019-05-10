@@ -96,7 +96,8 @@ import {getEles} from "@common/js";
 import { post } from "@api/index";
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
-import {mapGetters} from 'vuex';
+import {mapGetters,mapMutations} from 'vuex';
+import {SET_LOADING} from "@store/mutation-types"
 export default {
   data(){
     return{
@@ -167,7 +168,9 @@ export default {
         money:this.$route.params.mone,
         pay_pwd:this.value
       }
+      this.SET_LOADING(true)
       post('/security/investment',data).then(()=>{
+        this.SET_LOADING(false)
         let that = this;
         this.$createToast({
           txt: `投标成功`,
@@ -178,7 +181,10 @@ export default {
           }
         }).show()
       })
-    }
+    },
+    ...mapMutations({
+      SET_LOADING
+    }),
   }
 }
 </script>

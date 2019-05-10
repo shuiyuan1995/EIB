@@ -37,6 +37,10 @@ const mutations = {
   [types.SET_CONTENT](state, content) {
     state.content = content;
   },
+  // 设置loading
+  [types.SET_LOADING](state, showloading) {
+    state.showloading = showloading;
+  },
 
 
   /************************************* */

@@ -240,7 +240,7 @@ import {get,post} from '@api/index'
 import {changedata,getEles} from '@common/js'
 import {SET_AOTO} from "@store/mutation-types"
 export default {
-  created(){
+  activated(){
     // 复制自动投资管理列表
     this.listval = JSON.parse(JSON.stringify(this.aoto));
   },

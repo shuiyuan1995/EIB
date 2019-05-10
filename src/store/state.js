@@ -17,6 +17,8 @@ const state = {
   img:'',
   // 提现手续
   content:{},
+  // loading
+  showloading:false,
 };
 
 export default state;

@@ -69,28 +69,5 @@ export default {
       "userdata"
     ]),
   },
-  methods: {
-    onFetch() {
-      let items = []
-      return new Promise((resolve) => {
-        // 模拟请求 50 条数据，因为 size 设置为 50
-        setTimeout(() => {
-          for (let i = 0; i < 19; i++) {
-            items.push({
-              id: i,
-              type:'信',
-              title:'暖宝宝-EOS过冬理财计划',
-              allmoney:'100.0000',
-              Rate:'13%',
-              day:'30',
-              remaining:'10.0000',
-              tender:false
-            })
-          }
-          resolve(items)
-        }, 1000)
-      })
-    }
-  }
 }
 </script>

@@ -9,7 +9,7 @@ import {SET_TOKEN} from "@store/mutation-types";
 const http = axios.create({
   baseURL:
     process.env.NODE_ENV === "production"
-      ? "http://132.148.158.244:24862/api"
+      ? "http://www.admin.eosinvestmentbank.com/api"
       : "http://www.eosfinance.com/api", // 基础路径
   timeout: 30000, // 请求延时
 });

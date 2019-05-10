@@ -164,7 +164,7 @@ import {mapGetters} from 'vuex';
 import {post} from '@api/index'
 import {getEles} from '@common/js'
 export default {
-  created(){
+  activated(){
     this.thismoney = Object.keys(this.aoto)[0]
   },
   data(){

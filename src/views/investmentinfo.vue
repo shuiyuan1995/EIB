@@ -260,9 +260,10 @@ import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import {changedata} from '@common/js/index'
 import {mapGetters,mapMutations} from 'vuex';
-import {SET_THIS_BIAO} from "@store/mutation-types"
+import {SET_THIS_BIAO,SET_LOADING} from "@store/mutation-types"
 export default {
-  created(){
+  activated(){
+    this.SET_LOADING(true)
     this.getdata()
   },
   data(){
@@ -292,6 +293,7 @@ export default {
     // 数据获取
     getdata(){
       get('/api/bid_info',{id:this.thisbiao.item.id}).then(json=>{
+        this.SET_LOADING(false)
         const {info,details,cycle,recode} = json.data;
         this.details = details;
         this.recode = recode.map(val=>{
@@ -322,7 +324,8 @@ export default {
       })
     },
     ...mapMutations({
-      SET_THIS_BIAO
+      SET_THIS_BIAO,
+      SET_LOADING
     }),
   }
 }

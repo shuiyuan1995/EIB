@@ -16,6 +16,8 @@ export const SET_URL = "SET_URL";
 export const SET_IMG = "SET_IMG";
 // 设置提现手续
 export const SET_CONTENT = "SET_CONTENT";
+// 设置loading
+export const SET_LOADING = "SET_LOADING";
 
 /*************************************************** */
 

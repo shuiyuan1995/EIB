@@ -56,7 +56,7 @@ import myfooter from '@components/myfooter.vue'
 import {get} from '@api/index'
 import {changedata} from '@common/js/index'
 export default {
-  created(){
+  activated(){
     const {id,title} = this.$route.params
     this.title = title
     get('/login/notice_info',{id:id}).then(json=>{

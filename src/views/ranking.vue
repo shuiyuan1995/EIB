@@ -84,7 +84,7 @@ import {get} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 export default {
-  created(){
+  activated(){
     get('/api/ranking').then(json=>{
       const {int,inv} = json.data;
       this.int = int;

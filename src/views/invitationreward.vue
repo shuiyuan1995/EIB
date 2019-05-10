@@ -184,7 +184,7 @@ import myheader from '@components/myheader.vue'
 import {get} from '@api/index'
 import {mapGetters} from 'vuex';
 export default {
-  created(){
+  activated(){
     this.getdata(1)
   },
   data(){

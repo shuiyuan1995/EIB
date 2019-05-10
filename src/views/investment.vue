@@ -190,9 +190,10 @@ import { get } from "@api/index";
 import myheader from "@components/myheader.vue";
 import myfooter from "@components/myfooter.vue";
 import {mapMutations} from 'vuex';
-import {SET_THIS_BIAO} from "@store/mutation-types"
+import {SET_THIS_BIAO,SET_LOADING} from "@store/mutation-types"
 export default {
-  created() {
+  activated() {
+    this.SET_LOADING(true)
     this.getdata()
   },
   data() {
@@ -246,6 +247,7 @@ export default {
         })
       }else{
         get('/api/bid_list').then(json=>{
+          this.SET_LOADING(false)
           this.thedata = json.data
           this.thisitems = this.thedata[this.thisindex].data
         })
@@ -265,7 +267,8 @@ export default {
       this.thisitems = this.thedata[index].data
     },
     ...mapMutations({
-      SET_THIS_BIAO
+      SET_THIS_BIAO,
+      SET_LOADING
     }),
   }
 };

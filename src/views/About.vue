@@ -1,4 +1,6 @@
  <style lang="stylus" scoped>
+    .main
+      padding 0 0.8rem
     h2
       font-size 16px
       margin 6px 0 10px

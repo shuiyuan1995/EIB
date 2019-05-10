@@ -16,6 +16,8 @@ export const url = state => state.url;
 export const img = state => state.img;
 // 获取提现手续
 export const content = state => state.content;
+// 获取loading
+export const showloading = state => state.showloading;
 
 
 /********************************************** */

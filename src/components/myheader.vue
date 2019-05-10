@@ -48,6 +48,8 @@
     z-index 1
     right 0
     top 1.38rem
+    overflow hidden
+    transform-origin center top
   .menulist-nav
     cursor pointer
     display flex
@@ -63,6 +65,15 @@
       font-size: 0.56rem;
       color #ffffff
       margin-left 0.4rem
+  .mask
+    z-index 0
+  .showup-enter-active,
+  .showup-leave-active
+    transition all 0.5s
+  .showup-enter,
+  .showup-leave-to
+    opacity 0
+    transform scale(1,0)
 </style>
 
 <template>
@@ -72,21 +83,25 @@
     <span class="text" v-show="center">{{center}}</span>
     <router-link v-if="right" class="link right" :to="right=='注册'?'/register':'/login'">{{right}}</router-link>
     <span v-else class="menu" @click="changemenu"><i class="icon icon-menu1"></i></span>
-    <div class="menulist" v-show="menulist">
-      <router-link class="menulist-nav" :to="item.to" v-for="(item, index) in navlists" :key="index">
-        <i class="icon" :class="item.icon"></i>
-        <span>{{item.text}}</span>
-      </router-link>
-      <div class="menulist-nav" @click="thereload">
-        <i class="icon icon-refresh"></i>
-        <span>刷新页面</span>
+    <transition name="showup">
+      <div class="menulist" v-show="menulist">
+        <router-link class="menulist-nav" :to="item.to" v-for="(item, index) in navlists" :key="index">
+          <i class="icon" :class="item.icon"></i>
+          <span>{{item.text}}</span>
+        </router-link>
+        <div class="menulist-nav" @click="thereload">
+          <i class="icon icon-refresh"></i>
+          <span>刷新页面</span>
+        </div>
+        <div class="menulist-nav" @click="clearlogin">
+          <i class="icon icon-tuichu1"></i>
+          <span>退出登录</span>
+        </div>
       </div>
-      <div class="menulist-nav" @click="clearlogin">
-        <i class="icon icon-tuichu1"></i>
-        <span>退出登录</span>
-      </div>
-    </div>
-    <div class="mask" v-show="menulist" @click="changemenu"></div>
+    </transition>
+    <transition name="showface">
+      <div class="mask" v-show="menulist" @click="changemenu"></div>
+    </transition>
   </header>
 </template>
 
