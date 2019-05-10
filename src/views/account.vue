@@ -163,10 +163,12 @@ import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import accounttable from '@components/accounttable.vue'
 import {mapGetters,mapMutations} from 'vuex';
-import {SET_AOTO,SET_CONTENT} from "@store/mutation-types"
+import {SET_AOTO,SET_CONTENT,SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){
+    this.SET_LOADING(true)
     get('/security/center').then(json=>{
+      this.SET_LOADING(false)
       const {accumulated,difference,no,sum_money,due,porportion,aoto,content} = json.data;
       this.accumulated = accumulated;
       this.difference = difference;
@@ -201,7 +203,8 @@ export default {
   methods:{
     ...mapMutations({
       SET_AOTO,
-      SET_CONTENT
+      SET_CONTENT,
+      SET_LOADING
     }),
   }
 }

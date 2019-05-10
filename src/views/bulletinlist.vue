@@ -55,12 +55,15 @@ import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import {get} from '@api/index'
 import {changedata} from '@common/js/index'
+import {mapMutations} from 'vuex';
+import {SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){
     const {id,title} = this.$route.params
     this.title = title
+    this.SET_LOADING(true)
     get('/login/notice_info',{id:id}).then(json=>{
-      console.log(json)
+      this.SET_LOADING(false)
       const {type,time,abstract,content} = json.data
       this.type = type
       this.abstract = abstract
@@ -81,5 +84,10 @@ export default {
     myheader,
     myfooter
   },
+  methods:{
+    ...mapMutations({
+      SET_LOADING
+    }),
+  }
 }
 </script>

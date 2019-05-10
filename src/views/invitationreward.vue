@@ -95,7 +95,7 @@
       position fixed
       width 100%
       max-width 400px
-      top 358px
+      top 13.36rem
       bottom 0px
       padding 0 0.5rem
     .itemp
@@ -182,9 +182,11 @@
 <script>
 import myheader from '@components/myheader.vue'
 import {get} from '@api/index'
-import {mapGetters} from 'vuex';
+import {mapGetters,mapMutations} from 'vuex';
+import {SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){
+    this.SET_LOADING(true)
     this.getdata(1)
   },
   data(){
@@ -232,6 +234,7 @@ export default {
   methods: {
     getdata(page){
       get('/security/inviation_friend_ranking',{page:page}).then(json=>{
+        this.SET_LOADING(false)
         const {is_super,total,month,firend,page,max_page} = json.data;
         if(page==1){
           this.is_super = is_super
@@ -258,7 +261,10 @@ export default {
       }else{
         this.thisopen = id
       }
-    }
+    },
+    ...mapMutations({
+      SET_LOADING
+    }),
   }
 }
 </script>

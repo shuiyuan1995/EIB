@@ -121,9 +121,10 @@ import myfooter from '@components/myfooter.vue'
 import {get} from '@api/index'
 import {changedata} from '@common/js/index'
 import {mapMutations} from 'vuex';
-import {SET_USER_DATA} from "@store/mutation-types"
+import {SET_USER_DATA,SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){
+    this.SET_LOADING(true)
     this.getdata()
   },
   components:{
@@ -139,6 +140,7 @@ export default {
   methods:{
     getdata(){
       get('/login/message').then(json=>{
+        this.SET_LOADING(false)
         let {notice,user_data} = json.data
         this.notice = notice.map(val=>{
           return {
@@ -178,7 +180,8 @@ export default {
       })
     },
     ...mapMutations({
-      SET_USER_DATA
+      SET_USER_DATA,
+      SET_LOADING
     }),
   }
 }

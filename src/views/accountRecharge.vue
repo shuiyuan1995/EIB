@@ -55,7 +55,7 @@
     </div>
     <div class="main">
       <div class="img">
-        <img :src="img[thismoney]?img[thismoney].img:''" alt="">
+        <img v-show="key==thismoney" v-for="(item,key,index) in img" :key="index" :src="item.img" alt="">
       </div>
       <p class="save" @click="downloadCodeImg">保存二维码</p>
       <p class="title">{{account}}</p>
@@ -86,8 +86,11 @@
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import {get} from '@api/index'
+import {mapGetters,mapMutations} from 'vuex';
+import {SET_LOADING} from "@store/mutation-types"
 export default {
   created(){
+    this.SET_LOADING(true)
     this.getdata()
   },
   data(){
@@ -97,6 +100,8 @@ export default {
       tag:'',
       thismoney:'',
       picker:'',
+      imgindex:0,
+      imgWrap:[],
     }
   },
   components:{
@@ -106,10 +111,12 @@ export default {
   methods:{
     getdata(){
       get('/api/recharge').then(json=>{
+        this.SET_LOADING(false)
         const {account,img,tag} = json.data;
         this.account = account;
         this.img = img;
         this.tag = tag;
+        this.imgWrap = [];
         this.thismoney = Object.keys(img)[0]
       })
     },
@@ -132,6 +139,7 @@ export default {
     },
     selectHandle(selectedVal, selectedIndex, selectedText) {
       this.thismoney = selectedText[0]
+      this.imgindex = selectedIndex[0]
     },
     cancelHandle() {
     },
@@ -157,7 +165,10 @@ export default {
       // 设置图片地址
       a.href = this.img;
       a.click();
-    }
+    },
+    ...mapMutations({
+      SET_LOADING
+    }),
   }
 }
 </script>

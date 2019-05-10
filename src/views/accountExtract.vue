@@ -160,7 +160,8 @@
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import validation from '@components/validation.vue'
-import {mapGetters} from 'vuex';
+import {mapGetters,mapMutations} from 'vuex';
+import {SET_LOADING} from "@store/mutation-types"
 import {post} from '@api/index'
 import {getEles} from '@common/js'
 export default {
@@ -277,7 +278,9 @@ export default {
         }).show()
         return false;
       }
+      this.SET_LOADING(true)
       post('/security/ver_pay_pwd',{pay_pwd:this.value}).then(()=>{
+        this.SET_LOADING(false)
         this.onvalidation = true;
       })
     },
@@ -289,7 +292,9 @@ export default {
         pay_pwd:this.value,
         email_code:json.email_code
       }
+      this.SET_LOADING(true)
       post('/security/reflect',data).then(()=>{
+        this.SET_LOADING(false)
         this.thevalidation = false;
         this.$createToast({
           txt: '提交成功，请等待审核',
@@ -300,15 +305,13 @@ export default {
           }
         }).show()
       })
-      // let that = this
-      // let id = this.$route.params.type;
-      // let data = {};
-      // let url = ''
-      // this.thevalidation = false;
     },
     close(bl){
       this.onvalidation = bl
     },
+    ...mapMutations({
+      SET_LOADING
+    }),
   }
 }
 </script>

@@ -65,7 +65,8 @@
 import {post} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
-import {mapGetters} from 'vuex';
+import {mapGetters,mapMutations} from 'vuex';
+import {SET_LOADING} from "@store/mutation-types"
 export default {
   data(){
     return{
@@ -122,7 +123,9 @@ export default {
         phone:this.value3,
         region:this.value4
       }
+      this.SET_LOADING(true)
       post('/security/cooperation',data).then(()=>{
+        this.SET_LOADING(false)
         this.$createToast({
           txt: `发送成功，我们将尽快联系您`,
           type: 'txt',
@@ -132,7 +135,10 @@ export default {
           }
         }).show()
       })
-    }
+    },
+    ...mapMutations({
+      SET_LOADING
+    }),
   }
 }
 </script>

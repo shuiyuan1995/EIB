@@ -89,6 +89,9 @@ import myfooter from '@components/myfooter.vue'
 import {get} from '@api/index'
 import {changedata} from '@common/js'
 export default {
+  activated(){
+    onFetch()
+  },
   data(){
     return{
       size: 20,

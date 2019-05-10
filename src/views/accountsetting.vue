@@ -238,11 +238,13 @@ import myfooter from '@components/myfooter.vue'
 import {mapGetters,mapMutations} from 'vuex';
 import {get,post} from '@api/index'
 import {changedata,getEles} from '@common/js'
-import {SET_AOTO} from "@store/mutation-types"
+import {SET_AOTO,SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){
     // 复制自动投资管理列表
     this.listval = JSON.parse(JSON.stringify(this.aoto));
+    this.page = 1;
+    this.onFetch()
   },
   data(){
     return{
@@ -367,7 +369,9 @@ export default {
         pay_pwd:this.value,
         name:JSON.stringify(this.listval)
       }
+      this.SET_LOADING(true)
       post('/security/set_auto',data).then(()=>{
+        this.SET_LOADING(false)
         this.$createToast({
           txt: `修改成功`,
           type: 'txt',
@@ -382,7 +386,8 @@ export default {
       this.SET_AOTO(this.listval)
     },
     ...mapMutations({
-      SET_AOTO
+      SET_AOTO,
+      SET_LOADING
     }),
   }
 }

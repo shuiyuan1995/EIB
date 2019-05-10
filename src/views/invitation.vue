@@ -54,9 +54,10 @@ import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import {get} from '@api/index'
 import {mapMutations} from 'vuex';
-import {SET_IMG,SET_URL} from "@store/mutation-types"
+import {SET_IMG,SET_URL,SET_LOADING} from "@store/mutation-types"
 export default {
   created(){
+    this.SET_LOADING(true)
     this.getdata()
   },
   data(){
@@ -71,6 +72,7 @@ export default {
   methods:{
     getdata(){
       get('/security/inviation').then(json=>{
+        this.SET_LOADING(false)
         console.log(json)
         const {img_url,url,img} = json.data
         this.img_url = img_url
@@ -80,7 +82,8 @@ export default {
     },
     ...mapMutations({
       SET_IMG,
-      SET_URL
+      SET_URL,
+      SET_LOADING
     }),
   }
 }

@@ -176,7 +176,7 @@ import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import validation from '@components/validation.vue'
 import {mapGetters,mapMutations} from 'vuex';
-import {SET_USER_INFO} from "@store/mutation-types"
+import {SET_USER_INFO,SET_LOADING} from "@store/mutation-types"
 export default {
   mounted(){
   },
@@ -341,7 +341,9 @@ export default {
     // 提交数据
     gonext(id,url,data){
       this.repeat = true;
+      this.SET_LOADING(true)
       post(`/security/${url}`,data).then(json=>{
+        this.SET_LOADING(false)
         this.repeat = false;
         let that = this;
         let data = {};
@@ -455,7 +457,9 @@ export default {
             ...json,
             name:this.phone
           }
+          this.SET_LOADING(true)
           post(`/security/edit_pe`,data).then(json=>{
+            this.SET_LOADING(false)
             this.$createToast({
               type: 'correct',
               txt: '修改成功',
@@ -476,7 +480,9 @@ export default {
             ...json,
             name:this.email
           }
+          this.SET_LOADING(true)
           post(`/security/edit_pe`,data).then(json=>{
+            this.SET_LOADING(false)
             this.$createToast({
               type: 'correct',
               txt: '修改成功',
@@ -574,7 +580,8 @@ export default {
       }
     },
     ...mapMutations({
-      SET_USER_INFO
+      SET_USER_INFO,
+      SET_LOADING
     }),
   }
 }

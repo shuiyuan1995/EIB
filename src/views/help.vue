@@ -63,10 +63,12 @@ import {get} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import {mapMutations} from 'vuex';
-import {SET_HELPDATA} from "@store/mutation-types"
+import {SET_HELPDATA,SET_LOADING} from "@store/mutation-types"
 export default {
   created(){
+    this.SET_LOADING(true)
     get('/api/help').then(json=>{
+      this.SET_LOADING(false)
       let {phone,qq} = json.data.information
       this.phone = phone
       this.qq = qq
@@ -85,7 +87,8 @@ export default {
   },
   methods:{
     ...mapMutations({
-      SET_HELPDATA
+      SET_HELPDATA,
+      SET_LOADING
     }),
   }
 }

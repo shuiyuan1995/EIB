@@ -83,9 +83,13 @@
 import {get} from '@api/index'
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
+import {mapMutations} from 'vuex';
+import {SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){
+    this.SET_LOADING(true)
     get('/api/ranking').then(json=>{
+      this.SET_LOADING(false)
       const {int,inv} = json.data;
       this.int = int;
       this.inv = inv;
@@ -105,7 +109,10 @@ export default {
   methods:{
     changeto(num){
       this.isactive = num
-    }
+    },
+    ...mapMutations({
+      SET_LOADING
+    }),
   },
   computed:{
     itemdata(){
