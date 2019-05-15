@@ -36,7 +36,7 @@ import {SET_LOADING} from "@store/mutation-types"
 export default {
   created(){
     this.SET_LOADING(true)
-    get('/api/about').then(val=>{
+    get('/about').then(val=>{
       this.SET_LOADING(false)
       this.data = val.data
     })

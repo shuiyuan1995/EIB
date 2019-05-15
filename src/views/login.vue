@@ -75,7 +75,7 @@
             <i class="icon icon-mima"></i>
           </template>
         </cube-input>
-        <cube-validator ref="validator1" class="validator" v-model="valid[1]" :model="passworld" :rules="rules0" :messages="messages1"></cube-validator>
+        <cube-validator ref="validator1" class="validator" v-model="valid[1]" :model="passworld" :rules="rules1" :messages="messages1"></cube-validator>
       </label>
       <slider ref="slider"></slider>
       <cube-button class="loginbtn" @click="submit">确认登录</cube-button>
@@ -109,8 +109,13 @@ export default {
       messages0:{
         required:'账号不能为空',
       },
+      rules1:{
+        required: true,
+        pattern:/^(\w){6,16}$/
+      },
       messages1:{
-        required:'密码不能为空'
+        required:'密码不能为空',
+        pattern:'密码为6-16个字母、数字、下划线'
       },
     }
   },

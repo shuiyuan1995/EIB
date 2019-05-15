@@ -124,7 +124,7 @@ export default {
         region:this.value4
       }
       this.SET_LOADING(true)
-      post('/security/cooperation',data).then(()=>{
+      post('/cooperation',data).then(()=>{
         this.SET_LOADING(false)
         this.$createToast({
           txt: `发送成功，我们将尽快联系您`,

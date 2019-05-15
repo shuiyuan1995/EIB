@@ -67,7 +67,7 @@ import {SET_HELPDATA,SET_LOADING} from "@store/mutation-types"
 export default {
   created(){
     this.SET_LOADING(true)
-    get('/api/help').then(json=>{
+    get('/help').then(json=>{
       this.SET_LOADING(false)
       let {phone,qq} = json.data.information
       this.phone = phone

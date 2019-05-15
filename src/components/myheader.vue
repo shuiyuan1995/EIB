@@ -56,6 +56,7 @@
     align-items center
     height 1.2rem
     border-bottom 1px solid #a1bedb
+    line-height 1.2rem
     .icon
       color #ffffff
       font-size 0.64rem
@@ -193,10 +194,12 @@ export default {
     // 刷新当前页面
     thereload(){
       this.reload()
+      this.menulist = false;
     },
     // 退出登录
     clearlogin(){
       clearCookie();
+      this.menulist = false;
       this.$router.push('/')
       this.reload()
     }

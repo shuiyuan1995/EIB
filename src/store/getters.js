@@ -18,6 +18,11 @@ export const img = state => state.img;
 export const content = state => state.content;
 // 获取loading
 export const showloading = state => state.showloading;
+// 获取手机通讯地址
+export const phoneaddress = state => state.phoneaddress;
+// 获取邀请人电话 
+export const invite = state => state.invite;
+
 
 
 /********************************************** */
@@ -25,8 +30,7 @@ export const showloading = state => state.showloading;
 
 // 获取用户余额信息
 export const money = state => state.userInfo ? state.userInfo.money : "00.00";
-// 获取邀请人电话 
-export const invite_tel = state => state.invite_tel;
+
 // 获取邀请经纪人
 export const dealer = state => state.dealer;
 

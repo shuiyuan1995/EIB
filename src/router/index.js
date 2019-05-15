@@ -102,7 +102,7 @@ const router = new Router({
       }
     },
     {
-      path: '/accountRecharge',
+      path: '/accountRecharge/:type',
       name: 'accountRecharge',
       component:accountRecharge,
       meta: {

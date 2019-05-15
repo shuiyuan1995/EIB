@@ -82,6 +82,8 @@ export default {
     goto(id){
       if(this.userInfo.account){
         return false
+      }else{
+        this.$router.push('/securitysetting/1')
       }
     }
   }

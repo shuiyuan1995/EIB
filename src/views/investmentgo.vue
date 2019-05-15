@@ -99,6 +99,9 @@ import myfooter from '@components/myfooter.vue'
 import {mapGetters,mapMutations} from 'vuex';
 import {SET_LOADING} from "@store/mutation-types"
 export default {
+  activated(){
+    this.oninput()
+  },
   data(){
     return{
       value:''
@@ -169,7 +172,7 @@ export default {
         pay_pwd:this.value
       }
       this.SET_LOADING(true)
-      post('/security/investment',data).then(()=>{
+      post('/investment',data).then(()=>{
         this.SET_LOADING(false)
         let that = this;
         this.$createToast({

@@ -90,7 +90,7 @@ import {get} from '@api/index'
 import {changedata} from '@common/js'
 export default {
   activated(){
-    onFetch()
+    this.onFetch()
   },
   data(){
     return{
@@ -107,7 +107,7 @@ export default {
     onFetch() {
       let items = []
       return new Promise((resolve) => {
-        get('/api/historical_record').then(json=>{
+        get('/historical_record').then(json=>{
           items = json.data.map(val=>{
             return {
               ...val,

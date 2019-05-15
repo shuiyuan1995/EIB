@@ -73,6 +73,9 @@ import myfooter from '@components/myfooter.vue'
 import accounttable from '@components/accounttable.vue'
 import {mapGetters} from 'vuex';
 export default {
+  activated(){
+    this.money = ''
+  },
   data() {
     return {
       checked:false,

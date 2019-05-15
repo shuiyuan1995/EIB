@@ -138,11 +138,16 @@
 
 <script>
 import { login } from "@common/js";
-import {mapGetters} from 'vuex';
+import {mapGetters,mapMutations} from 'vuex';
+import {SET_INVITE} from "@store/mutation-types"
 export default {
   created() {
     // 自动登录
     login();
+    // 获取邀请人
+    if(this.$route.query.invite){
+      this.SET_INVITE(this.$route.query.invite)
+    }
   },
   provide() {
     return {
@@ -181,7 +186,10 @@ export default {
     },
     changemask() {
       this.mask = !this.mask;
-    }
+    },
+    ...mapMutations({
+      SET_INVITE
+    }),
   }
 };
 </script>

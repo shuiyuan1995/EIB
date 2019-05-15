@@ -205,7 +205,7 @@
     <ul class="investmentinfo-center">
       <li>开标时间：{{info.start}}</li>
       <li>停标时间：{{info.end}}</li>
-      <li>还款日期：{{info.repay}}</li>
+      <li>还款日期：{{info.repay}}天</li>
       <li>计息方式：{{info.compute}}</li>
       <li>计息币种：{{info.coin}}</li>
     </ul>
@@ -283,7 +283,8 @@ export default {
   },
   computed:{
     ...mapGetters([
-      "thisbiao"
+      "thisbiao",
+      "userInfo"
     ]),
   },
   methods:{
@@ -292,7 +293,7 @@ export default {
     },
     // 数据获取
     getdata(){
-      get('/api/bid_info',{id:this.thisbiao.item.id}).then(json=>{
+      get('/bid_info',{id:this.thisbiao.item.id}).then(json=>{
         this.SET_LOADING(false)
         const {info,details,cycle,recode} = json.data;
         this.details = details;
@@ -312,16 +313,52 @@ export default {
           ...info,
           start:changedata(info.start*1000,'yyyy-MM-dd'),
           end:changedata(info.end*1000,'yyyy-MM-dd'),
-          repay:changedata(info.repay*1000,'yyyy-MM-dd')
         };
         this.SET_THIS_BIAO({...this.thisbiao,info:this.info})
       })
     },
     gonext(){
-      this.$router.push({
-        name: 'investmentmoney',
-        params: {}
-      })
+      if(this.thisbiao.item.state=='已完成'){
+        this.$createToast({
+          txt: '此标已完成募集,请选择其他标',
+          type: 'txt'
+        }).show()
+        return false
+      }
+      if(this.thisbiao.item.state=='过期'){
+        this.$createToast({
+          txt: '此标已过期,请选择其他标',
+          type: 'txt'
+        }).show()
+        return false
+      }
+      if(this.thisbiao.item.state=='认购完成'){
+        this.$createToast({
+          txt: '此标已认购完成,请选择其他标',
+          type: 'txt'
+        }).show()
+        return false
+      }
+      if(this.thisbiao.item.state=='募集中'){
+        if(!this.userInfo.account){
+          this.$createToast({
+            txt: '请绑定钱包',
+            type: 'txt'
+          }).show()
+          return false
+        }
+        if(!this.userInfo.pay_password){
+          this.$createToast({
+            txt: '请绑定支付密码',
+            type: 'txt'
+          }).show()
+          return false
+        }
+        this.$router.push({
+          name: 'investmentmoney',
+          params: {}
+        })
+      }
     },
     ...mapMutations({
       SET_THIS_BIAO,

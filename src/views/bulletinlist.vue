@@ -62,7 +62,7 @@ export default {
     const {id,title} = this.$route.params
     this.title = title
     this.SET_LOADING(true)
-    get('/login/notice_info',{id:id}).then(json=>{
+    get('/notice_info',{id:id}).then(json=>{
       this.SET_LOADING(false)
       const {type,time,abstract,content} = json.data
       this.type = type

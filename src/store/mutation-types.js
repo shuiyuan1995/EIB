@@ -18,14 +18,12 @@ export const SET_IMG = "SET_IMG";
 export const SET_CONTENT = "SET_CONTENT";
 // 设置loading
 export const SET_LOADING = "SET_LOADING";
+// 设置邀请人
+export const SET_INVITE = "SET_INVITE";
 
 /*************************************************** */
 
 
-// 设置邀请人电话
-export const SET_INVITE_TEL = "SET_INVITE_TEL";
+
 // 设置邀请经纪人
 export const SET_DEALER = "SET_DEALER";
-
-/*--------------------------------acyions type--------------------------------*/
-export const SET_INVITE = "SET_INVITE";

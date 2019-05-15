@@ -64,6 +64,10 @@
       padding-top 10px
       padding-bottom 10px
       background #a1bedb
+  .phoneaddress
+    padding 11px 16px
+  .phonenum
+    margin-left 6px
 </style>
 
 <template>
@@ -88,7 +92,7 @@
           <p>3.EOS暂不支持lnline方式的转账充值，通过lnline方式的转账充值将不会上账，请您谅解。</p>
           <p>4.请务必填写并仔细核对地址标签，这是您账户的唯一标识，否则资产将不可找回。</p>
           <p>5.您充值至上述地址后，需要整个网络节点的确认，1次网络确认后到账，1次网络确认后可提币。</p>
-          <p>6.最小充值金额: 0.1EOS1，小于最小金额的充值将不会上账且无法退回。</p>
+          <p>6.最小充值金额: 0.1EOS，小于最小金额的充值将不会上账且无法退回。</p>
           <p>7.您的充值地址不会经常，可以重复充值；如有更改，我们会尽量通过网站公告或邮件通知您。</p>
           <p>8.请务必确认电脑浏览器安全，防止信息被篡改或泄露。</p>
         </div>
@@ -100,7 +104,7 @@
               <i class="icon icon-mima"></i>
             </template>
           </cube-input>
-          <cube-validator ref="validator1" class="validator" v-model="valid[1]" :model="newpass" :rules="rules0" :messages="messages0"></cube-validator>
+          <cube-validator ref="validator1" class="validator" v-model="valid[1]" :model="newpass" :rules="rules1" :messages="messages1"></cube-validator>
         </label>
         <label>
           <cube-input type="password" v-model="pass" placeholder="再次输入新密码">
@@ -108,7 +112,7 @@
               <i class="icon icon-mima"></i>
             </template>
           </cube-input>
-          <cube-validator ref="validator2" class="validator" v-model="valid[2]" :model="pass" :rules="rules0" :messages="messages0"></cube-validator>
+          <cube-validator ref="validator2" class="validator" v-model="valid[2]" :model="pass" :rules="rules2" :messages="messages2"></cube-validator>
         </label>
       </div>
       <div v-if="$route.params.type==3">
@@ -118,7 +122,7 @@
               <i class="icon icon-mima"></i>
             </template>
           </cube-input>
-          <cube-validator ref="validator3" class="validator" v-model="valid[3]" :model="newpaypass" :rules="rules0" :messages="messages0"></cube-validator>
+          <cube-validator ref="validator3" class="validator" v-model="valid[3]" :model="newpaypass" :rules="rules3" :messages="messages3"></cube-validator>
         </label>
         <label>
           <cube-input type="password" v-model="paypass" placeholder="再次输入交易密码">
@@ -126,7 +130,7 @@
               <i class="icon icon-mima"></i>
             </template>
           </cube-input>
-          <cube-validator ref="validator4" class="validator" v-model="valid[4]" :model="paypass" :rules="rules0" :messages="messages0"></cube-validator>
+          <cube-validator ref="validator4" class="validator" v-model="valid[4]" :model="paypass" :rules="rules4" :messages="messages2"></cube-validator>
         </label>
       </div>
       <div v-if="$route.params.type==4">
@@ -134,16 +138,20 @@
           <cube-input v-model="phone" placeholder="请输入手机号">
             <template slot="prepend">
               <i class="icon icon-shoujibangding"></i>
+              <span class="phonenum">{{phonenum}} -</span>
             </template>
           </cube-input>
-          <cube-validator ref="validator5" class="validator" v-model="valid[5]" :model="phone" :rules="rules0" :messages="messages0"></cube-validator>
+          <cube-validator ref="validator5" class="validator" v-model="valid[5]" :model="phone" :rules="rules5" :messages="messages5"></cube-validator>
+        </label>
+        <label>
+          <cube-button class="phoneaddress" :outline="true" @click="changeaddress">手机通讯地址：{{phoneadd}}</cube-button>
         </label>
         <label>
           <div class="validationitem">
             <cube-input class="cubeinput" v-model="code" placeholder="请输入验证码"></cube-input>
             <cube-button class="btn" @click="getcode">{{codetxt}}</cube-button>
           </div>
-          <cube-validator ref="validator6" class="validator" v-model="valid[6]" :model="code" :rules="rules0" :messages="messages0"></cube-validator>
+          <cube-validator ref="validator6" class="validator" v-model="valid[6]" :model="code" :rules="rules0" :messages="messages4"></cube-validator>
         </label>
       </div>
       <div v-if="$route.params.type==5">
@@ -153,14 +161,14 @@
               <i class="icon icon-shoujibangding"></i>
             </template>
           </cube-input>
-          <cube-validator ref="validator7" class="validator" v-model="valid[7]" :model="email" :rules="rules0" :messages="messages0"></cube-validator>
+          <cube-validator ref="validator7" class="validator" v-model="valid[7]" :model="email" :rules="rules6" :messages="messages6"></cube-validator>
         </label>
         <label>
           <div class="validationitem">
             <cube-input class="cubeinput" v-model="code1" placeholder="请输入验证码"></cube-input>
             <cube-button class="btn" @click="getcode">{{codetxt1}}</cube-button>
           </div>
-          <cube-validator ref="validator8" class="validator" v-model="valid[8]" :model="code1" :rules="rules0" :messages="messages0"></cube-validator>
+          <cube-validator ref="validator8" class="validator" v-model="valid[8]" :model="code1" :rules="rules0" :messages="messages4"></cube-validator>
         </label>
       </div>
       <cube-button class="settingbtn" @click="next">确认</cube-button>
@@ -178,7 +186,14 @@ import validation from '@components/validation.vue'
 import {mapGetters,mapMutations} from 'vuex';
 import {SET_USER_INFO,SET_LOADING} from "@store/mutation-types"
 export default {
-  mounted(){
+  activated(){
+    this.newname = '';
+    this.newpass = '';
+    this.pass = '';
+    this.newpaypass = '';
+    this.paypass = '';
+    this.phone = '';
+    this.email = '';
   },
   components: {
     myheader,
@@ -210,8 +225,61 @@ export default {
       messages0:{
         required:'昵称不能为空',
       },
+      rules1:{
+        required: true,
+        pattern:/^(\w){6,16}$/
+      },
+      messages1:{
+        required:'密码不能为空',
+        pattern:'只能输入6-16个字母、数字、下划线'
+      },
+      rules2:{
+        custom: () => {
+          return this.newpass == this.pass
+        }
+      },
+      rules4:{
+        custom: () => {
+          return this.newpaypass == this.paypass
+        }
+      },
+      messages2:{
+        custom:'密码不一致'
+      },
+      rules3:{
+        required: true,
+        pattern:/^\d{6}$/
+      },
+      messages3:{
+        required:'交易密码不能为空',
+        pattern:'只能输入6个数字交易密码'
+      },
+      rules5:{
+        required: true,
+        custom: (val) => {
+          return this.reg.test(val)
+        }
+      },
+      messages5:{
+        required:'手机号不能为空',
+        custom:'请输入正确的手机号'
+      },
+      rules6:{
+        required: true,
+        type: 'email',
+      },
+      messages6:{
+        required:'邮箱不能为空',
+        type:'请输入正确的邮箱号'
+      },
+      messages4:{
+        required:'验证码不能为空',
+      },
       // 重复点击判断
       repeat:false,
+      phoneadd:'中国',
+      phonenum:86,
+      reg:/^(\+?0?86\-?)?1[345789]\d{9}$/
     }
   },
   computed:{
@@ -242,7 +310,8 @@ export default {
       return title
     },
     ...mapGetters([
-      "userInfo"
+      "userInfo",
+      "phoneaddress"
     ]),
   },
   methods:{
@@ -256,6 +325,7 @@ export default {
       let url = '';
       let data = {};
       let ps = [];
+      this.valid = ['undefined','undefined','undefined','undefined','undefined','undefined','undefined'];
       switch (id) {
         case '0':
           ps = [this.$refs.validator0.validate()]
@@ -265,7 +335,7 @@ export default {
           }
           break;
         case '1':
-          this.$router.push('/accountRecharge')
+          this.$router.push('/accountRecharge/1')
           return false;
         case '2':
           ps = [this.$refs.validator1.validate(),this.$refs.validator2.validate()]
@@ -342,14 +412,13 @@ export default {
     gonext(id,url,data){
       this.repeat = true;
       this.SET_LOADING(true)
-      post(`/security/${url}`,data).then(json=>{
+      post(`/${url}`,data).then(json=>{
         this.SET_LOADING(false)
         this.repeat = false;
         let that = this;
         let data = {};
         switch (id) {
           case '0':
-            console.log(json)
             data = {
               ...this.userInfo,
               nick:json.data.nick
@@ -373,6 +442,8 @@ export default {
                 that.$router.back(-1)
               }
             }).show()
+            this.pass = '';
+            this.newpass = '';
             break;
           case '3':
             this.$createToast({
@@ -383,6 +454,8 @@ export default {
                 that.$router.back(-1)
               }
             }).show()
+            this.paypass = '';
+            this.newpaypass = '';
             break;
           case '4':
             if(this.userInfo.phone){
@@ -458,7 +531,7 @@ export default {
             name:this.phone
           }
           this.SET_LOADING(true)
-          post(`/security/edit_pe`,data).then(json=>{
+          post(`/edit_pe`,data).then(json=>{
             this.SET_LOADING(false)
             this.$createToast({
               type: 'correct',
@@ -481,7 +554,7 @@ export default {
             name:this.email
           }
           this.SET_LOADING(true)
-          post(`/security/edit_pe`,data).then(json=>{
+          post(`/edit_pe`,data).then(json=>{
             this.SET_LOADING(false)
             this.$createToast({
               type: 'correct',
@@ -527,12 +600,11 @@ export default {
           return false
         }
         this.repeat = true;
-        post('/security/phone_code',{phone:this.phone}).then(json=>{
-          this.$createToast({
-            txt: json.data,
-            type: 'txt',
-            time: 10000
-          }).show()
+        let data = {
+          phone:this.phone,
+          phone_head:this.phonenum
+        }
+        post('/phone_code',data).then(json=>{
           this.repeat = false;
           // 倒计时
           inter = setInterval(()=>{
@@ -557,12 +629,7 @@ export default {
           return false
         }
         this.repeat = true;
-        post('/security/email_code',{email:this.email}).then(json=>{
-          this.$createToast({
-            txt: json.data,
-            type: 'txt',
-            time: 10000
-          }).show()
+        post('/email_code',{email:this.email}).then(json=>{
           this.repeat = false;
           // 倒计时
           inter = setInterval(()=>{
@@ -578,6 +645,28 @@ export default {
           this.repeat = false;
         })
       }
+    },
+    changeaddress(){
+      if (!this.picker) {
+        this.picker = this.$createPicker({
+          title: '号码归属地',
+          data: [this.phoneaddress],
+          onSelect: this.selectHandle,
+          onCancel: this.cancelHandle
+        })
+      }
+      this.picker.show()
+    },
+    selectHandle(selectedVal, selectedIndex, selectedText) {
+      this.phoneadd = selectedText[0];
+      this.phonenum = selectedVal[0];
+      if(this.phoneaddress[selectedIndex].reg){
+        this.reg = this.phoneaddress[selectedIndex].reg
+      }else{
+        this.reg = /^011(999|998|997|996|995|994|993|992|991|990|979|978|977|976|975|974|973|972|971|970|969|968|967|966|965|964|963|962|961|960|899|898|897|896|895|894|893|892|891|890|889|888|887|886|885|884|883|882|881|880|879|878|877|876|875|874|873|872|871|870|859|858|857|856|855|854|853|852|851|850|839|838|837|836|835|834|833|832|831|830|809|808|807|806|805|804|803|802|801|800|699|698|697|696|695|694|693|692|691|690|689|688|687|686|685|684|683|682|681|680|679|678|677|676|675|674|673|672|671|670|599|598|597|596|595|594|593|592|591|590|509|508|507|506|505|504|503|502|501|500|429|428|427|426|425|424|423|422|421|420|389|388|387|386|385|384|383|382|381|380|379|378|377|376|375|374|373|372|371|370|359|358|357|356|355|354|353|352|351|350|299|298|297|296|295|294|293|292|291|290|289|288|287|286|285|284|283|282|281|280|269|268|267|266|265|264|263|262|261|260|259|258|257|256|255|254|253|252|251|250|249|248|247|246|245|244|243|242|241|240|239|238|237|236|235|234|233|232|231|230|229|228|227|226|225|224|223|222|221|220|219|218|217|216|215|214|213|212|211|210|98|95|94|93|92|91|90|86|84|82|81|66|65|64|63|62|61|60|58|57|56|55|54|53|52|51|49|48|47|46|45|44|43|41|40|39|36|34|33|32|31|30|27|20|7|1)[0-9]{0, 14}$/
+      }
+    },
+    cancelHandle() {
     },
     ...mapMutations({
       SET_USER_INFO,

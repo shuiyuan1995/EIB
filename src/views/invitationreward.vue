@@ -233,7 +233,7 @@ export default {
   },
   methods: {
     getdata(page){
-      get('/security/inviation_friend_ranking',{page:page}).then(json=>{
+      get('/inviation_friend_ranking',{page:page}).then(json=>{
         this.SET_LOADING(false)
         const {is_super,total,month,firend,page,max_page} = json.data;
         if(page==1){

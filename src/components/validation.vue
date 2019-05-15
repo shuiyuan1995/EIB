@@ -121,7 +121,7 @@ export default {
       this.$emit('close',false)
     },
     send(url){
-      get(`/security/${url}`).then(()=>{})
+      post(`/${url}`).then(()=>{})
     },
     validation(){
       if(this.phone==''&&this.thisphone||this.email==''){
@@ -133,6 +133,8 @@ export default {
         return false
       }
       this.$emit('send',{phone_code:this.phone,email_code:this.email})
+      this.phone = '';
+      this.email = '';
     }
     // 发送邮箱验证
   }

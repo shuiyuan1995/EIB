@@ -22,7 +22,7 @@
       p:last-of-type
         color #ffffff
       p
-        margin-top 0.12rem
+        margin-top 0.32rem
       span 
         font-size 0.48rem
         color #dddddd
@@ -108,7 +108,7 @@
       </div>
       <div class="nacenter">
         <p>钱包资产估值</p>
-        <p>{{sum_money+due}} <span>≈￥{{(porportion*(sum_money+due)).toFixed(2)}}</span></p>
+        <p>{{sum_money+due}} EOS<span v-show="false">≈￥{{(porportion*(sum_money+due)).toFixed(2)}}</span></p>
       </div>
       <div class="naright">
         <p>{{accumulated}} EOS</p>
@@ -135,7 +135,7 @@
       <router-link class="investmentbtn" to="/investment">立即投资</router-link>
     </div>
     <div class="accountnav">
-      <div @click="$router.push('/accountRecharge')">
+      <div @click="userInfo.account?$router.push('/accountRecharge/0'):$router.push('/securitysetting/1')">
         <i class="icon icon-chongzhi1"></i>
         <p>充值</p>
       </div>
@@ -166,8 +166,10 @@ import {mapGetters,mapMutations} from 'vuex';
 import {SET_AOTO,SET_CONTENT,SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){
+    // loading
     this.SET_LOADING(true)
-    get('/security/center').then(json=>{
+    // 获取页面数据
+    get('/center').then(json=>{
       this.SET_LOADING(false)
       const {accumulated,difference,no,sum_money,due,porportion,aoto,content} = json.data;
       this.accumulated = accumulated;
@@ -176,17 +178,25 @@ export default {
       this.sum_money = sum_money;
       this.porportion = porportion;
       this.due = due;
+      // 保存余额信息
       this.SET_AOTO(aoto)
+      // 保存手续费信息
       this.SET_CONTENT(content)
     })
   },
   data(){
     return{
+      // 累计收益
       accumulated:'',
+      // 与前一名差距
       difference:'',
+      // 名次
       no:'',
+      // 账户余额
       sum_money:'',
+      // 待收本金
       due:'',
+      // 现金与eos装换比列
       porportion:''
     }
   },

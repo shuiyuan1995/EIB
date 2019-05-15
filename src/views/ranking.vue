@@ -88,7 +88,7 @@ import {SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){
     this.SET_LOADING(true)
-    get('/api/ranking').then(json=>{
+    get('/ranking').then(json=>{
       this.SET_LOADING(false)
       const {int,inv} = json.data;
       this.int = int;

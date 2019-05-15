@@ -62,7 +62,7 @@ export default {
   },
   methods:{
     getdata(){
-      get('/api/per_order').then(json=>{
+      get('/per_order').then(json=>{
         this.money = json.data
       })
     },

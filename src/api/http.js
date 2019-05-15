@@ -3,7 +3,7 @@ import axios from "axios";
 import qs from "qs";
 import store from "@store";
 import { Toast } from 'cube-ui'
-import {SET_TOKEN} from "@store/mutation-types";
+import {SET_TOKEN,SET_LOADING} from "@store/mutation-types";
 
 // 请求配置参数
 const http = axios.create({
@@ -37,12 +37,14 @@ http.interceptors.request.use(config => {
 // 请求返回拦截
 http.interceptors.response.use(response => {
   const { data } = response;
+  console.log('http',response)
   if (response.status === 200 && data.code === 200) {
     if(data.data.token){
       store.commit(SET_TOKEN, data.data.token)
     }
     return Promise.resolve(data);
   } else {
+    store.commit(SET_LOADING, false)
     if(data.code === 421){
       Toast.$create({
         txt: "登录过期,请重新登录",
@@ -50,14 +52,17 @@ http.interceptors.response.use(response => {
         type:'txt'
       }).show()
       router.push('/login')
+    }else{
+      Toast.$create({
+        txt: data.msg,
+        time: 2000,
+        type:'txt'
+      }).show()
     }
-    Toast.$create({
-      txt: data.msg,
-      time: 2000,
-      type:'txt'
-    }).show()
     return Promise.reject(data);
   }
+},err => {
+  store.commit(SET_LOADING, false)
 });
 
 /**

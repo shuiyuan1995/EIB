@@ -237,7 +237,7 @@ export default {
     // 获取数据
     getdata(page){
       if(page){
-        get('/api/bid_list',{page:page,type:this.thedata[this.thisindex].type}).then(json=>{
+        get('/bid_list',{page:page,type:this.thedata[this.thisindex].type}).then(json=>{
           this.thedata[this.thisindex].page = json.data.page
           this.thedata[this.thisindex].data = [
             ...this.thedata[this.thisindex].data,
@@ -246,7 +246,7 @@ export default {
           this.thisitems = this.thedata[this.thisindex].data
         })
       }else{
-        get('/api/bid_list').then(json=>{
+        get('/bid_list').then(json=>{
           this.SET_LOADING(false)
           this.thedata = json.data
           this.thisitems = this.thedata[this.thisindex].data

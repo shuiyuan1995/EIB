@@ -279,7 +279,7 @@ export default {
         return false;
       }
       this.SET_LOADING(true)
-      post('/security/ver_pay_pwd',{pay_pwd:this.value}).then(()=>{
+      post('/ver_pay_pwd',{pay_pwd:this.value}).then(()=>{
         this.SET_LOADING(false)
         this.onvalidation = true;
       })
@@ -293,7 +293,7 @@ export default {
         email_code:json.email_code
       }
       this.SET_LOADING(true)
-      post('/security/reflect',data).then(()=>{
+      post('/reflect',data).then(()=>{
         this.SET_LOADING(false)
         this.thevalidation = false;
         this.$createToast({

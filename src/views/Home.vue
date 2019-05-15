@@ -139,8 +139,8 @@ import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import {mapGetters} from 'vuex';
 export default {
-  created(){
-    get('/api/index').then(json=>{
+  activated(){
+    get('/index').then(json=>{
       let {img,investment_msg,areate_amount,repayment,trading_amount} = json.data
       this.img = img
       this.investment_msg = investment_msg

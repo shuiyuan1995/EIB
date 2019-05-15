@@ -71,7 +71,7 @@ export default {
   },
   methods:{
     getdata(){
-      get('/security/inviation').then(json=>{
+      get('/inviation').then(json=>{
         this.SET_LOADING(false)
         console.log(json)
         const {img_url,url,img} = json.data

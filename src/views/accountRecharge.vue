@@ -46,12 +46,12 @@
 
 <template>
   <div class="accountRecharge">
-    <myheader left="prev" center="充币"></myheader>
-    <h2>充币</h2>
+    <myheader left="prev" :center="type==0?'充币':'验证'"></myheader>
+    <h2>{{type==0?'充币':'验证'}}</h2>
     <div class="changemoney">
-      <span>{{thismoney}}</span>
-      <span @click="showPicker">选择币种</span>
-      <i class="icon icon-pagenext"></i>
+      <span>{{type==1?'请想以下账户充值0.0001':''}}{{thismoney}}</span>
+      <span v-show="type==0" @click="showPicker">选择币种</span>
+      <i v-show="type==0" class="icon icon-pagenext"></i>
     </div>
     <div class="main">
       <div class="img">
@@ -89,9 +89,10 @@ import {get} from '@api/index'
 import {mapGetters,mapMutations} from 'vuex';
 import {SET_LOADING} from "@store/mutation-types"
 export default {
-  created(){
+  activated(){
     this.SET_LOADING(true)
     this.getdata()
+    this.type = this.$route.params.type
   },
   data(){
     return{
@@ -102,6 +103,7 @@ export default {
       picker:'',
       imgindex:0,
       imgWrap:[],
+      type:'',
     }
   },
   components:{
@@ -110,7 +112,7 @@ export default {
   },
   methods:{
     getdata(){
-      get('/api/recharge').then(json=>{
+      get('/recharge').then(json=>{
         this.SET_LOADING(false)
         const {account,img,tag} = json.data;
         this.account = account;

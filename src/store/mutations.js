@@ -41,13 +41,13 @@ const mutations = {
   [types.SET_LOADING](state, showloading) {
     state.showloading = showloading;
   },
+  // 设置邀请人
+  [types.SET_INVITE](state, invite) {
+    state.invite = invite;
+  },
 
 
   /************************************* */
-  // 设置邀请人电话
-  [types.SET_INVITE_TEL](state, invite_tel) {
-    state.invite_tel = invite_tel;
-  },
   // 设置邀请经销商
   [types.SET_DEALER](state, dealer) {
     state.dealer = dealer;

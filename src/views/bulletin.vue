@@ -139,7 +139,7 @@ export default {
   },
   methods:{
     getdata(){
-      get('/login/message').then(json=>{
+      get('/message').then(json=>{
         this.SET_LOADING(false)
         let {notice,user_data} = json.data
         this.notice = notice.map(val=>{

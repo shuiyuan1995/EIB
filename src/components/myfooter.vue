@@ -30,13 +30,12 @@
 
 <template>
   <footer>
-    <p>友情提示：网贷有风险，投资须谨慎</p>
+    <!-- <p>友情提示：投资须谨慎</p> -->
     <nav class="footnav">
       <router-link class="link" to="/">首页</router-link>
-      <router-link class="link" to="/">我要投资</router-link>
-      <router-link class="link" to="/">我要融资</router-link>
-      <router-link class="link" to="/">关于我们</router-link>
-      <router-link class="link" to="/">帮助</router-link>
+      <router-link class="link" to="/investment">我要投资</router-link>
+      <router-link class="link" to="/about">关于我们</router-link>
+      <router-link class="link" to="/help">帮助</router-link>
     </nav>
     <div class="footerli">
       <span>EIB</span>

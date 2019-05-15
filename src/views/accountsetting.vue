@@ -333,7 +333,7 @@ export default {
     // 获取数据
     onFetch() {
       return new Promise((resolve) => {
-        get('/api/investment_record',{page:this.page}).then(json=>{
+        get('/investment_record',{page:this.page}).then(json=>{
           if(this.page==1){
             const {collected,cumulative,distribute,coll_record,proportion} = json.data
             this.collected = collected
@@ -370,7 +370,7 @@ export default {
         name:JSON.stringify(this.listval)
       }
       this.SET_LOADING(true)
-      post('/security/set_auto',data).then(()=>{
+      post('/set_auto',data).then(()=>{
         this.SET_LOADING(false)
         this.$createToast({
           txt: `修改成功`,
