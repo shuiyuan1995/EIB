@@ -33,7 +33,7 @@
 
 <template>
   <div class="help">
-    <myheader left="prev" center="帮助"></myheader>
+    <myheader left="prev" center="帮助中心"></myheader>
     <nav class="helpnav">
       <div @click="$router.push('/helpfinancial/financial')">
         <i class="icon icon-yonghu1"></i>

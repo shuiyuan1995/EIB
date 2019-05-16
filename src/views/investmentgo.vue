@@ -100,6 +100,7 @@ import {mapGetters,mapMutations} from 'vuex';
 import {SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){
+    this.value = ''
     this.oninput()
   },
   data(){

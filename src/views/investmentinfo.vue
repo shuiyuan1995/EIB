@@ -136,6 +136,9 @@
       span 
         flex 1
         text-align center
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
     .tablebox3
       min-height 4rem
       p
@@ -274,7 +277,7 @@ export default {
       details:{},
       cycle:[],
       recode:[],
-      istable:2
+      istable:0
     }
   },
   components:{

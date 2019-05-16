@@ -174,7 +174,7 @@
       <cube-button class="settingbtn" @click="next">确认</cube-button>
     </div>
     <myfooter></myfooter>
-    <validation @close="close" @send="send" v-show="thevalidation"></validation>
+    <validation @close="close" @send="send" v-show="thevalidation" :thevalidation="thevalidation"></validation>
   </div>
 </template>
 
@@ -221,9 +221,11 @@ export default {
       valid:['undefined','undefined','undefined','undefined','undefined','undefined','undefined'],
       rules0:{
         required: true,
+        max:15,
       },
       messages0:{
         required:'昵称不能为空',
+        max:'最大为15个字符'
       },
       rules1:{
         required: true,

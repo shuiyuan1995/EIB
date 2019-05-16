@@ -5,12 +5,17 @@
     align-items center
     border-bottom 1px solid #e5e5e5
     .naleft
-      flex 1
+      flex 0 0 25%
+      overflow hidden
       text-align center
       font-size 0.56rem
       i 
         color #80abd1
         font-size 1.2rem
+      p
+        overflow hidden
+        white-space nowrap
+        text-overflow ellipsis
     .nacenter
       position relative
       flex 2

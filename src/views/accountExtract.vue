@@ -152,7 +152,7 @@
       <cube-button class="btn" @click="goto">确  定</cube-button>
     </form>
     <myfooter></myfooter>
-    <validation @close="close" @send="send" :thisphone="false" v-show="onvalidation"></validation>
+    <validation @close="close" @send="send" :thisphone="false" v-show="onvalidation" :thevalidation="thevalidation"></validation>
   </div>
 </template>
 

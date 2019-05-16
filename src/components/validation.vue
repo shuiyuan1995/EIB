@@ -61,13 +61,22 @@
   .showup-leave-to
     opacity 0
     transform translateY(100%)
+  .showop-enter-active,
+  .showop-leave-active
+    transition all 0.5s
+  .showop-enter,
+  .showop-leave-to
+    opacity 0
 </style>
 
 <template>
-  <transition name="showup">
+  <transition name="showop">
     <div class="validation">
-      <div class="bg" @click="close"></div>
-      <div class="main">
+      <transition name="showop">
+      <div v-show="thevalidation" class="bg" @click="close"></div>
+      </transition>
+      <transition name="showup">
+      <div v-show="thevalidation" class="main">
         <p>若为收到邮件，请检查邮箱垃圾箱</p>
         <div class="title">
           <h2>安全验证</h2>
@@ -78,37 +87,45 @@
             <p>短信验证:{{userInfo.phone}}</p>
             <div class="validationitem">
               <cube-input class="cubeinput" v-model="phone" placeholder="请输入验证码"></cube-input>
-              <cube-button class="btn" @click="send('phone_code')">发送</cube-button>
+              <cube-button class="btn" @click="send('phone_code')">{{codetxt[0]}}</cube-button>
             </div>
           </label>
           <label for="">
             <p>邮箱验证:{{userInfo.email}}</p>
             <div class="validationitem">
               <cube-input class="cubeinput" v-model="email" placeholder="请输入验证码"></cube-input>
-              <cube-button class="btn" @click="send('email_code')">发送</cube-button>
+              <cube-button class="btn" @click="send('email_code')">{{codetxt[1]}}</cube-button>
             </div>
           </label>
           <cube-button class="btnok" @click="validation">确  认</cube-button>
         </form>
       </div>
+      </transition>
     </div>
   </transition>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
-import {get} from '@api/index'
+import {post} from '@api/index';
+let inter = [null,null];
 export default {
   props:{
     thisphone:{
       type:Boolean,
       default:true
+    },
+    thevalidation:{
+      type:Boolean
     }
   },
   data(){
     return{
       phone:'',
       email:'',
+      // 倒计时
+      time:[60,60],
+      codetxt:['点击获取验证码','点击获取验证码']
     }
   },
   computed:{
@@ -121,7 +138,25 @@ export default {
       this.$emit('close',false)
     },
     send(url){
-      post(`/${url}`).then(()=>{})
+      
+      let i = url=='phone_code'?0:1;
+      // 判断点击间隙
+      if(this.time[i] !== 60){
+        return false
+      }
+      inter[i] = null
+      post(`/${url}`).then(()=>{
+        // 倒计时
+        inter[i] = setInterval(()=>{
+          this.$set(this.codetxt,i,`${this.time[i]}秒后可重新发送`)
+          this.time[i]--;
+          if(this.time[i]<=0){
+            this.$set(this.codetxt,i,`点击获取验证码`)
+            clearInterval(inter[i])
+            this.time[i] = 60
+          }
+        },1000)
+      })
     },
     validation(){
       if(this.phone==''&&this.thisphone||this.email==''){

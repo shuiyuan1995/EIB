@@ -17,6 +17,11 @@
         color #a6a6a6
       span.icon-qianbao
         margin-right 0.12rem
+    .nick
+      max-width 4rem
+      overflow hidden
+      white-space nowrap
+      text-overflow ellipsis
 </style>
 
 <template>
@@ -26,7 +31,7 @@
       <router-link class="item" to="/securitysetting/0">
         <span class="icon icon-idinput"></span>
         <span>用户名</span>
-        <span>{{userInfo.nick}}</span>
+        <span class="nick">{{userInfo.nick}}</span>
         <span class="icon icon-pagenext"></span>
       </router-link>
       <div class="item" @click="goto(1)">

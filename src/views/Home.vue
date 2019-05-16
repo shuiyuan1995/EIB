@@ -21,12 +21,16 @@
       color #546ca9
   .swper1
     height 0.8rem
+    padding-right 0.4rem
     .message-txt
       font-family AdobeHeitiStd-Regular
       font-size 0.6rem
       color #4b4b4b
       display block
       line-height 0.8rem
+      overflow hidden
+      text-overflow ellipsis
+      white-space nowrap
   // 基础信息
   .basis-message
     // height 3.76rem
