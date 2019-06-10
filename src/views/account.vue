@@ -134,8 +134,9 @@
     <div class="account-investment">
       <i class="icon icon-zhanghuxinxililv"></i>
       <div class="investment-txt">
-        <p v-if="no">总收益第{{no}}名，比前一名仅差{{difference}}元哟！</p>
-        <p v-else>您还没有排名，快去投标吧</p>
+        <p v-if="no==1">总收益第{{no}}名！</p>
+        <p v-else-if="no">总收益第{{no}}名，比前一名仅差{{difference}} EOS哟！</p>
+        <p v-else>您还没有排名，快去投标吧{{no}}</p>
       </div>
       <router-link class="investmentbtn" to="/investment">立即投资</router-link>
     </div>

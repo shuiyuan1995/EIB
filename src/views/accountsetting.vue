@@ -154,43 +154,28 @@
     <div class="settingitem" v-show="thisactive">
       <div class="itemtop">
         <p class="first"><span>累计投资：<i>{{cumulative.num}}</i>笔/<i>{{cumulative.money}}</i> EOS</span><span @click="$router.push('/investment')">立即投资</span></p>
-        <p>待收本金：{{collected.num}}笔/{{collected.money}} EOS ≈￥{{(collected.money*proportion).toFixed(2)}}</p>
-        <p>发放利息：{{distribute.num}}笔/{{distribute.money}} EOS ≈￥{{(distribute.money*proportion).toFixed(2)}}</p>
-        <p>待收利息：{{coll_record.num}}笔/{{coll_record.money}} EOS ≈￥{{(coll_record.money*proportion).toFixed(2)}}</p>
+        <p>待收本金：{{collected.num}}笔/{{collected.money}} EOS</p>
+        <p>发放利息：{{distribute.num}}笔/{{distribute.money}} EOS</p>
+        <p>待收利息：{{coll_record.num}}笔/{{coll_record.money}} EOS</p>
       </div>
       <div class="itemtable">
         <div class="tablenav">
-          <span>投资时间</span>
+          <span>标名</span>
           <span>状态</span>
-          <span>金额</span>
+          <span>投资金额</span>
           <span>还款日期</span>
         </div>
         <div class="view-wrapper">
-          <cube-recycle-list class="list" :offset="offset" :infinite="infinite" :size="size" :on-fetch="onFetch">
-            <!-- tombstone 的作用域插槽 slot-scope 必须声明 -->
-            <template slot="tombstone" slot-scope="props">
-              <div class="item tombstone">
-                <div class="avatar"></div>
-                <div class="bubble">
-                  <p></p>
-                  <p></p>
-                  <p></p>
-                  <div class="meta">
-                    <time class="posted-date"></time>
-                  </div>
-                </div>
-              </div>
-            </template>
-            <template slot="item" slot-scope="{ data }">
-              <div :id="data.id" class="item">
-                <span>{{data.up}}</span>
-                <span class="blue">{{data.state}}</span>
-                <span>{{data.name}}</span>
-                <span class="red">{{data.end}}</span>
-              </div>
-            </template>
-            <myfooter slot="noMore"></myfooter>
-          </cube-recycle-list>
+          <cube-scroll ref="scroll" :data="thisitems" 
+            :options="options" 
+            @pulling-up="onPullingUp">
+            <div class="item" v-for="(item,index) in thisitems" :key="index" @click="goto(item.info)">
+              <span>{{item.up}}</span>
+              <span class="blue">{{item.state}}</span>
+              <span>{{item.name}}</span>
+              <span class="red">{{item.end}}</span>
+            </div>
+          </cube-scroll>
         </div>
       </div>
     </div>
@@ -238,13 +223,12 @@ import myfooter from '@components/myfooter.vue'
 import {mapGetters,mapMutations} from 'vuex';
 import {get,post} from '@api/index'
 import {changedata,getEles} from '@common/js'
-import {SET_AOTO,SET_LOADING} from "@store/mutation-types"
+import {SET_AOTO,SET_LOADING,SET_THIS_BIAO} from "@store/mutation-types"
 export default {
   activated(){
     // 复制自动投资管理列表
     this.listval = JSON.parse(JSON.stringify(this.aoto));
-    this.page = 1;
-    this.onFetch()
+    this.getdata(1)
   },
   data(){
     return{
@@ -261,13 +245,20 @@ export default {
       // 自动投资管理列表
       listval:[],
       // 自动更新配置
-      size: 20,
-      infinite: true,
-      offset:100,
+      options: {
+      pullUpLoad: true,
+      scrollbar: true,
+      bounce:{
+        top:false
+      }
+      },
+      // 投资记录
+      thisitems:[],
       // 切换管理
       thisactive:true,
       // 请求页面
       page:1,
+      lastlist:false,
       // 支付密码
       value:'',
     }
@@ -280,6 +271,9 @@ export default {
     ...mapGetters([
       "aoto"
     ]),
+    // thistype(){
+    //   return this.thedata[this.thisindex].title.substr(0,1)
+    // }
   },
   methods: {
     // 进入密码框焦点
@@ -330,28 +324,44 @@ export default {
         }
       }
     },
-    // 获取数据
-    onFetch() {
-      return new Promise((resolve) => {
-        get('/investment_record',{page:this.page}).then(json=>{
-          if(this.page==1){
-            const {collected,cumulative,distribute,coll_record,proportion} = json.data
-            this.collected = collected
-            this.cumulative = cumulative
-            this.distribute = distribute
-            this.coll_record = coll_record
-            this.proportion = proportion
-          }
+    // 上拉加载
+    onPullingUp() {
+      if(this.lastlist){
+        this.$refs.scroll.forceUpdate();
+      }else{
+        this.getdata(this.page)
+      }
+    },
+    getdata(){
+      get('/investment_record',{page:this.page}).then(json=>{
+        let {log} = json.data
+        if(this.page==1){
+          const {collected,cumulative,distribute,coll_record,proportion} = json.data
+          this.collected = collected
+          this.cumulative = cumulative
+          this.distribute = distribute
+          this.coll_record = coll_record
+          this.proportion = proportion
+        }
+        // 判断是否为最后一页
+        if(log.length<20){
+          this.lastlist = true
+        }else{
           this.page++
-          let log = json.data.log.map(val=>{
-            return {
-              ...val,
-              up:changedata(val.up*1000,'MM-dd hh:mm'),
-              end:changedata(val.end*1000,'yyyy-MM-dd'),
-            }
-          })
-          resolve(log)
+        }
+        // 处理时间
+        log = log.map(val=>{
+          return {
+            ...val,
+            // up:changedata(val.up*1000,'MM-dd hh:mm'),
+            end:changedata(val.end*1000,'yyyy-MM-dd'),
+          }
         })
+        // 添加数据
+        this.thisitems = this.page==1?log:[
+          ...this.thisitems,
+          ...log
+        ]
       })
     },
     // 提交自动登录
@@ -385,9 +395,18 @@ export default {
       })
       this.SET_AOTO(this.listval)
     },
+    goto(item){
+      this.$router.push('/investmentinfo')
+      let data = {
+        type:item.title.substr(0,1),
+        item:item
+      }
+      this.SET_THIS_BIAO(data)
+    },
     ...mapMutations({
       SET_AOTO,
-      SET_LOADING
+      SET_LOADING,
+      SET_THIS_BIAO
     }),
   }
 }

@@ -6,9 +6,9 @@ import store from './store/index'
 import VueClipboard from 'vue-clipboard2'
 Vue.use(VueClipboard)
 /* eslint-disable no-unused-vars */
-import Vconsole from 'vconsole'
-const vConsole = new Vconsole();
-Vue.use(vConsole)
+// import Vconsole from 'vconsole'
+// const vConsole = new Vconsole();
+// Vue.use(vConsole)
 
 import '@common/stylus/index.styl'
 

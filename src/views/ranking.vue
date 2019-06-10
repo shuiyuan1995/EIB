@@ -1,7 +1,6 @@
 <style lang="stylus" scoped>
   .ranking-top
     height 3.56rem
-    background-color #a1bedb
   .tablebar
     display flex
     height 2.48rem
@@ -49,7 +48,9 @@
 <template>
   <div class="ranking">
     <myheader left="prev" center="收益排行"></myheader>
-    <div class="ranking-top"></div>
+    <div class="ranking-top">
+      <img :src="img_url">
+    </div>
     <div class="ranking-table">
       <nav class="tablebar">
         <div class="tableitem" @click="changeto(0)" :class="isactive==0?'active':''">
@@ -71,7 +72,7 @@
         <li v-for="(item,index) in itemdata" :key="index">
           <span :class="index<4?'good':''" class="icon icon-B-paihangbang"></span>
           <span>{{item.nick}}</span>
-          <span>{{item.sum}}</span>
+          <span>{{item.sum}} EOS</span>
         </li>
       </ul>
     </div>
@@ -90,7 +91,8 @@ export default {
     this.SET_LOADING(true)
     get('/ranking').then(json=>{
       this.SET_LOADING(false)
-      const {int,inv} = json.data;
+      const {img_url,int,inv} = json.data;
+      this.img_url = img_url
       this.int = int;
       this.inv = inv;
     })
@@ -99,7 +101,8 @@ export default {
     return{
       isactive:0,
       int:[],
-      inv:[]
+      inv:[],
+      img_url:''
     }
   },
   components: {

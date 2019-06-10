@@ -37,7 +37,6 @@ http.interceptors.request.use(config => {
 // 请求返回拦截
 http.interceptors.response.use(response => {
   const { data } = response;
-  console.log('http',response)
   if (response.status === 200 && data.code === 200) {
     if(data.data.token){
       store.commit(SET_TOKEN, data.data.token)

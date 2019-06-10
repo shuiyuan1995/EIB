@@ -39,7 +39,6 @@
     </nav>
     <div class="footerli">
       <span>EIB</span>
-      <span>渝ICP备14007328号-1</span>
     </div>
   </footer>
 </template>

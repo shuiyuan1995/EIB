@@ -103,10 +103,6 @@
         <cube-input :value="content.account" placeholder="输入或长按粘贴地址" disabled></cube-input>
       </label>
       <label>
-        <p class="title">标签<span class="red">（填写错误可能导致资产损失，请仔细核对）</span></p>
-        <cube-input v-model="lable" placeholder="输入或长按粘贴标签"></cube-input>
-      </label>
-      <label>
         <p class="title">数量</p>
         <div class="itemin">
           <cube-input type="Number" class="cubeinput" v-model="money" :placeholder="`最小提币数量${aoto[thismoney].withdraw}`">
@@ -165,18 +161,21 @@ import {SET_LOADING} from "@store/mutation-types"
 import {post} from '@api/index'
 import {getEles} from '@common/js'
 export default {
+  created(){
+    this.thismoney = Object.keys(this.aoto)[0]
+  },
   activated(){
     this.thismoney = Object.keys(this.aoto)[0]
   },
   data(){
     return{
-      lable:'',
       money:'',
       thismoney:'',
       picker:'',
       onvalidation:false,
       // 支付密码
       value:'',
+      thevalidation:false,
     }
   },
   components:{
@@ -254,14 +253,6 @@ export default {
     cancelHandle() {
     },
     goto(){
-      if(!this.lable){
-        this.$createToast({
-          txt: `标签不能为空`,
-          type: 'txt',
-          time: 500,
-        }).show()
-        return false;
-      }
       if(this.money<this.aoto[this.thismoney].withdraw||this.money>this.aoto[this.thismoney].money){
         this.$createToast({
           txt: `请填写正确金额`,

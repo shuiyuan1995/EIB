@@ -44,41 +44,45 @@
     <myheader left="prev" center="投资列表"></myheader>
     <h2>历史记录</h2>
     <div class="view-wrapper">
-      <cube-recycle-list class="list" :offset="offset" :infinite="infinite" :size="size" :on-fetch="onFetch">
-        <!-- tombstone 的作用域插槽 slot-scope 必须声明 -->
-        <template slot="tombstone" slot-scope="props">
-          <div class="item tombstone">
-            <div class="avatar"></div>
-            <div class="bubble">
-              <p></p>
-              <p></p>
-              <p></p>
-              <div class="meta">
-                <time class="posted-date"></time>
+      <cube-scroll ref="scroll" :data="thisitems" 
+          :options="options" 
+          @pulling-up="onPullingUp">
+        <div class="item" v-for="(item,index) in thisitems" :key="index">
+          <div class="itemtop">
+            <span>{{item.type}}({{item.coin}})</span>
+            <i class="icon icon-pagenext" @click="goto(item)"></i>
+          </div>
+          <div class="itemcenter">
+            <span>数量</span>
+            <span>状态</span>
+            <span>时间</span>
+          </div>
+          <div class="itembottom">
+            <span>{{item.money}}</span>
+            <span>{{item.state}}</span>
+            <span>{{item.time}}</span>
+          </div>
+        </div>
+        <template slot="pulldown" slot-scope="props">
+          <div v-if="props.pullDownRefresh"
+            class="cube-pulldown-wrapper"
+            :style="props.pullDownStyle">
+            <div v-if="props.beforePullDown"
+              class="before-trigger"
+              :style="{paddingTop: props.bubbleY + 'px'}">
+              <span :class="{rotate: props.bubbleY > 40}">↓</span>
+            </div>
+            <div class="after-trigger" v-else>
+              <div v-show="props.isPullingDown" class="loading">
+                <cube-loading></cube-loading>
               </div>
+              <transition name="success">
+                <div v-show="!props.isPullingDown" class="text-wrapper"><span class="refresh-text">更新成功</span></div>
+              </transition>
             </div>
           </div>
         </template>
-        <template slot="item" slot-scope="{ data }">
-          <div :id="data.id" class="item">
-            <div class="itemtop">
-              <span>{{data.type}}({{data.coin}})</span>
-              <i class="icon icon-pagenext" @click="goto(data)"></i>
-            </div>
-            <div class="itemcenter">
-              <span>数量</span>
-              <span>状态</span>
-              <span>时间</span>
-            </div>
-            <div class="itembottom">
-              <span>{{data.money}}</span>
-              <span>{{data.state}}</span>
-              <span>{{data.time}}</span>
-            </div>
-          </div>
-        </template>
-        <myfooter slot="noMore"></myfooter>
-      </cube-recycle-list>
+      </cube-scroll>
     </div>
   </div>
 </template>
@@ -90,13 +94,23 @@ import {get} from '@api/index'
 import {changedata} from '@common/js'
 export default {
   activated(){
-    this.onFetch()
+    this.getdata()
   },
   data(){
     return{
-      size: 20,
-      infinite: true,
-      offset:100
+      thisitems:[],
+      options: {
+        pullUpLoad: true,
+        scrollbar: {
+          fade: true,
+          interactive: false,
+        },
+        bounce:{
+          top:false
+        }
+      },
+      last:false,
+      time:''
     }
   },
   components:{
@@ -104,18 +118,37 @@ export default {
     myfooter
   },
   methods: {
-    onFetch() {
-      let items = []
-      return new Promise((resolve) => {
-        get('/historical_record').then(json=>{
-          items = json.data.map(val=>{
-            return {
-              ...val,
-              time:changedata(val.time*1000,'hh:mm dd/MM/yyyy')
-            }
-          })
-          resolve(items)
+    // 上拉加载
+    onPullingUp() {
+      if(this.last){
+        this.$refs.scroll.forceUpdate();
+      }else{
+        this.getdata(this.time)
+      }
+    },
+    getdata(time){
+      get('/historical_record',{time:time?time:''}).then(json=>{
+        const {data} = json
+        if(data.length < 20){
+          this.last = true
+          this.time = ''
+        }else{
+          this.time = data[19].time
+        }
+        let thisarr = data.map(val=>{
+          return {
+            ...val,
+            time:changedata(val.time*1000,'hh:mm dd/MM/yyyy')
+          }
         })
+        if(!time){
+          this.thisitems = thisarr;
+        }else{
+          this.thisitems = [
+            ...this.thisitems,
+            ...thisarr
+          ]
+        }
       })
     },
     goto(data){

@@ -144,6 +144,7 @@ export default {
       if(this.time[i] !== 60){
         return false
       }
+      this.time[i]--;
       inter[i] = null
       post(`/${url}`).then(()=>{
         // 倒计时

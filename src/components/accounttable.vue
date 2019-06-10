@@ -46,7 +46,7 @@
 <script>
 import { get } from "@api/index";
 export default {
-  created(){
+  activated(){
     this.getdata()
   },
   data() {

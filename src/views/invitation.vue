@@ -1,7 +1,6 @@
 <style lang="stylus" scoped>
   .advertising
     width 100%
-    background-color #9bb6d3
     img 
       width 100%
   .invitationlist

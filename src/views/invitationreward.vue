@@ -92,7 +92,7 @@
         font-size 0.48rem
         font-weight normal
     .view-wrapper
-      position fixed
+      // position fixed
       width 100%
       max-width 400px
       top 13.36rem
@@ -126,7 +126,7 @@
 
 <template>
   <div class="invitationreward">
-    <myheader left="prev" center="VIP会员"></myheader>
+    <myheader left="prev" :center="is_super?'VIP会员':'会员'"></myheader>
     <div class="rewardtop">
       <nav>
         <span :class="change?'active':''" @click="change = true">总</span>
@@ -148,8 +148,9 @@
         <p>{{thisdata.sum}}</p>
       </div>
       <div class="messagebottom">
-        <p>1.直接邀请人收益X10%</p>
-        <p>2.间接邀请人收益X5%</p>
+        <p v-show="is_super">1.vip直接邀请人收益前三十天X100%</p>
+        <p>{{is_super?'2.超过三十天直接邀请人收益X10%':'1.直接邀请人收益X10%'}}</p>
+        <p>{{is_super?'3':'2'}}.间接邀请人收益X5%</p>
       </div>
       <div class="btn">
         <span @click="$router.push('/account')">提现</span>

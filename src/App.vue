@@ -24,7 +24,7 @@
   margin: 0 auto;
   max-width: 400px;
   min-height: 100vh;
-  top: 0px;
+  top: -1px;
   padding-top: 1.4rem;
 }
 
@@ -53,7 +53,7 @@
   // transform: translate3d(-100%, 0, 0);
 }
 
-.loading {
+.thisloading
   position: fixed;
   top: 0px;
   width: 100%;
@@ -63,8 +63,7 @@
   background: rgba(0, 0, 0, 0.6);
   text-align center
   color #8cd0e5
-  line-height 6.4rem
-}
+  line-height 6.4rem;
 
 @keyframes lds-eclipse {
   0% {
@@ -127,7 +126,7 @@
       </keep-alive>
     </transition>
     <transition name="showface">
-      <div class="loading" v-show="showloading">
+      <div class="thisloading" v-show="showloading">
         <div class="lds-eclipse">
         </div>
         loading...
@@ -139,11 +138,14 @@
 <script>
 import { login } from "@common/js";
 import {mapGetters,mapMutations} from 'vuex';
-import {SET_INVITE} from "@store/mutation-types"
+import {SET_INVITE,SET_LOADING} from "@store/mutation-types"
 export default {
   created() {
     // 自动登录
-    login();
+    this.SET_LOADING(true)
+    login(false,()=>{
+      this.SET_LOADING(false)
+    });
     // 获取邀请人
     if(this.$route.query.invite){
       this.SET_INVITE(this.$route.query.invite)
@@ -188,7 +190,8 @@ export default {
       this.mask = !this.mask;
     },
     ...mapMutations({
-      SET_INVITE
+      SET_INVITE,
+      SET_LOADING
     }),
   }
 };

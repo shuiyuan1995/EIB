@@ -101,13 +101,14 @@
       </div>
     </transition>
     <transition name="showface">
-      <div class="mask" v-show="menulist" @click="changemenu"></div>
+    <div class="mask" v-show="menulist" @click="changemenu(false)"></div>
     </transition>
   </header>
 </template>
 
 <script>
 import {clearCookie} from "@common/js";
+import {mapGetters} from 'vuex';
 export default {
   mounted(){
     // console.log(this.reload())
@@ -131,8 +132,37 @@ export default {
     return{
       // 列表控制
       menulist:false,
-      // 路由列表
-      navlists: [
+    }
+  },
+  methods:{
+    // 菜单控制
+    changemenu(bool){
+      if(typeof bool == 'boolean'){
+        this.menulist = false;
+      }else{
+        this.menulist = !this.menulist;
+      }
+    },
+    // 刷新当前页面
+    thereload(){
+      this.reload()
+      this.menulist = false;
+    },
+    // 退出登录
+    clearlogin(){
+      clearCookie();
+      this.menulist = false;
+      this.$router.push('/')
+      this.reload()
+    }
+  },
+  computed:{
+    ...mapGetters([
+      "userInfo"
+    ]),
+    // 路由列表
+    navlists(){
+      return [
         {
           to:'/',
           icon:'icon-dianji',
@@ -144,7 +174,7 @@ export default {
           text:'账户中心'
         },
         {
-          to:'/investment',
+          to:this.userInfo.account?'/accountRecharge/0':'/securitysetting/1',
           icon:'icon-touzi',
           text:'我要投资'
         },
@@ -183,25 +213,7 @@ export default {
           icon:'icon-bangzhuzhongxin',
           text:'帮助中心'
         },
-      ],
-    }
-  },
-  methods:{
-    // 菜单控制
-    changemenu(){
-      this.menulist = !this.menulist;
-    },
-    // 刷新当前页面
-    thereload(){
-      this.reload()
-      this.menulist = false;
-    },
-    // 退出登录
-    clearlogin(){
-      clearCookie();
-      this.menulist = false;
-      this.$router.push('/')
-      this.reload()
+      ]
     }
   }
 }

@@ -48,6 +48,7 @@
       font-size 0.6rem
     .basis-eos
       font-size 0.48rem
+      margin-top 0.12rem
     .basis-price
       font-size 0.48rem
       color #aaaaaa
@@ -104,29 +105,29 @@
         <p class="basis-title">累计成交金额</p>
         <span class="icon icon-EOS">EOS</span>
         <p class="basis-eos">{{trading_amount.EOS}}</p>
-        <p class="basis-price">≈￥{{trading_amount.money}}</p>
+        <!-- <p class="basis-price">≈￥{{trading_amount.money}}</p> -->
         <!-- <p class="basis-num">项目：12 个</p> -->
       </div>
       <div>
         <p class="basis-title">累计创造收益</p>
         <span class="icon icon-EOS">EOS</span>
         <p class="basis-eos">{{areate_amount.EOS}}</p>
-        <p class="basis-price">≈￥{{areate_amount.money}}</p>
+        <!-- <p class="basis-price">≈￥{{areate_amount.money}}</p> -->
         <!-- <p class="basis-num">投资：12 笔</p> -->
       </div>
       <div>
         <p class="basis-title">已还本金</p>
         <span class="icon icon-EOS">EOS</span>
         <p class="basis-eos">{{repayment.EOS}}</p>
-        <p class="basis-price">≈￥{{repayment.money}}</p>
+        <!-- <p class="basis-price">≈￥{{repayment.money}}</p> -->
         <!-- <p class="basis-num">坏账率：0.0%</p> -->
       </div>
     </div>
     <!-- 功能列表 -->
     <nav class="functionlist">
-      <router-link class="link-nav" :to="this.userInfo.nick?'/investment':'/login'">
-        <div class="linkbox"><i class="icon" :class="this.userInfo.nick?'icon-touzi':'icon-dianji'"></i></div>
-        <p>{{this.userInfo.nick?'我要投资':'登录/注册'}}</p>
+      <router-link class="link-nav" :to="this.userInfo.nick?'/account':'/login'">
+        <div class="linkbox"><i class="icon" :class="this.userInfo.nick?'icon-zhanghuzhongxin':'icon-dianji'"></i></div>
+        <p>{{this.userInfo.nick?'账户中心':'登录/注册'}}</p>
       </router-link>
       <router-link class="link-nav" :to="item.to" v-for="(item, index) in navlists" :key="index">
         <div class="linkbox"><i class="icon" :class="item.icon"></i></div>
@@ -170,9 +171,9 @@ export default {
       // 路由列表
       navlists: [
         {
-          to:'/account',
-          icon:'icon-zhanghuzhongxin',
-          text:'账户中心'
+          to:'/investment',
+          icon:'icon-touzi',
+          text:'我要投资'
         },
         {
           to:'/invitation',

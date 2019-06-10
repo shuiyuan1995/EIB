@@ -24,13 +24,17 @@
   }
 }
 
-.view-wrapper {
+.view-wrapper
   position: absolute;
   width: 100%;
   top: 84px;
   bottom: 0px;
   height auto
-}
+  .rotate
+    display block
+    transform rotate(180deg)
+  .refresh-text
+    font-size 12px
 
 .item {
   height: 4rem;
@@ -138,8 +142,12 @@
       <div v-for="(item,index) in thedata" :key="index" :class="thisindex==index?'active':''" @click="change(index)">{{item.title}}</div>
     </nav>
     <div class="view-wrapper">
-      <cube-scroll ref="scroll" :data="thisitems" :options="options" @pulling-up="onPullingUp">
-        <div class="item" v-for="(item,index) in thisitems" :key="index">
+      <cube-scroll ref="scroll" :data="thisitems" 
+          :options="options" 
+          @pulling-up="onPullingUp"
+          @pulling-down="onPullingDown">
+        <div class="item" v-for="(item,index) in thisitems" :key="index" 
+            @click="goto(item)">
           <div class="item-top">
             <span>{{thistype}}</span>
             <p>{{item.title}}</p>
@@ -173,13 +181,30 @@
               <span>{{100-Math.floor(item.surplus/item.total*100)}}%</span>
             </div>
             <span
-            @click="goto(item)"
             class="tenderbtn"
             :class="item.state=='募集中'?'':'old'"
             >{{item.state}}</span>
           </div>
         </div>
-        <!-- <myfooter></myfooter> -->
+        <template slot="pulldown" slot-scope="props">
+          <div v-if="props.pullDownRefresh"
+            class="cube-pulldown-wrapper"
+            :style="props.pullDownStyle">
+            <div v-if="props.beforePullDown"
+              class="before-trigger"
+              :style="{paddingTop: props.bubbleY + 'px'}">
+              <span :class="{rotate: props.bubbleY > 40}">↓</span>
+            </div>
+            <div class="after-trigger" v-else>
+              <div v-show="props.isPullingDown" class="loading">
+                <cube-loading></cube-loading>
+              </div>
+              <transition name="success">
+                <div v-show="!props.isPullingDown" class="text-wrapper"><span class="refresh-text">更新成功</span></div>
+              </transition>
+            </div>
+          </div>
+        </template>
       </cube-scroll>
     </div>
   </div>
@@ -202,14 +227,8 @@ export default {
       thisitems: [],
       thedata:[],
       options: {
-        pullUpLoad: {
-          threshold:0,
-          txt:{
-            more:'正在加载',
-            nomore:'没有了哦'
-          }
-        },
-        bounce:false,
+        pullUpLoad: true,
+        pullDownRefresh:{},
         scrollbar: true
       }
     };
@@ -226,13 +245,16 @@ export default {
   methods: {
     // 上拉加载
     onPullingUp() {
-      console.log(111)
-      console.log(this.thedata[this.thisindex].page,this.thedata[this.thisindex].max_page)
+      console.log(this.thedata[this.thisindex].page<this.thedata[this.thisindex].max_page)
       if(this.thedata[this.thisindex].page<this.thedata[this.thisindex].max_page){
         this.getdata(this.thedata[this.thisindex].page+1)
       }else{
-        this.$refs.scroll.forceUpdate(false);
+        this.$refs.scroll.forceUpdate();
       }
+    },
+    // 下拉刷新
+    onPullingDown(){
+      this.getdata()
     },
     // 获取数据
     getdata(page){
@@ -252,7 +274,6 @@ export default {
           this.thisitems = this.thedata[this.thisindex].data
         })
       }
-      
     },
     goto(item){
       this.$router.push('/investmentinfo')

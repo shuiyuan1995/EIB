@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import store from "@store";
+import { Toast } from 'cube-ui'
 
 import Router from 'vue-router'
 import Home from '@views/Home.vue'
@@ -267,7 +268,12 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if(!store.state.userInfo.nick&&to.meta.role=='member'){
-    next('/')
+    Toast.$create({
+      txt: "请登录",
+      time: 2000,
+      type:'txt'
+    }).show()
+    next('/login')
   }else{
     next()
   }

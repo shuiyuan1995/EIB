@@ -83,7 +83,7 @@
             <li></li>
           </ul>
         </label>
-        <input @focus="onfocus" @input="oninput" @blur="onblur" v-model="value" type="password" id="ipt" maxlength="6" >
+        <input @focus="onfocus" @input="oninput" @blur="onblur" v-model="value" type="password" ref="ipt" id="ipt"  maxlength="6" >
       </div>
       <button class="gobtn" @click="investment">确认</button>
     </div>
@@ -102,6 +102,7 @@ export default {
   activated(){
     this.value = ''
     this.oninput()
+    this.$refs.ipt.focus()
   },
   data(){
     return{

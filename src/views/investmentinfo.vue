@@ -328,9 +328,9 @@ export default {
         }).show()
         return false
       }
-      if(this.thisbiao.item.state=='过期'){
+      if(this.thisbiao.item.state=='还款中'){
         this.$createToast({
-          txt: '此标已过期,请选择其他标',
+          txt: '此标正在结算,请选择其他标',
           type: 'txt'
         }).show()
         return false

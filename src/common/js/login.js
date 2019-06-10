@@ -5,18 +5,16 @@ import {SET_USER_INFO} from "@store/mutation-types";
 import {post} from '@api';
 
 // 登陆封装
-const login = (data) => {
-  if(!data&&!document.cookie.length){
-    return false
-  }
+const login = (data,fn) => {
   if(!data){
     data = getCookie()
+    if(data.name == ''||data.password == '') return false
   }
   post('/login',data).then(json=>{
     let {user_info} = json.data
     store.commit(SET_USER_INFO, user_info)
     if(document.cookie.length <= 0||window.location.pathname=='/login'){
-      setCookie(data.name, data.password, 1)
+      setCookie(data.name, data.password, 15)
       Toast.$create({
         type: 'correct',
         txt: '登录成功',
@@ -24,6 +22,7 @@ const login = (data) => {
       }).show()
       router.push('/')
     }
+    fn&&fn();
   })
 }
 

@@ -138,7 +138,8 @@ import myheader from '@components/myheader.vue'
 import slider from '@components/slider.vue'
 import myfooter from '@components/myfooter.vue'
 import {post} from '@api/index'
-import {mapGetters} from 'vuex';
+import {mapGetters,mapMutations} from 'vuex';
+import {SET_LOADING} from "@store/mutation-types"
 import { login } from "@common/js";
 import { setInterval, clearInterval } from 'timers';
 let inter = null;
@@ -148,8 +149,9 @@ export default {
     this.num = '';
     this.passworld = '';
     this.repassworld = '';
-    this.yaoqing = '';
     this.yanzhengma = '';
+    clearInterval(inter);
+    this.time = 60;
   },
   data(){
     return{
@@ -162,7 +164,7 @@ export default {
       },
       messages0:{
         required:'账号不能为空',
-        type:'请输入正确的账号'
+        type:'请输入正确的邮箱'
       },
       rules1:{
         required: true,
@@ -205,7 +207,9 @@ export default {
       registeractive:true,
       phoneadd:'中国',
       phonenum:86,
-      reg:/^(\+?0?86\-?)?1[345789]\d{9}$/
+      reg:/^(\+?0?86\-?)?1[345789]\d{9}$/,
+      // 多次点击
+      onmore:false,
     }
   },
   components:{
@@ -222,6 +226,7 @@ export default {
   methods:{
     // 获取验证码
     getcode(){
+      if(this.onmore) return false
       // 判断点击间隙
       if(this.time !== 60){
         return false
@@ -241,22 +246,25 @@ export default {
         }).show()
         return false
       }
-      // 倒计时
-      inter = setInterval(()=>{
-        this.timetxt = `${this.time}秒后可重新发送`;
-        this.time--;
-        if(this.time<=0){
-          this.timetxt = '点击获取验证码';
-          clearInterval(inter)
-          this.time = 60
-        }
-      },1000)
       let data = {
         phone_head:this.registeractive?this.phonenum:'',
         name:this.num
       }
+      this.onmore = true
       post('/get_code',data).then(json=>{
+        this.onmore = false
+        // 倒计时
+        inter = setInterval(()=>{
+          this.timetxt = `${this.time}秒后可重新发送`;
+          this.time--;
+          if(this.time<=0){
+            this.timetxt = '点击获取验证码';
+            clearInterval(inter)
+            this.time = 60
+          }
+        },1000)
       }).catch(()=>{
+        this.onmore = false
       })
       // 清空滑块
       this.$refs.slider.resetslider()
@@ -277,12 +285,14 @@ export default {
       Promise.all([p1, p2, p3, p4]).then(() => {
         // 判断验证
         if (this.valid.every(item => item)) {
+          this.SET_LOADING(true)
           post('/reg',data).then(()=>{
             let that = this
             const data = {
               name:this.num,
               password:this.passworld
             }
+            this.SET_LOADING(false)
             this.$createToast({
               type: 'correct',
               txt: '注册成功',
@@ -322,6 +332,9 @@ export default {
     },
     cancelHandle() {
     },
+    ...mapMutations({
+      SET_LOADING
+    }),
   }
 }
 </script>

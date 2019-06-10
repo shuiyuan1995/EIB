@@ -94,8 +94,12 @@ import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import {login} from "@common/js";
 import {mapMutations} from 'vuex';
-import {SET_USER_INFO} from "@store/mutation-types"
+import {SET_USER_INFO,SET_LOADING} from "@store/mutation-types"
 export default {
+  activated(){
+    this.num = '';
+    this.passworld = '';
+  },
   data(){
     return{
       // 表单
@@ -111,11 +115,9 @@ export default {
       },
       rules1:{
         required: true,
-        pattern:/^(\w){6,16}$/
       },
       messages1:{
         required:'密码不能为空',
-        pattern:'密码为6-16个字母、数字、下划线'
       },
     }
   },
@@ -147,12 +149,18 @@ export default {
         this.$refs.slider.resetslider()
         // 判断验证
         if (this.valid.every(item => item)) {
-          login(data)
+          this.SET_LOADING(true)
+          login(data,()=>{
+            this.num = '';
+            this.passworld = '';
+            this.SET_LOADING(false)
+          })
         }
       })
     },
     ...mapMutations({
-      SET_USER_INFO
+      SET_USER_INFO,
+      SET_LOADING
     }),
   }
 }
