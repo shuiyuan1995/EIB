@@ -66,7 +66,7 @@
       <p><span>预期利率</span><span>{{thisbiao.info.annual_profit}}</span></p>
       <p><span>还款期限</span><span>{{thisbiao.item.day}}天</span></p>
       <p><span>还款方式</span><span>{{thisbiao.info.compute}}</span></p>
-      <p><span>融资金额</span><span>{{thisbiao.item.surplus}} {{thisbiao.item.need_coin}}</span></p>
+      <p><span>剩余金额</span><span>{{thisbiao.item.surplus}} {{thisbiao.item.need_coin}}</span></p>
       <p><span>投资金额</span><span class="red">{{$route.params.mone}} {{thisbiao.item.need_coin}}</span></p>
       <p>如遇流标情况，投资金额将在流标后冻结。</p>
     </div>

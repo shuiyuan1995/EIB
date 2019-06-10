@@ -173,7 +173,7 @@
     <div class="investmentinfo-top">
       <div class="title">
         <div class="title-left">
-          <span>{{type}}</span><p>{{thisbiao.item.title}}</p>
+          <span>{{thisbiao.type}}</span><p>{{thisbiao.item.title}}</p>
         </div>
         <p>还需融资：{{thisbiao.item.surplus}} {{thisbiao.item.need_coin}}</p>
       </div>
@@ -234,7 +234,7 @@
           <span>{{item.money}} {{item.need_coin}}</span>
           <span>{{item.time}}</span>
         </li>
-        <p v-show="!recode.length">暂未开始</p>
+        <p v-show="!recode.length">快去投标</p>
       </ul>
       <ul class="tablebox3" v-show="istable==2">
         <li>

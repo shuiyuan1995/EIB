@@ -398,7 +398,7 @@ export default {
     goto(item){
       this.$router.push('/investmentinfo')
       let data = {
-        type:item.title.substr(0,1),
+        type:item.type.substr(0,1),
         item:item
       }
       this.SET_THIS_BIAO(data)

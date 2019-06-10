@@ -174,12 +174,12 @@ export default {
           text:'账户中心'
         },
         {
-          to:this.userInfo.account?'/accountRecharge/0':'/securitysetting/1',
+          to:'/investment',
           icon:'icon-touzi',
           text:'我要投资'
         },
         {
-          to:'/accountRecharge',
+          to:this.userInfo.account?'/accountRecharge/0':'/securitysetting/1',
           icon:'icon-chongzhi',
           text:'我要充值'
         },
