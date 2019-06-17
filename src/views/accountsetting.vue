@@ -192,7 +192,7 @@
         </li>
         <li class="item1info" v-for="(item,key,index) in listval" :key="index">
           <span>{{key}}</span>
-          <span>{{item.money}}</span>
+          <span>{{Math.floor(item.money*10000)/10000}}</span>
           <span><cube-switch :value="item.state" class="cubeswitch" v-model="item.state"></cube-switch></span>
         </li>
       </ul>
@@ -396,7 +396,7 @@ export default {
       this.SET_AOTO(this.listval)
     },
     goto(item){
-      this.$router.push('/investmentinfo')
+      this.$router.push(`/investmentinfo/${item.id}`)
       let data = {
         type:item.type.substr(0,1),
         item:item

@@ -11,6 +11,7 @@ const http = axios.create({
     process.env.NODE_ENV === "production"
       ? "https://admin.eosinvestmentbank.com/api"
       : "http://www.eosfinance.com/api", // 基础路径
+      // http://www.eosfinance.com/api
   timeout: 30000, // 请求延时
 });
 http.defaults.withCredentials = true;

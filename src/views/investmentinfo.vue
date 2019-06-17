@@ -173,19 +173,19 @@
     <div class="investmentinfo-top">
       <div class="title">
         <div class="title-left">
-          <span>{{thisbiao.type}}</span><p>{{thisbiao.item.title}}</p>
+          <span>{{info.type}}</span><p>{{info.title}}</p>
         </div>
-        <p>还需融资：{{thisbiao.item.surplus}} {{thisbiao.item.need_coin}}</p>
+        <p>还需融资：{{info.surplus}} {{info.need}}</p>
       </div>
       <div class="investmentinfo-type">
         <i></i>
-        <span>{{thisbiao.item.state}}</span>
+        <span>{{info.state}}</span>
       </div>
       <div class="investmentinfo-msg">
         <div class="msg-item">
           <i class="icon icon-chuzhijine"></i>
           <p>融资金额</p>
-          <p>{{thisbiao.item.total}} {{thisbiao.item.need_coin}}</p>
+          <p>{{info.total}} {{info.need}}</p>
         </div>
         <div class="msg-item">
           <i class="icon icon-zhanghuxinxililv"></i>
@@ -199,9 +199,9 @@
         </div>
       </div>
       <div class="investmentinfo-bar">
-        <p>当前进度：{{100-Math.floor(thisbiao.item.surplus/thisbiao.item.total*100)}}%</p>
+        <p>当前进度：{{100-Math.floor(info.surplus/info.total*100)}}%</p>
         <div class="bar">
-          <div class="bar-info" :style="{width:`${100-Math.floor(thisbiao.item.surplus/thisbiao.item.total*100)}%`}"></div>
+          <div class="bar-info" :style="{width:`${100-Math.floor(info.surplus/info.total*100)}%`}"></div>
         </div>
       </div>
     </div>
@@ -267,6 +267,7 @@ import {SET_THIS_BIAO,SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){
     this.SET_LOADING(true)
+    console.log(111)
     this.getdata()
   },
   data(){
@@ -296,7 +297,8 @@ export default {
     },
     // 数据获取
     getdata(){
-      get('/bid_info',{id:this.thisbiao.item.id}).then(json=>{
+      console.log(this.$route.params.id)
+      get('/bid_info',{id:this.$route.params.id}).then(json=>{
         this.SET_LOADING(false)
         const {info,details,cycle,recode} = json.data;
         this.details = details;
@@ -314,6 +316,7 @@ export default {
         });
         this.info = {
           ...info,
+          type:info.type.substr(0,1),
           start:changedata(info.start*1000,'yyyy-MM-dd'),
           end:changedata(info.end*1000,'yyyy-MM-dd'),
         };
@@ -321,6 +324,15 @@ export default {
       })
     },
     gonext(){
+      if(this.userInfo.nick=='undefined'){
+        this.$createToast({
+          txt: '请先登录',
+          type: 'txt',
+          onTimeout:()=>{
+            that.$router.push('/login')
+          }
+        }).show()
+      }
       if(this.thisbiao.item.state=='已完成'){
         this.$createToast({
           txt: '此标已完成募集,请选择其他标',
@@ -351,9 +363,10 @@ export default {
           return false
         }
         if(!this.userInfo.pay_password){
+          let that = this
           this.$createToast({
             txt: '请绑定支付密码',
-            type: 'txt'
+            type: 'txt',
           }).show()
           return false
         }

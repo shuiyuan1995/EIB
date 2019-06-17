@@ -104,22 +104,22 @@
       <div>
         <p class="basis-title">累计成交金额</p>
         <span class="icon icon-EOS">EOS</span>
-        <p class="basis-eos">{{trading_amount.EOS}}</p>
-        <!-- <p class="basis-price">≈￥{{trading_amount.money}}</p> -->
+        <p class="basis-eos">{{trading_amount.EOS?trading_amount.EOS:0}}</p>
+        <p class="basis-price">≈￥{{trading_amount.money?trading_amount.money:0}}</p>
         <!-- <p class="basis-num">项目：12 个</p> -->
       </div>
       <div>
         <p class="basis-title">累计创造收益</p>
         <span class="icon icon-EOS">EOS</span>
-        <p class="basis-eos">{{areate_amount.EOS}}</p>
-        <!-- <p class="basis-price">≈￥{{areate_amount.money}}</p> -->
+        <p class="basis-eos">{{areate_amount.EOS?areate_amount.EOS:0}}</p>
+        <p class="basis-price">≈￥{{areate_amount.money?areate_amount.money:0}}</p>
         <!-- <p class="basis-num">投资：12 笔</p> -->
       </div>
       <div>
         <p class="basis-title">已还本金</p>
         <span class="icon icon-EOS">EOS</span>
-        <p class="basis-eos">{{repayment.EOS}}</p>
-        <!-- <p class="basis-price">≈￥{{repayment.money}}</p> -->
+        <p class="basis-eos">{{repayment.EOS?repayment.EOS:0}}</p>
+        <p class="basis-price">≈￥{{repayment.money?repayment.money:0}}</p>
         <!-- <p class="basis-num">坏账率：0.0%</p> -->
       </div>
     </div>

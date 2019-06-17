@@ -276,7 +276,7 @@ export default {
       }
     },
     goto(item){
-      this.$router.push('/investmentinfo')
+      this.$router.push(`/investmentinfo/${item.id}`)
       let data = {
         type:this.thistype,
         item:item

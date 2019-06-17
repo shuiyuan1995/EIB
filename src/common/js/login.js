@@ -8,7 +8,10 @@ import {post} from '@api';
 const login = (data,fn) => {
   if(!data){
     data = getCookie()
-    if(data.name == ''||data.password == '') return false
+    if(data.name == ''||data.password == '') {
+      fn&&fn();
+      return false
+    }
   }
   post('/login',data).then(json=>{
     let {user_info} = json.data

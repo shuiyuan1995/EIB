@@ -1,7 +1,7 @@
 <style lang="stylus" scoped>
   .account-name
     display flex
-    height 2.4rem
+    height 3rem
     align-items center
     border-bottom 1px solid #e5e5e5
     .naleft
@@ -22,13 +22,13 @@
       text-align center
       font-size 0.64rem
       background #9bb6d3
-      height 2.4rem
+      height 3rem
       color #dddddd
-      p:last-of-type
+      p
         color #ffffff
       p
         margin-top 0.32rem
-      span 
+      .rmb 
         font-size 0.48rem
         color #dddddd
       &:after
@@ -113,7 +113,8 @@
       </div>
       <div class="nacenter">
         <p>钱包资产估值</p>
-        <p>{{sum_money+due}} EOS<span v-show="false">≈￥{{(porportion*(sum_money+due)).toFixed(2)}}</span></p>
+        <p>{{Number(sum_money+due).toFixed(4)}} EOS</p>
+        <p class="rmb">≈￥{{(eos_money*(sum_money+due)).toFixed(2)}}</p>
       </div>
       <div class="naright">
         <p>{{accumulated}} EOS</p>
@@ -177,13 +178,14 @@ export default {
     // 获取页面数据
     get('/center').then(json=>{
       this.SET_LOADING(false)
-      const {accumulated,difference,no,sum_money,due,porportion,aoto,content} = json.data;
+      const {accumulated,difference,no,sum_money,due,porportion,aoto,content,eos_money} = json.data;
       this.accumulated = accumulated;
       this.difference = difference;
       this.no = no;
       this.sum_money = sum_money;
       this.porportion = porportion;
       this.due = due;
+      this.eos_money = eos_money
       // 保存余额信息
       this.SET_AOTO(aoto)
       // 保存手续费信息

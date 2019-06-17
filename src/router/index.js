@@ -67,15 +67,15 @@ const router = new Router({
       name: 'investment',
       component:investment,
       meta: {
-        role: 'member'
+        role: 'all'
       }
     },
     {
-      path: '/investmentinfo',
+      path: '/investmentinfo/:id',
       name: 'investmentinfo',
       component:investmentinfo,
       meta: {
-        role: 'member'
+        role: 'all'
       }
     },
     {

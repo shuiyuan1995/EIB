@@ -54,7 +54,7 @@
       <accounttable ref="accounttable"></accounttable>
     </div>
     <div class="imoney-bottom">
-      <cube-input @input='theinput' v-model="money" type="number" class="imoney-input" :placeholder="`${thisbiao.info.min_eos}${thisbiao.item.need_coin}起投，最大为${thisbiao.info.max_eos}${thisbiao.item.need_coin}，金额为1的倍数`">
+      <cube-input v-model="money" type="number" class="imoney-input" :placeholder="`${thisbiao.info.min_eos}${thisbiao.item.need_coin}起投，最大为${thisbiao.info.max_eos}${thisbiao.item.need_coin}，金额为1的倍数`">
         <template slot="append">
           <p class="inputappend">{{thisbiao.item.need_coin}}</p>
         </template>
@@ -105,7 +105,7 @@ export default {
         }).show()
         return false
       }
-      this.money=this.money.toString().match(/^\d+(?:\.\d{0,2})?/)[0]
+      this.money=Math.floor(this.money)
       // 判断最大最小金额
       if(Math.floor(this.money)<this.thisbiao.info.min_eos){
         this.$createToast({
@@ -142,9 +142,6 @@ export default {
           mone:this.money
         }
       })
-    },
-    theinput(){
-      
     }
   }
 }

@@ -36,7 +36,7 @@
     <ul>
       <li v-for="(value, key, index) in money" :key="index" v-show="!(value.small&&small)">
         <span>{{key}}</span>
-        <span>{{value.money}}</span>
+        <span>{{Math.floor(value.money * 10000) / 10000}}</span>
         <span>冻结 {{value.frozen}}</span>
       </li>
     </ul>
