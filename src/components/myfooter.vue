@@ -12,7 +12,7 @@
   .footnav
     text-align center
     .link
-      color #000000
+      color #c4c4c4
       font-size 0.5rem
       padding 0 0.48rem
       border-right 0.06rem solid #e5e5e5
@@ -23,6 +23,7 @@
     span 
       font-size 0.52rem
       padding 0 0.48rem
+      color #c4c4c4
       border-right 0.06rem solid #8c8c8c
       &:last-of-type
         border-right none

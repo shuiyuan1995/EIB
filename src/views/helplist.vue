@@ -1,6 +1,6 @@
 <style lang="stylus" scoped>
   .list
-    border-bottom 1px solid #e8edeb
+    border-bottom 1px solid #526ca3
     &>p
       cursor pointer
       display flex
@@ -8,6 +8,7 @@
       font-size 0.6rem
       padding 0 1rem
       height 1.4rem
+      color #ffffff
       span 
         flex 1
       .icon

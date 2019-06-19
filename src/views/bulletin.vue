@@ -1,6 +1,6 @@
 <style lang="stylus" scoped>
   .bulletin
-    padding-top 1.76rem
+    padding-top 44px
   .tablenav
     position fixed
     top 1.4rem

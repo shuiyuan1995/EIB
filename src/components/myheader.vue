@@ -6,13 +6,13 @@
     z-index 9
     width 100%
     max-width 400px
-    height 1.38rem
-    background-color #5570a6
+    height 1.8rem
+    background: linear-gradient(#0f194e 15%, #1f2f8f 100%)
     display flex
     justify-content space-between
     align-items center
     font-family MicrosoftYaHei
-    font-size 15px
+    font-size 0.6rem
     color #ffffff
   .logo
     margin-left 0.44rem

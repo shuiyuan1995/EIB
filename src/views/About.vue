@@ -1,6 +1,8 @@
  <style lang="stylus" scoped>
-    .main
-      padding 0 0.8rem
+    .main{
+      padding: 0 0.8rem;
+      color: #ffffff;
+    }
     h2
       font-size 16px
       margin 6px 0 10px
@@ -14,8 +16,6 @@
       font-size 14px
       padding 0 32px
       line-height 22px
-      a
-        color #5570a6
 </style>
 
 

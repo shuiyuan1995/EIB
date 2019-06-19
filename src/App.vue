@@ -20,12 +20,13 @@
 .pos {
   position: absolute;
   width: 100%;
-  background: #fff;
+  // background: #fff;
+  background rgb(6,5,37)
   margin: 0 auto;
   max-width: 400px;
   min-height: 100vh;
   top: -1px;
-  padding-top: 1.4rem;
+  padding-top: 1.8rem;
 }
 
 .slide-right-enter-active, .slide-right-leave-active, .slide-left-enter-active, .slide-left-leave-active {

@@ -16,17 +16,19 @@
       line-height 2.2rem
       border-radius 50%
       font-size 1.32rem
-      color #5570a6
+      color #ffffff
+      background #8c3eb3
     p
       font-size 0.6rem
-      color #5670a9
+      color #ffffff
       margin-top 0.32rem
   .num
     height 1.84rem
     line-height 1.84rem
     font-size 0.6rem
     padding 0 0.84rem
-    border-bottom 1px solid #e8edeb
+    color #ffffff
+    border-bottom 1px solid #526ca3
     .icon 
       margin-right 0.24rem
 </style>

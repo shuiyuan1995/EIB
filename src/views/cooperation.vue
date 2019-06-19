@@ -1,16 +1,16 @@
 <style lang="stylus" scoped>
   h2
-    border-bottom 1px solid #e5e5e5
+    border-bottom 1px solid #526ca3
     height 1.76rem
     line-height 1.76rem
     font-size 0.64rem
-    color #5570a6
+    color #ffffff
     padding 0 0.44rem
     .icon
       display inline-block
       width 1.2rem
       height 1.2rem
-      border 0.08rem solid #526ca3
+      border 0.08rem solid #ffffff
       border-radius 50%
       text-align center
       line-height 1.2rem
@@ -20,11 +20,12 @@
     padding 0 0.44rem
     font-size 0.52rem
     line-height 0.72rem
+    color #ffffff
   h3
     margin-bottom 0.24rem
     margin-top 0.6rem
   .plast
-    border-bottom 1px solid #e5e5e5
+    border-bottom 1px solid #526ca3
     padding-bottom 0.3rem
     margin-bottom 0.3rem
   form
@@ -34,9 +35,13 @@
       color #b30303
   .cubeinput
     margin-bottom 0.4rem
+    border 1px solid #526ca3
+    background rgba(0, 0, 0, 0.3)
+    &.cube-input_active
+      border 1px solid #8c3eb3
   .btn
     margin-top 1rem
-    background #9bb6d3
+    background #8c3eb3
 </style>
 
 <template>

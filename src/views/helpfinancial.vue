@@ -1,6 +1,6 @@
 <style lang="stylus" scoped>
   .list
-    border-bottom 1px solid #e8edeb
+    border-bottom 1px solid #526ca3
     &>p
       display flex
       align-items center
@@ -8,12 +8,13 @@
       padding 0 1rem
       height 1.4rem
       cursor pointer
+      color #ffffff
       span 
         flex 1
     .point
       width 10px
       height 10px
-      background-color #526ca3
+      background-color #8c3eb3
       border-radius 50%
       margin-right 0.48rem
     .item
