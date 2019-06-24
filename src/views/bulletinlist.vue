@@ -1,8 +1,8 @@
 <style lang="stylus" scoped>
   .bulletintitle
     padding 0 0.44rem
-    border-bottom 0.08rem solid #e5e5e5
-    color #000000
+    border-bottom 0.08rem solid #526ca3
+    color #ffffff
     font-size 0.6rem
     height 1.4rem
     line-height 1.4rem
@@ -11,29 +11,32 @@
       border-radius 50%
       width 0.36rem
       height 0.36rem
-      background-color #526ca3
+      background-color #8c3eb3
       margin-right 0.32rem
   .bulletintime
     display flex
     font-size 0.52rem
     padding 0 0.44rem
-    border-bottom 0.06rem solid #e5e5e5
+    border-bottom 0.06rem solid #526ca3
     align-items center
     height 1rem
     justify-content space-between
+    color #ffffff
     span:first-of-type
-      color #5670a7
+      color #8c3eb3
   .bulletintop
     font-size 0.56rem
     padding 0 0.44rem
-    border-bottom 0.06rem solid #e5e5e5
+    border-bottom 0.06rem solid #526ca3
     height 1.2rem
     line-height 1.2rem
+    color #ffffff
   .bulletinmain
     padding 0 0.44rem
     padding-top 0.8rem
     font-size 0.64rem
     line-height 0.8rem
+    color #ffffff
 </style>
 
 <template>

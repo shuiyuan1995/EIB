@@ -1,24 +1,25 @@
 <style lang="stylus" scoped>
   .accountsetting
     bottom 0rem
+    color #ffffff
   .settingnav
-    border-bottom 0.06rem solid #e8edeb
+    border-bottom 0.06rem solid #1a2879
     display flex
     font-size 0.64rem
     height 1.2rem
     align-items center
+    margin-top 0.24rem
     span
       flex 1
       text-align center
       line-height 1.2rem
       cursor pointer
       &.active
-        border-bottom 0.06rem solid #5570a6
+        color #8c3eb3
+        border-bottom 0.06rem solid #8c3eb3
   .settingitem
-    margin-top 0.4rem
     .itemtop
-      background #e5e5e5
-      padding 0.48rem 0.84rem 0.6rem 0.64rem
+      padding 0.48rem 0.84rem 0.4rem 0.64rem
       font-size 0.56rem
     p:not(.first)
       line-height 0.8rem
@@ -29,7 +30,7 @@
       i 
         color #b20202
       span:last-of-type
-        background-color #9bb6d5
+        background-color #8c3eb3
         border-radius 0.1rem
         color #ffffff
         padding 0.24rem 0.48rem
@@ -39,18 +40,18 @@
       font-size 0.56rem
       height 1.32rem
       align-items center
-      border-bottom 1px solid #e5e5e5
+      border-bottom 1px solid #5570a6
+      color #5570a6
       span 
         flex 1
         text-align center
-        border-right 1px solid #e5e5e5
         line-height 1.32rem
-        &:last-of-type
-          border-right none
+    .itemtable
+      border-top 12px solid #8c3eb3
     .view-wrapper
       position absolute
       width 100%
-      top 8.8rem
+      top 9.44rem
       bottom 0rem
       .item
         display flex
@@ -72,27 +73,27 @@
       padding 0 1.12rem 0 0.76rem
       font-size 0.64rem
       align-items center
-      background #9bb6d5
       height 2.4rem
       margin-top 0.4rem
       margin-bottom 0.8rem
       .icon
         color #ffffff
         &:before
-          color #5570a6
+          color #8c3eb3
           margin-right 0.24rem
       .topbtn
         font-size 0.56rem
         padding 0.24rem 0.56rem
         border-radius 0.84rem
-        background #ffffff
+        background #8c3eb3
+        color #ffffff
         cursor pointer
     .item1table
       padding 0 0.68rem 0 0.6rem
     .item1title
       display flex
       align-items center
-      background #e5e5e5
+      background #8c3eb3
       font-size 0.56rem
       height 1.6rem
       span 
@@ -102,7 +103,7 @@
       display flex
       font-size 0.56rem
       align-items center
-      border-bottom 0.04rem solid #e5e5e5
+      border-bottom 0.04rem solid #526ca3
       padding 0.16rem 0
       span 
         flex 1
@@ -129,10 +130,10 @@
         height 30px
         line-height 30px
         text-align center
-        border 1px solid #dedede
-        background #ffffff
+        border 1px solid #2440a8
+        margin 0 0.16rem
         &.active
-          border 1px solid #0081f7
+          border 1px solid #8c3eb3
     input 
       width 1px
       height 1px
@@ -141,7 +142,7 @@
   .btn
     width 90%
     margin 6px auto 0
-    background #9bb6d5
+    background #8c3eb3
 </style>
 
 <template>
@@ -160,7 +161,7 @@
       </div>
       <div class="itemtable">
         <div class="tablenav">
-          <span>标名</span>
+          <span>投资项目</span>
           <span>状态</span>
           <span>投资金额</span>
           <span>还款日期</span>

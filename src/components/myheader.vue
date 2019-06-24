@@ -19,6 +19,9 @@
     font-family AdobeHeitiStd-Regular
     font-size 0.88rem
     color #ffffff
+    height 100%
+    img 
+      height 100%
   .link
     cursor pointer
     color #ffffff
@@ -80,7 +83,9 @@
 <template>
   <header>
     <i v-if="left" class="link icon icon-pagepreview" @click="$router.back(-1)"></i>
-    <span v-else class="logo">EIB</span>
+    <span v-else class="logo">
+      <img src="../assets/loginsmall.png" alt="">
+    </span>
     <span class="text" v-show="center">{{center}}</span>
     <router-link v-if="right" class="link right" :to="right=='注册'?'/register':'/login'">{{right}}</router-link>
     <span v-else class="menu" @click="changemenu"><i class="icon icon-menu1"></i></span>

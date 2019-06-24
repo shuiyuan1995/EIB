@@ -223,7 +223,7 @@ const router = new Router({
       }
     },
     {
-      path: '/helpfinancial/:page',
+      path: '/helpfinancial/:id',
       name: 'helpfinancial',
       component:helpfinancial,
       meta: {

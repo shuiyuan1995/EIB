@@ -1,8 +1,8 @@
 <style lang="stylus" scoped>
   .bg
     width 100%
-    height 5.92rem
-    background url('../assets/images/invitation.jpg') no-repeat center
+    height 7.76rem
+    background url('../assets/images/invitation.png') no-repeat center
     background-size 100%
     padding 10px
     p
@@ -11,14 +11,16 @@
     font-size 0.56rem
     padding 0.4rem
     line-height 0.72rem
+    color #ffffff
   .copy
     display flex
     padding 0.4rem
     .btn
       flex 0 0 100px
+      height 1.68rem
       padding-top 10px
       padding-bottom 10px
-      background #9bb6d5
+      background #8c3eb3
     .input
       flex 1
   .img
@@ -29,15 +31,13 @@
   .savebtn
     width 90%
     margin 0 auto
-    background #9bb6d5
+    background #8c3eb3
 </style>
 
 <template>
   <div class="invitationpromote">
     <myheader left="prev" center="邀请好友"></myheader>
-    <div class="bg">
-      <p>方法一：通过微信邀请</p>
-    </div>
+    <div class="bg"></div>
     <p class="title">方法二：复制下面的邀请链接发送给好友，邀请朋友加入EOS。</p>
     <div class="copy">
       <cube-input class="input" v-model="value" readonly></cube-input>

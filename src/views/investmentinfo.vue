@@ -1,6 +1,8 @@
 <style lang="stylus" scoped>
+  .investmentinfo
+    color #ffffff
   .investmentinfo-top
-    border-bottom 0.96rem solid #e9eeec
+    border-bottom 0.96rem solid #8c3eb3
     padding-bottom 0.56rem
     .title
       display flex
@@ -16,10 +18,9 @@
       span 
         width 0.56rem
         height 0.56rem
-        background #7eaad0
+        background #8c3eb3
         text-align center
         line-height 0.56rem
-        color #ffffff
       p
         margin-left 0.2rem   
     p
@@ -33,11 +34,11 @@
         height: 0;
         border-width: 0.28rem;
         border-style: solid;
-        border-color: transparent #a1bedb transparent transparent;
+        border-color: transparent #8c3eb3 transparent transparent;
       span 
         width 6rem
         height 0.56rem
-        background-color #a1bedb
+        background-color #8c3eb3
         font-size 0.48rem
         line-height 0.56rem
         text-align center
@@ -50,7 +51,7 @@
         flex 1
         text-align center
       i 
-        color #7ca9cc
+        color #8c3eb3
         font-size 1.6rem
       p:first-of-type
         margin-top 0.28rem
@@ -61,13 +62,11 @@
       align-items center
       margin-top 0.72rem
       padding 0 0.8rem 0 1.2rem
-      p
-        color #546da8
       .bar
         position relative
         width 7.52rem
         height 0.2rem
-        background-color #a6a6a6
+        background-color #f4f2ea
         border-radius 0.1rem
       .bar-info
         position absolute
@@ -75,7 +74,7 @@
         left 0px
         width 10%
         height 100%
-        background-color #d4a79e
+        background-color #8c3eb3
         border-radius 0.1rem
   .investmentinfo-center
     font-size 13px
@@ -91,14 +90,14 @@
         content ''
         width 0.24rem
         height 0.24rem
-        background-color #5570a6
+        background-color #8c3eb3
         border-radius 50%
   .investmentinfo-table
     margin-top 0.4rem
     .tabletitle
       height 1.52rem
-      border-top 1px solid #bfbfbf
-      border-bottom 2px solid #bfbfbf
+      border-top 1px solid #152061
+      border-bottom 2px solid #152061
       font-size 0.72rem
       display flex
       align-items center
@@ -106,9 +105,9 @@
         flex 1
         text-align center
         &.active
-          color #5570a6
+          color #8c3eb3
           line-height 1.52rem
-          border-bottom 2px solid #5570a6
+          border-bottom 2px solid #8c3eb3
     .tablebox1
       font-size 0.48rem
       .boxtxt,.boxtxt1
@@ -116,11 +115,11 @@
         padding 0.36rem 0.44rem
       .boxtitle
         height 0.88rem
-        color #000000
+        color #ffffff
         line-height 0.88rem
         padding-left 0.44rem
         font-size 0.56rem
-        background-color #e9eeec
+        background-color #8c3eb3
     .tablebox2
       min-height 4rem
       p
@@ -132,7 +131,7 @@
         font-size 12px
         height 1.2rem
         line-height 1.2rem
-        border-bottom 1px solid #bfbfbf
+        border-bottom 1px solid #152061
       span 
         flex 1
         text-align center
@@ -150,7 +149,7 @@
         font-size 12px
         height 1.2rem
         line-height 1.2rem
-        border-bottom 1px solid #bfbfbf
+        border-bottom 1px solid #152061
       span 
         flex 1
         text-align center
@@ -159,7 +158,7 @@
     width 14rem
     height 1.2rem
     margin 0 auto
-    background-color #9bb6d3
+    background-color #8c3eb3
     text-align center
     font-size 15px
     color #ffffff

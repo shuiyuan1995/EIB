@@ -2,18 +2,18 @@
   h2
     font-size 0.72rem
     padding 0.56rem 0.8rem
+    color #ffffff
   .changemoney
     margin 0 0.8rem
     padding 0 0.4rem
     height 1.2rem
-    background-color #e5e5e5
+    background-color #8c3eb3
     font-size 0.56rem
     display flex
     align-items center
-    color #8e8e8e
+    color #ffffff
     span:first-of-type
       flex 1
-      color #000000
     span:last-of-type
       cursor pointer
   .main
@@ -32,8 +32,10 @@
       font-size 0.56rem
       margin-bottom 0.28rem
       text-align center
+      color #ffffff
   .rechargeBottom
-    background-color #9bb6d3
+    background-color #8c3eb3
+    color #ffffff
     border-radius 0.2rem
     margin 0.56rem
     font-size 0.48rem

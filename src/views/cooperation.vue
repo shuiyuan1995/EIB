@@ -33,12 +33,12 @@
     p
       font-size 12px
       color #b30303
-  .cubeinput
-    margin-bottom 0.4rem
-    border 1px solid #526ca3
-    background rgba(0, 0, 0, 0.3)
-    &.cube-input_active
-      border 1px solid #8c3eb3
+  // .cubeinput
+  //   margin-bottom 0.4rem
+  //   border 1px solid #526ca3
+  //   background rgba(0, 0, 0, 0.3)
+  //   &.cube-input_active
+  //     border 1px solid #8c3eb3
   .btn
     margin-top 1rem
     background #8c3eb3

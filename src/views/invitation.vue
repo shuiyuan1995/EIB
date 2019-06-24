@@ -12,15 +12,16 @@
       padding 0 0.6rem
       font-size 0.64rem
       cursor pointer
+      color #ffffff
       span:first-of-type
         width 1.24rem
         height 1.24rem
         border-radius 50%
-        border solid 1px #5570a6
+        border solid 1px #8c3eb3
         margin-right 0.24rem
         text-align center
         line-height 1.24rem
-        color #5570a6
+        color #8c3eb3
         font-size 0.8rem
       span:nth-of-type(2)
         flex 1

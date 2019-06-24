@@ -3,10 +3,11 @@
     font-size 16px
     padding 10px 0.6rem
     font-weight bold
+    color #ffffff
   .money
     font-size 20px
     text-align center
-    color #5570a6
+    color #ffffff
     margin-bottom 43px
     margin-top 39px
     span 
@@ -17,10 +18,11 @@
     font-size 14px
     margin-bottom 30px
     line-height 18px
+    color #5570a6
     span 
       word-break break-all
     span:first-of-type
-      color #8c8b8b
+      color #ffffff
       flex 0 0 80px
 </style>
 

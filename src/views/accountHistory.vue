@@ -1,5 +1,6 @@
 <style lang="stylus" scoped>
   .accountHistory
+    color #ffffff
     bottom 0px
   h2
     font-size 16px
@@ -15,13 +16,13 @@
     margin-bottom 10px
   .itemtop
     display flex
-    background #9bb6d3
+    background #8c3eb3
     justify-content space-between
     align-items center
-    height 30px
+    height 0.96rem
     padding 0 8px
     color #ffffff
-    font-size 14px
+    font-size 0.56rem
     .icon
       color #cccccc
       cursor pointer
@@ -29,7 +30,7 @@
     display flex
     padding 0 8px
     line-height 18px
-    border-bottom 1px solid #e5e5e5
+    border-bottom 1px solid #5570a6
     span 
       flex 2
       white-space nowrap
@@ -37,6 +38,8 @@
       font-size 0.48rem
       &:nth-of-type(1),&:nth-of-type(2)
         flex 1
+  .itembottom
+    color #5570a6
 </style>
 
 <template>

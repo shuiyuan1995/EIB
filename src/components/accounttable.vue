@@ -1,7 +1,7 @@
 <style lang="stylus" scoped>
   .accounttable
     .tabletitle
-      color #aeaeae
+      color #ffffff
       font-size 12px
       margin-top 10px
       display flex
@@ -9,20 +9,20 @@
       align-items center
       .cubecheckbox
         padding 0px
-        color #aeaeae
+        color #ffffff
     ul
-      border-top 1px solid #e5e5e5
+      border-top 1px solid #526ca3
       li
         display flex
-        border-bottom 1px solid #e5e5e5
-        color #010101
+        border-bottom 1px solid #526ca3
+        color #ffffff
         font-size 0.48rem
         height 0.88rem
         line-height 0.88rem
       span 
         flex 1
         &:last-of-type
-          color #b6b6b6
+          color #ffffff
 </style>
 
 <template>

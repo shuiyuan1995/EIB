@@ -1,13 +1,16 @@
 <style lang="stylus" scoped>
+  .investmentmoney
+    color #ffffff
   .imoney-top
-    height 6.32rem
-    background-color #a1bedb
+    height 5.2rem
     padding 1.16rem 0.96rem
+    text-align center
     p:first-of-type
       font-size 0.64rem
       color #ffffff
       i 
         margin-right 0.28rem
+        color #8c3eb3
     p:last-of-type
       font-size 1.2rem
       color #ffffff
@@ -15,7 +18,6 @@
   .imoney-center
     padding 0.32rem 0.72rem
     h3
-      color #010101
       font-size 0.56rem
   .imoney-bottom
     .imoney-input
@@ -35,10 +37,9 @@
     display block
     width 13rem
     margin 0 auto
-    background-color #9bb6d3
+    background-color #8c3eb3
     text-align center
     font-size 15px
-    color #ffffff
     margin-top 0.8rem
 </style>
 
@@ -97,6 +98,7 @@ export default {
     gonext(){
       let that = this
       // 判断输入金额
+      this.money=Math.floor(this.money)
       if(this.money==''){
         this.$createToast({
           txt: `金额不能为空`,
@@ -105,7 +107,6 @@ export default {
         }).show()
         return false
       }
-      this.money=Math.floor(this.money)
       // 判断最大最小金额
       if(Math.floor(this.money)<this.thisbiao.info.min_eos){
         this.$createToast({

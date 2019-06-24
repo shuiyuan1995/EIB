@@ -9,6 +9,7 @@
       position relative
       .icon
         margin-left 0.4rem
+        color #8c3eb3
       .clickinput
         padding-left 0.4rem
       .clickgo
@@ -35,7 +36,6 @@
     padding-left 1.46rem
   .settingbtn
     width 12rem
-    background-color #a1bedb
     border none 
     outline none
     border-radius 0.2rem
@@ -63,11 +63,15 @@
       font-size 12px
       padding-top 10px
       padding-bottom 10px
-      background #a1bedb
+      background #8c3eb3
+      box-sizing border-box
+      height 1.68rem
   .phoneaddress
     padding 11px 16px
+    color #ffffff
   .phonenum
     margin-left 6px
+    color #ffffff
 </style>
 
 <template>

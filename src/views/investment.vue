@@ -1,25 +1,22 @@
 <style lang="stylus" scoped>
 .investment
   bottom 0px
+  color #ffffff
 .investmentnav {
   display: flex;
   height: 1.2rem;
-  color: #7eaad0;
   font-family: MicrosoftYaHei;
   font-size: 0.8rem;
   align-items: center;
-  border-bottom: 2px solid #dee3e1;
+  border-bottom: 2px solid #1a2879;
   justify-content: center;
   margin-top: 0.64rem;
-
   div {
     flex: 1;
     text-align: center;
     line-height: 1.2rem;
-
     &.active {
-      color: #5570a6;
-      border-bottom: 2px solid #546fa5;
+      border-bottom: 2px solid #8c3eb3;
     }
   }
 }
@@ -27,7 +24,7 @@
 .view-wrapper
   position: absolute;
   width: 100%;
-  top: 84px;
+  top: 4rem;
   bottom: 0px;
   height auto
   .rotate
@@ -39,12 +36,12 @@
 .item {
   height: 4rem;
   min-width: 15rem;
-  border-bottom: 4px solid #f4f2ea;
+  border-bottom: 4px solid #2447c9;
   padding: 0 0.32rem;
   box-sizing: border-box;
 
   .item-top {
-    border-bottom: 1px solid #bfbfbf;
+    border-bottom: 1px solid #2447c9;
     font-family: MicrosoftYaHei;
     font-size: 0.48rem;
     display: flex;
@@ -54,10 +51,10 @@
     span {
       width: 0.56rem;
       height: 0.56rem;
-      background: #7eaad0;
+      background: #8c3eb3;
       text-align: center;
       line-height: 0.56rem;
-      color: #ffffff;
+      color: #ffffff;s
     }
 
     p {
@@ -75,11 +72,9 @@
     .itemcenterlist {
       flex: 1;
       text-align: center;
-      color: #000000;
 
       p:first-of-type {
         margin-bottom: 0.16rem;
-        color: #474747;
       }
     }
   }
@@ -103,7 +98,7 @@
       position: relative;
       width: 6rem;
       height: 0.24rem;
-      background: #bfbac1;
+      background: #f4f2ea;
       border-radius: 0.12rem;
     }
 
@@ -113,13 +108,13 @@
       left: 0px;
       height: 0.24rem;
       border-radius: 0.12rem;
-      background: #d4a79e;
+      background: #8c3eb3;
     }
 
     .tenderbtn {
       width: 2.24rem;
       height: 0.6rem;
-      background-color: #d4a79e;
+      background-color: #8c3eb3;
       border-radius: 0.1rem;
       color: #ffffff;
       font-size: 0.48rem;

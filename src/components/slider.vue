@@ -66,7 +66,7 @@ export default {
       downX:0,
       bgstyle:{
         width:'0px',
-        background:'lightblue'
+        background:'#fbc2eb'
       },
       slstyle:{
         left:'0px'
@@ -126,7 +126,7 @@ export default {
     success(){
       this.isSuccess = true;
       this.txt = "解锁成功";
-      this.bgstyle.background = 'lightgreen'
+      this.bgstyle.background = '#a18cd1'
       this.slider.className = "slider active";
       this.iconclass = 'icon-xuanzhong'
       //滑动成功时，移除鼠标按下事件和鼠标移动事件
@@ -142,6 +142,7 @@ export default {
       this.slstyle.left = 0 + "px";
       this.bgstyle.transition = "width 0.3s linear";
       this.slstyle.transition = "left 0.3s linear";
+      this.bgstyle.background = '#fbc2eb'
       this.txt = "滑动验证";
     }
   }

@@ -3,29 +3,28 @@
     padding-top 44px
   .tablenav
     position fixed
-    top 1.4rem
+    top 1.8rem
     width 100%
     max-width 400px
     display flex
     height 1.6rem
     align-items center
-    background #fefefe
-    border-bottom 2px solid #bfbfbf
+    border-bottom 2px solid #526ca3
     span 
       flex 1
       text-align center
       line-height 1.6rem
       font-size 0.6rem
-      color #010101
+      color #ffffff
       cursor pointer
       &.active
-        background #a1bedb
-        color #fefefe
+        color #8c3eb3
+        border-bottom 2px solid #8c3eb3
   .tablelist
-    margin-top 34px
+    margin-top 1.68rem
     li
       position relative
-      border-bottom 0.06rem solid #dddada
+      border-bottom 0.06rem solid #526ca3
       display flex
       align-items center
       height 1.6rem
@@ -34,13 +33,14 @@
       padding-right 0.52rem
       justify-content space-between
       cursor pointer
+      color #ffffff
       &:before
         position absolute
         left 0.6rem
         content ''
         width 0.24rem
         height 0.24rem
-        background #526ca3
+        background #8c3eb3
         border-radius 50%
       span:first-of-type
         width 7.52rem
@@ -48,7 +48,7 @@
         text-overflow ellipsis
         white-space nowrap
   .tablelist1
-    margin-top 34px
+    margin-top 1.68rem
     &>div
       display flex
       height 2.4rem
@@ -59,16 +59,17 @@
     .list1-l
       width 1.6rem
       height 1.6rem
-      border solid 1px #526ca3
+      background #8c3eb3
       border-radius 50%
       margin-right 0.8rem
       text-align center
       line-height 1.6rem
       .icon
         font-size 1.16rem
-        color #5570a6
+        color #ffffff
     .list1-c
       flex 1
+      color #ffffff
       p:first-of-type
         font-size 0.56rem
       p:last-of-type
@@ -93,7 +94,9 @@
     </ul>
     <div class="tablelist1" v-show="thisbulletin">
       <div @click="$router.push('/bulletinnotice/0')">
-        <div class="list1-l"></div>
+        <div class="list1-l">
+          <i class="icon icon-touzi"></i>
+        </div>
         <div class="list1-c">
           <p>通知</p>
           <p>查看站内通知</p>

@@ -3,25 +3,25 @@
     display flex
     height 3rem
     align-items center
-    border-bottom 1px solid #e5e5e5
+    border-bottom 1px solid #8c3eb3
     .naleft
       flex 0 0 25%
       overflow hidden
       text-align center
       font-size 0.56rem
       i 
-        color #80abd1
+        color #8c3eb3
         font-size 1.2rem
       p
         overflow hidden
         white-space nowrap
         text-overflow ellipsis
+        color #ffffff
     .nacenter
       position relative
       flex 2
       text-align center
       font-size 0.64rem
-      background #9bb6d3
       height 3rem
       color #dddddd
       p
@@ -38,14 +38,15 @@
         content ''
         width 0
         height 0
-        border-width 0.28rem
+        border-width 6px
         border-style solid
-        border-color transparent transparent #ffffff transparent
+        border-color transparent transparent #8c3eb3 transparent
     .naright
       flex 1
       text-align center
       font-size 0.48rem
       line-height 0.72rem
+      color #ffffff
       p:first-of-type
         color #c30101
   .account-money
@@ -54,6 +55,7 @@
     line-height 0.72rem
     align-items center
     height 2rem
+    color #ffffff
     &>div
       flex 1
       text-align center
@@ -68,7 +70,7 @@
     i 
       margin-right 0.24rem
       font-size 0.96rem
-      color #7eaad0
+      color #8c3eb3
     .investment-txt
       flex 1
       p:first-of-type
@@ -84,19 +86,20 @@
       padding 0 0.16rem
       color #ffffff
       font-size 0.48rem
-      background-color #7eaad0
+      background-color #8c3eb3
   .accountnav
     display flex
     padding 0.56rem 0
-    border-bottom 0.32rem solid #eeeeee
+    border-bottom 0.32rem solid #8c3eb3
     &>div
       flex 1
       text-align center
-      color #0a3ea6
+      color #8c3eb3
       cursor pointer
     .icon
       font-size 1.2rem
     p
+      color #ffffff
       font-size 0.56rem
       margin-top 0.16rem
   .thetable
@@ -205,7 +208,8 @@ export default {
       // 待收本金
       due:'',
       // 现金与eos装换比列
-      porportion:''
+      porportion:'',
+      eos_money:0
     }
   },
   components:{

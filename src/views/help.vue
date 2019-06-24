@@ -1,23 +1,23 @@
 <style lang="stylus" scoped>
   .helpnav
     display flex
-    margin-top 1.44rem
-    margin-bottom 1.44rem
+    flex-wrap wrap
+    margin-top 0.92rem
     &>div
       cursor pointer
       text-align center
-      flex 1
+      flex 0 0 33%
+      margin-bottom 0.64rem
     .icon
       display inline-block
-      width 2.2rem
-      height 2.2rem
+      width 2.88rem
+      height 2.88rem
       border solid 1px #526ca3
       text-align center
-      line-height 2.2rem
+      line-height 2.88rem
       border-radius 50%
-      font-size 1.32rem
-      color #ffffff
-      background #8c3eb3
+      font-size 1.68rem
+      color #5570a6
     p
       font-size 0.6rem
       color #ffffff
@@ -37,19 +37,27 @@
   <div class="help">
     <myheader left="prev" center="帮助中心"></myheader>
     <nav class="helpnav">
-      <div @click="$router.push('/helpfinancial/financial')">
-        <i class="icon icon-yonghu1"></i>
-        <p>理财问题</p>
+      <div @click="next({name:'reg',title:'注册投资'})">
+        <i class="icon icon-zhuce"></i>
+        <p>注册投资</p>
       </div>
-      <div @click="$router.push('/helpoperation')">
-        <i class="icon icon-liucheng"></i>
-        <p>操作流程</p>
+      <div @click="next({name:'charge',title:'如何充提'})">
+        <i class="icon icon-chongtijilu"></i>
+        <p>如何充提</p>
       </div>
-      <div @click="$router.push('/helplist/account')">
-        <i class="icon icon-gupiao"></i>
-        <p>账户问题</p>
+      <div @click="next({name:'user',title:'用户协议'})">
+        <i class="icon icon-Ankerwebicon-1"></i>
+        <p>用户协议</p>
       </div>
-      <div @click="$router.push('/helplist/security')">
+      <div @click="next({name:'law',title:'法律声明'})">
+        <i class="icon icon-icon-"></i>
+        <p>法律声明</p>
+      </div>
+      <div @click="next({name:'privacy',title:'隐私条款'})">
+        <i class="icon icon-yinsitiaokuan"></i>
+        <p>隐私条款</p>
+      </div>
+      <div @click="next({name:'security',title:'安全问题'})">
         <i class="icon icon-anquan"></i>
         <p>安全问题</p>
       </div>
@@ -74,6 +82,7 @@ export default {
       let {phone,qq} = json.data.information
       this.phone = phone
       this.qq = qq
+      this.data = json.data
       this.SET_HELPDATA(json.data)
     })
   },
@@ -81,6 +90,7 @@ export default {
     return{
       phone:'',
       qq:'',
+      data:''
     }
   },
   components:{
@@ -92,6 +102,27 @@ export default {
       SET_HELPDATA,
       SET_LOADING
     }),
+    next(obj){
+      if(this.data[obj.name].length>1){
+        this.$router.push({
+          name: 'helpfinancial',
+          params: {
+            id: obj.name,
+          },
+          query: {
+            title:obj.title
+          }
+        })
+      }else{
+        this.$router.push({
+          name: 'helpoperation',
+          params: {
+            title: obj.title,
+            data:this.data[obj.name][0]
+          }
+        })
+      }
+    }
   }
 }
 </script>

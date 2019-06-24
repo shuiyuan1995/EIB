@@ -1,4 +1,6 @@
 <style lang="stylus" scoped>
+  .investmentgo
+    color #ffffff
   .investmentgomain
     font-size 0.6rem
     padding 0.8rem 1.2rem
@@ -11,7 +13,7 @@
     span:first-of-type
       flex 0 0 4rem
     .blue
-      color #5570a6
+      color #8c3eb3
     .red
       color #b50000
       font-size 0.8rem
@@ -34,10 +36,10 @@
         height 30px
         line-height 30px
         text-align center
-        border 1px solid #dedede
-        background #ffffff
+        border 1px solid #2440a8
+        margin 0 4px
         &.active
-          border 1px solid #0081f7
+          border 1px solid #8c3eb3
     input 
       width 1px
       height 1px
@@ -48,7 +50,7 @@
     width 12.64rem
     height 1.2rem
     margin 0 auto
-    background-color #9bb6d3
+    background-color #8c3eb3
     text-align center
     font-size 15px
     color #ffffff

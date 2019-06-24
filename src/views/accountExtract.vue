@@ -2,18 +2,18 @@
   h2
     font-size 0.72rem
     padding 0.56rem 0.8rem
+    color #ffffff
   .changemoney
     margin 0 0.8rem
     padding 0 0.4rem
     height 1.2rem
-    background-color #e5e5e5
+    background-color #8c3eb3
     font-size 0.56rem
     display flex
     align-items center
-    color #8e8e8e
+    color #ffffff
     span:first-of-type
       flex 1
-      color #000000
     span:last-of-type
       cursor pointer
   form
@@ -22,6 +22,7 @@
     .title
       font-size 0.56rem
       margin-bottom 0.16rem
+      color #ffffff
     label
       margin-bottom 0.48rem
       display block
@@ -34,7 +35,7 @@
         padding-top 0.4rem
         padding-bottom 0.4rem
     .formtxt
-      background #7eaad0
+      background #8c3eb3
       font-size 0.48rem
       color #ffffff
       padding 0.4rem
@@ -47,13 +48,17 @@
       font-size 0.56rem
       justify-content space-between
       margin 0.8rem 0
+      color #ffffff
     .inputappend
       margin-right 0.32rem
     .btn
-      background #9bb6d3
+      background #8c3eb3
+    .btn1
+      height 1.68rem
   .investmentgopay
     margin 0.56rem 0
     .passwordDiv
+      color #ffffff
       display flex
       justify-content center
       align-items center
@@ -71,10 +76,10 @@
         height 30px
         line-height 30px
         text-align center
-        border 1px solid #dedede
-        background #ffffff
+        margin 0 0.16rem
+        border 1px solid #2440a8
         &.active
-          border 1px solid #0081f7
+          border 1px solid #8c3eb3
     input 
       width 1px
       height 1px
@@ -110,7 +115,7 @@
               <p class="inputappend">{{thismoney}}</p>
             </template>
           </cube-input>
-          <cube-button class="btn" @click="money = aoto[thismoney].money">全部</cube-button>
+          <cube-button class="btn btn1" @click="money = aoto[thismoney].money">全部</cube-button>
         </div>
       </label>
       <label>

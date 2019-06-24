@@ -26,12 +26,10 @@
 
 <template>
   <div class="helpfinancial">
-    <myheader left="prev" center="理财问题"></myheader>
+    <myheader left="prev" :center="$route.query.title"></myheader>
     <ul>
-      <li class="list" v-for="(item,index) in thislist" :key="index" @click="thisactive=index">
+      <li class="list" v-for="(item,index) in thislist" :key="index" @click="next(item)">
         <p><i class="point"></i><span>{{item.title}}</span><i class="icon icon-pagenext"></i></p>
-        <div class="item" v-show="thisactive==index" v-html="item.content">
-        </div>
       </li>
     </ul>
     <myfooter></myfooter>
@@ -57,7 +55,18 @@ export default {
       "helpdata"
     ]),
     thislist(){
-      return this.helpdata.list[this.$route.params.page]
+      return this.helpdata[this.$route.params.id]
+    }
+  },
+  methods:{
+    next(item){
+      this.$router.push({
+        name: 'helpoperation',
+        params: {
+          title: item.title,
+          data:item.content
+        }
+      })
     }
   }
 }

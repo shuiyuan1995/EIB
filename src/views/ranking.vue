@@ -5,26 +5,28 @@
     display flex
     height 2.48rem
     align-items center
-    border-bottom 0.12rem solid #dcdcdc
     .tableitem
       flex 1
       display flex
       font-size 0.56rem
       justify-content center
       align-items center
-      color #5570a6
-      height 2.48rem
+      color #ffffff
+      height 62px
       cursor pointer
+      box-sizing border-box
+      border-bottom 0.12rem solid #1a2879
       &.active
-        border-bottom 0.12rem solid #5570a6
+        border-bottom 0.12rem solid #8c3eb3
       span 
         width 1.32rem
         height 1.32rem
         line-height 1.32rem
         color #ffffff
-        background #9bb6d3
+        background #8c3eb3
         margin-right 0.08rem
         text-align center
+        margin-right 0.16rem
       p:last-of-type
         font-size 0.48rem
   .tablelist
@@ -33,6 +35,7 @@
       height 1.84rem
       border-bottom 1px solid #e8edeb
       align-items center
+      color #ffffff
       span 
         flex 2
         text-align center
@@ -40,9 +43,9 @@
         &.icon
           flex 1
           font-size 0.96rem
-          color #cccccc
+          color #ffffff
         &.good
-          color red
+          color #8c3eb3
 </style>
 
 <template>

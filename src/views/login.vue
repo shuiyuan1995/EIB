@@ -1,8 +1,8 @@
 <style lang="stylus" scoped>
   .login-logo
-    height 1.6rem
+    height 3.6rem
     text-align center
-    margin 0.8rem 0 1.4rem
+    margin 0.8rem 0 1rem
     cursor pointer
     img 
       height 100%
@@ -16,6 +16,7 @@
       position relative
       .icon
         margin-left 8px
+        color #ffffff
   .logininput
     width 12.16rem
     height 1.18rem
@@ -26,7 +27,7 @@
     padding-left 1.46rem
   .loginbtn
     width 12rem
-    background-color #a1bedb
+    background-color #8c3eb3
     border none 
     outline none
     border-radius 0.2rem
@@ -41,7 +42,7 @@
     .link
       font-family MicrosoftYaHei
       font-size 0.48rem
-      color #5570a6
+      color #8c3eb3
     p
       font-size 0.48rem
       color #b6b6b6
@@ -81,7 +82,7 @@
       <cube-button class="loginbtn" @click="submit">确认登录</cube-button>
     </form>
     <div class="loginbotton">
-      <router-link class="link" to="/securitysetting/2">忘记密码？</router-link>
+      <!-- <router-link class="link" to="/securitysetting/2">忘记密码？</router-link> -->
       <p>还没账户吗？<router-link class="link" to="/register">立即注册</router-link></p>
     </div>
     <myfooter></myfooter>

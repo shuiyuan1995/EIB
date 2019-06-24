@@ -1,15 +1,17 @@
 <style lang="stylus" scoped>
   .securitylist
+    margin-top 0.24rem
     .item
       display flex
       height 1.48rem
-      border-bottom 1px solid #a6a6a6
+      border-bottom 1px solid #526ca3
       align-items center
       padding 0 0.64rem 0 0.76rem
       font-size 14px
+      color #ffffff
       span:nth-of-type(1)
         font-size 0.88rem
-        color #5570a6
+        color #8c3eb3
         margin-right 10px
       span:nth-of-type(2)
         flex 1

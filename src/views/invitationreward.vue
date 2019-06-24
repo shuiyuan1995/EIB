@@ -1,24 +1,27 @@
 <style lang="stylus" scoped>
   .rewardtop
-    background #9bb6d5
     padding-bottom 2.48rem
     nav 
       margin 0 auto
-      background #e8edeb
+      background #1a2879
+      color #ffffff
       border-radius 0 0 0.2rem 0.2rem
       align-items center
       width 4rem
       height 1.2rem
       display flex
+      overflow hidden
       span 
         flex 1
         text-align center
         font-size 14px
         cursor pointer
+        line-height 1.2rem
         &:first-of-type
-          border-right 1px solid #a6a6a6
+          border-right 1px solid #ffffff
         &.active
-          color #5570a6
+          color #000000
+          background #8c3eb3
           font-weight bold
     .person
       float left
@@ -30,7 +33,7 @@
         position absolute
         font-size 29px
         left -16px
-        background #1296db
+        background #8c3eb3
         color #ffffff
         border-radius 50%
         overflow hidden
@@ -40,7 +43,7 @@
         padding 2px 10px 2px 16px
         border-radius 4px
         span:first-of-type
-          color #bd1313
+          color #8c3eb3
         span 
           display block
     .message
@@ -61,15 +64,17 @@
       p:nth-of-type(3)
         font-size 0.72rem
     .messagebottom
+      margin-top 10px
       font-size 0.48rem
       color #ffffff
       padding-left 0.96rem
       line-height 0.72rem
     .btn
       float right
+      margin-top -10px
       span 
         display block
-        background #526ca3
+        background #8c3eb3
         color #ffffff
         font-size 0.48rem
         text-align center
@@ -85,8 +90,9 @@
       justify-content space-between
       align-items center
       height 1.2rem
-      border-bottom 1px solid #d2d2d2
+      border-bottom 1px solid #526ca3
       font-weight bold
+      color #ffffff
       &:last-of-type
         color #526ca3
         font-size 0.48rem
@@ -102,9 +108,10 @@
       display flex
       font-size 0.48rem
       height 1.2rem
-      border-bottom 0.04rem solid #d2d2d2
+      border-bottom 0.04rem solid #526ca3
       align-items center
       cursor pointer
+      color #ffffff
       span:first-of-type
         flex 1
       .icon
@@ -113,6 +120,7 @@
           transform rotate(90deg)
     .itemlist
       transition all 0.5s
+      background #ffffff
       overflow hidden
       li 
         display flex
