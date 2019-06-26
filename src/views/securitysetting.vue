@@ -44,7 +44,8 @@
     color #ffffff
     margin 0 auto 0.4rem
   .rechargeBottom
-    background-color #9bb6d3
+    background-color #8c3eb3
+    color #ffffff
     border-radius 0.2rem
     margin 0.56rem
     font-size 0.48rem

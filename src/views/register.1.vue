@@ -1,15 +1,24 @@
 <style lang="stylus" scoped>
-  .registered
-    color #ffffff
-    &>span 
-      padding 0 1.44rem
-      font-size 0.56rem
+  .registernav
+    display flex
+    height 1.2rem
+    color #7eaad0
+    font-family MicrosoftYaHei
+    font-size 0.8rem
+    align-items center
+    border-bottom 2px solid #dee3e1
+    justify-content center
+    margin-top 0.64rem
+    div
+      flex 1
+      text-align center
+      line-height 1.2rem
+      &.active
+        color #5570a6
+        border-bottom 2px solid #546fa5
   .registerform
     text-align center
     margin-top 1rem
-    h1
-      text-align left 
-      padding 0 1.44rem 0.8rem
     label
       display inline-block
       width 12.16rem
@@ -42,11 +51,11 @@
     padding 0 0.64rem
   .registerbtn
     width 12rem
-    background-color #8c3eb3
+    background-color #a1bedb
     font-family MicrosoftYaHei
     font-size 0.52rem
     color #ffffff
-    margin 0 auto 0.48rem
+    margin 0.88rem auto
     border-radius 0.2rem
   .validator
     position absolute
@@ -55,7 +64,6 @@
     bottom -18px
   .phoneaddress
     padding 11px 16px
-    color #ffffff
   .phonenum
     margin-left 6px
 </style>
@@ -63,8 +71,11 @@
 <template>
   <div class="registered">
     <myheader left="prev" center="用户注册" right="登录"></myheader>
+    <nav class="registernav">
+      <div @click="changeregister(true)" :class="registeractive?'active':''">手机注册</div>
+      <div @click="changeregister(false)" :class="registeractive?'':'active'">邮箱注册</div>
+    </nav>
     <form class="registerform">
-      <h1>{{registeractive?'手机注册':'邮箱注册'}}</h1>
       <label>
         <cube-input v-model="num" :placeholder="registeractive?'请输入手机号码':'请输入邮箱'">
           <template slot="prepend">
@@ -100,6 +111,10 @@
           </template>
         </cube-input>
       </label>
+      <!-- <label>
+        <i class="icon" :class="registeractive?'icon-zhanghuzhongxin':'icon-rs-mail'"></i>
+        <input class="logininput" type="text" :placeholder="registeractive?'请输入手机号码':'请输入邮箱'">
+      </label> -->
       <slider ref="slider" class="thislider"></slider>
       <label>
         <cube-input v-model="yanzhengma" placeholder="请输入验证码">
@@ -114,7 +129,6 @@
       </label>
       <cube-button class="registerbtn" @click="submit">确认注册</cube-button>
     </form>
-    <span @click="changepage">{{registeractive?'邮箱注册':'手机注册'}}</span>
     <myfooter></myfooter>
   </div>
 </template>
@@ -131,7 +145,6 @@ import { setInterval, clearInterval } from 'timers';
 let inter = null;
 export default {
   activated(){
-    this.registeractive = this.$route.params.type=='email'?false:true
     if(this.invite) this.yaoqing = this.invite
     this.num = '';
     this.passworld = '';
@@ -140,7 +153,6 @@ export default {
     clearInterval(inter);
     this.time = 60;
   },
-  inject:['reload'],
   data(){
     return{
       // 表单样式与验证
@@ -295,6 +307,9 @@ export default {
         }
       })
     },
+    changeregister(isnav){
+      this.registeractive = isnav
+    },
     changeaddress(){
       if (!this.picker) {
         this.picker = this.$createPicker({
@@ -316,11 +331,6 @@ export default {
       }
     },
     cancelHandle() {
-    },
-    // 切换注册
-    changepage(){
-      this.$router.push(`/register/${this.$route.params.type=='email'?'phone':'email'}`)
-      this.reload()
     },
     ...mapMutations({
       SET_LOADING

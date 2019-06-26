@@ -130,6 +130,8 @@ export default {
       this.slider.className = "slider active";
       this.iconclass = 'icon-xuanzhong'
       //滑动成功时，移除鼠标按下事件和鼠标移动事件
+      this.slider.removeEventListener('touchstart', this.mousedownHandler)
+      this.slider.removeEventListener('mousedown', this.mousedownHandler)
       document.removeEventListener('mousemove', this.mousemoveHandler)
       document.removeEventListener('mouseup', this.mouseupHandler)
       this.slider.removeEventListener('touchmove', this.mousemoveHandler)
@@ -144,6 +146,8 @@ export default {
       this.slstyle.transition = "left 0.3s linear";
       this.bgstyle.background = '#fbc2eb'
       this.txt = "滑动验证";
+      this.slider.addEventListener('touchstart', this.mousedownHandler, false);
+      this.slider.addEventListener('mousedown', this.mousedownHandler, false);
     }
   }
 }

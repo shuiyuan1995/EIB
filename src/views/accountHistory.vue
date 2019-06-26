@@ -10,7 +10,7 @@
     position absolute
     width 100%
     top 76px
-    bottom 0px
+    bottom 2.2rem
   .item
     padding 0 0.6rem
     margin-bottom 10px

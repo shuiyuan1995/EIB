@@ -25,7 +25,7 @@
   position: absolute;
   width: 100%;
   top: 4rem;
-  bottom: 0px;
+  bottom: 2.2rem;
   height auto
   .rotate
     display block
@@ -39,7 +39,6 @@
   border-bottom: 4px solid #2447c9;
   padding: 0 0.32rem;
   box-sizing: border-box;
-
   .item-top {
     border-bottom: 1px solid #2447c9;
     font-family: MicrosoftYaHei;
@@ -47,7 +46,6 @@
     display: flex;
     align-items: center;
     padding: 0.24rem 0 0.04rem 0;
-
     span {
       width: 0.56rem;
       height: 0.56rem;
@@ -68,7 +66,6 @@
     align-items: center;
     font-size: 0.48rem;
     height: 2.1rem;
-
     .itemcenterlist {
       flex: 1;
       text-align: center;

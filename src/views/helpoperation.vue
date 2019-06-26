@@ -1,6 +1,7 @@
 <style>
   .helpoperationmain{
     padding: 0.6rem 1rem;
+    color: #ffffff;
   }
   .helpoperationmain p{
     font-size: 0.6rem;

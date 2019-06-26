@@ -3,11 +3,11 @@
   header 
     position fixed
     top 0px
-    z-index 9
+    z-index 100
     width 100%
     max-width 400px
     height 1.8rem
-    background: linear-gradient(#0f194e 15%, #1f2f8f 100%)
+    background: linear-gradient(#717171 25%, #000000 100%)
     display flex
     justify-content space-between
     align-items center
@@ -47,10 +47,10 @@
   .menulist
     position absolute
     width 4.36rem
-    background-color #546fa5
+    background-color #8c3eb3
     z-index 1
     right 0
-    top 1.38rem
+    top 1.8rem
     overflow hidden
     transform-origin center top
   .menulist-nav
@@ -87,7 +87,7 @@
       <img src="../assets/loginsmall.png" alt="">
     </span>
     <span class="text" v-show="center">{{center}}</span>
-    <router-link v-if="right" class="link right" :to="right=='注册'?'/register':'/login'">{{right}}</router-link>
+    <router-link v-if="right" class="link right" :to="right=='注册'?'/register/email':'/login'">{{right}}</router-link>
     <span v-else class="menu" @click="changemenu"><i class="icon icon-menu1"></i></span>
     <transition name="showup">
       <div class="menulist" v-show="menulist">
@@ -150,6 +150,7 @@ export default {
     },
     // 刷新当前页面
     thereload(){
+      console.log(this)
       this.reload()
       this.menulist = false;
     },

@@ -13,11 +13,12 @@
       width 2.88rem
       height 2.88rem
       border solid 1px #526ca3
+      background #8c3eb3
       text-align center
       line-height 2.88rem
       border-radius 50%
       font-size 1.68rem
-      color #5570a6
+      color #ffffff
     p
       font-size 0.6rem
       color #ffffff
@@ -62,8 +63,8 @@
         <p>安全问题</p>
       </div>
     </nav>
-    <p class="num"><i class="icon icon-icon-yxj-phone-right"></i>客服热线：{{phone}}</p>
-    <p class="num"><i class="icon icon-QQ"></i>官方QQ群：{{qq}}</p>
+    <p class="num"><i class="icon icon-icon-yxj-phone-right"></i>{{phone}}</p>
+    <p class="num"><i class="icon  icon-icon-yxj-phone-right"></i>{{qq}}</p>
     <myfooter></myfooter>
   </div>
 </template>

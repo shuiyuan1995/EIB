@@ -52,7 +52,7 @@
       position absolute
       width 100%
       top 9.44rem
-      bottom 0rem
+      bottom 2.2rem
       .item
         display flex
         font-size 12px

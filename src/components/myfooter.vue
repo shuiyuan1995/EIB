@@ -1,7 +1,9 @@
 <style lang="stylus" scoped>
     // 底部
   footer
-    margin-top 0.8rem
+    position absolute
+    bottom 2.4rem
+    width 100%
     p
       font-family MicrosoftYaHei
       font-size 0.5rem

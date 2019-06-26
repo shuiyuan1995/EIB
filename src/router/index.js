@@ -55,7 +55,7 @@ const router = new Router({
       }
     },
     {
-      path: '/register',
+      path: '/register/:type',
       name: 'register',
       component:register,
       meta: {

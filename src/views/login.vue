@@ -83,7 +83,7 @@
     </form>
     <div class="loginbotton">
       <!-- <router-link class="link" to="/securitysetting/2">忘记密码？</router-link> -->
-      <p>还没账户吗？<router-link class="link" to="/register">立即注册</router-link></p>
+      <p>还没账户吗？<router-link class="link" to="/register/email">立即注册</router-link></p>
     </div>
     <myfooter></myfooter>
   </div>

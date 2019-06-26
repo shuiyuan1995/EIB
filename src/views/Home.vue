@@ -1,4 +1,6 @@
 <style lang="stylus" scoped>
+  .home
+    color #ffffff
   // 轮播
   .swper
     width 100%
@@ -16,16 +18,15 @@
     .icon
       position absolute
       left -1.2rem
-      top -0.24rem
+      top -0.16rem
       font-size 1.04rem
-      color #546ca9
+      color #8c3eb3
   .swper1
     height 0.8rem
     padding-right 0.4rem
     .message-txt
       font-family AdobeHeitiStd-Regular
       font-size 0.6rem
-      color #4b4b4b
       display block
       line-height 0.8rem
       overflow hidden
@@ -33,12 +34,10 @@
       white-space nowrap
   // 基础信息
   .basis-message
-    // height 3.76rem
-    border-top 1px solid #9bb3d2
-    border-bottom 1px solid #9bb3d2
+    border-top 1px solid #8c3eb3
+    border-bottom 1px solid #8c3eb3
     display flex
     font-family AdobeHeitiStd-Regular
-    color #4b4b4b
     text-align center
     padding-top 0.32rem
     padding-bottom 0.24rem
@@ -51,7 +50,6 @@
       margin-top 0.12rem
     .basis-price
       font-size 0.48rem
-      color #aaaaaa
     .basis-num
       font-size 0.48rem
       color #6a6a6a
@@ -61,23 +59,24 @@
     flex-wrap wrap
     margin-top 1.12rem
     .link-nav
-      width 25%
+      width 33%
       text-align center
       margin-bottom 1rem
       p
         font-family AdobeHeitiStd-Regular
         font-size 0.5rem
-        color #000000
+        color #ffffff
+        margin-top 0.4rem
     .linkbox
-      width 1.76rem
-      height 1.76rem
-      background-color #5570a6
+      width 2.52rem
+      height 2.52rem
+      background-color #8c3eb3
       margin 0 auto
       border-radius 50%
       i 
         color #ffffff
-        line-height 1.76rem
-        font-size 1.2rem
+        line-height 2.52rem
+        font-size 1.6rem
 </style>
 
 
