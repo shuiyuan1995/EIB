@@ -1,6 +1,6 @@
 <style lang="stylus" scoped>
   .list
-    border-bottom 1px solid #526ca3
+    border-bottom 1px solid $border-small
     &>p
       display flex
       align-items center
@@ -14,7 +14,7 @@
     .point
       width 10px
       height 10px
-      background-color #8c3eb3
+      background $btn-background
       border-radius 50%
       margin-right 0.48rem
     .item

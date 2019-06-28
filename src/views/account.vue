@@ -3,14 +3,14 @@
     display flex
     height 3rem
     align-items center
-    border-bottom 1px solid #8c3eb3
+    border-bottom 1px solid $font-active
     .naleft
       flex 0 0 25%
       overflow hidden
       text-align center
       font-size 0.56rem
       i 
-        color #8c3eb3
+        color $font-active
         font-size 1.2rem
       p
         overflow hidden
@@ -40,7 +40,7 @@
         height 0
         border-width 6px
         border-style solid
-        border-color transparent transparent #8c3eb3 transparent
+        border-color transparent transparent $font-active transparent
     .naright
       flex 1
       text-align center
@@ -70,7 +70,7 @@
     i 
       margin-right 0.24rem
       font-size 0.96rem
-      color #8c3eb3
+      color $font-active
     .investment-txt
       flex 1
       p:first-of-type
@@ -86,15 +86,15 @@
       padding 0 0.16rem
       color #ffffff
       font-size 0.48rem
-      background-color #8c3eb3
+      background $btn-background
   .accountnav
     display flex
     padding 0.56rem 0
-    border-bottom 0.32rem solid #8c3eb3
+    border-bottom 0.32rem solid $font-active
     &>div
       flex 1
       text-align center
-      color #8c3eb3
+      color $font-active
       cursor pointer
     .icon
       font-size 1.2rem

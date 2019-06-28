@@ -39,16 +39,19 @@ body,
   max-width 400px
   margin 0 auto
 .cube-input
-    border 1px solid #526ca3
+    border 1px solid $input-color
     background rgba(0, 0, 0, 0.3)
     &.cube-input_active
-      border 1px solid #8c3eb3
+      border 1px solid $input-coloractive
 .cube-btn
   background-color #8c3eb3
 .cube-input-field
   color #ffffff
 .cube-switch .cube-switch-input:checked + .cube-switch-ui
-  background-color #8c3eb3
-  border-color: #8c3eb3;
+  background-color $font-active
+  border-color: $font-active;
 .bscroll-indicator
   background #f4f2ea !important
+.cube-toast .cube-popup-content
+  background rgba(248, 249, 255, 0.9)
+  color #000000

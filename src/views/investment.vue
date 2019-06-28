@@ -8,7 +8,7 @@
   font-family: MicrosoftYaHei;
   font-size: 0.8rem;
   align-items: center;
-  border-bottom: 2px solid #1a2879;
+  border-bottom: 2px solid $border-small;
   justify-content: center;
   margin-top: 0.64rem;
   div {
@@ -16,7 +16,7 @@
     text-align: center;
     line-height: 1.2rem;
     &.active {
-      border-bottom: 2px solid #8c3eb3;
+      border-bottom: 2px solid $font-active;
     }
   }
 }
@@ -36,11 +36,11 @@
 .item {
   height: 4rem;
   min-width: 15rem;
-  border-bottom: 4px solid #2447c9;
+  border-bottom: 4px solid #717171;
   padding: 0 0.32rem;
   box-sizing: border-box;
   .item-top {
-    border-bottom: 1px solid #2447c9;
+    border-bottom: 1px solid $border-small;
     font-family: MicrosoftYaHei;
     font-size: 0.48rem;
     display: flex;
@@ -49,7 +49,7 @@
     span {
       width: 0.56rem;
       height: 0.56rem;
-      background: #8c3eb3;
+      background: $font-active;
       text-align: center;
       line-height: 0.56rem;
       color: #ffffff;s
@@ -105,13 +105,13 @@
       left: 0px;
       height: 0.24rem;
       border-radius: 0.12rem;
-      background: #8c3eb3;
+      background: $btn-background;
     }
 
     .tenderbtn {
       width: 2.24rem;
       height: 0.6rem;
-      background-color: #8c3eb3;
+      background: $btn-background;
       border-radius: 0.1rem;
       color: #ffffff;
       font-size: 0.48rem;
@@ -119,7 +119,7 @@
       text-align: center;
 
       &.old {
-        background-color: #f4f2ea;
+        background: #f4f2ea;
         color: #373737;
       }
     }

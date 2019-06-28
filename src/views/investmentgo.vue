@@ -13,7 +13,7 @@
     span:first-of-type
       flex 0 0 4rem
     .blue
-      color #8c3eb3
+      color $font-active
     .red
       color #b50000
       font-size 0.8rem
@@ -36,10 +36,10 @@
         height 30px
         line-height 30px
         text-align center
-        border 1px solid #2440a8
+        border 1px solid $input-color
         margin 0 4px
         &.active
-          border 1px solid #8c3eb3
+          border 1px solid $input-coloractive
     input 
       width 1px
       height 1px
@@ -50,7 +50,7 @@
     width 12.64rem
     height 1.2rem
     margin 0 auto
-    background-color #8c3eb3
+    background $btn-background
     text-align center
     font-size 15px
     color #ffffff

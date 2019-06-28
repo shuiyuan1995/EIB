@@ -15,15 +15,15 @@
       height 62px
       cursor pointer
       box-sizing border-box
-      border-bottom 0.12rem solid #1a2879
+      border-bottom 0.12rem solid $border-small
       &.active
-        border-bottom 0.12rem solid #8c3eb3
+        border-bottom 0.12rem solid $font-active
       span 
         width 1.32rem
         height 1.32rem
         line-height 1.32rem
         color #ffffff
-        background #8c3eb3
+        background $btn-background
         margin-right 0.08rem
         text-align center
         margin-right 0.16rem
@@ -45,7 +45,7 @@
           font-size 0.96rem
           color #ffffff
         &.good
-          color #8c3eb3
+          color $font-active
 </style>
 
 <template>

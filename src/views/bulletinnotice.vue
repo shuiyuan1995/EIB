@@ -15,13 +15,13 @@
     .mainl
       width 1.52rem
       height 1.52rem
-      border solid 1px #526ca3
+      border solid 1px $font-active
       border-radius 50%
       text-align center
       line-height 1.52rem
       .icon
         font-size 1.12rem
-        color #5570a6
+        color $font-active
     .mainr
       margin-left 0.88rem
       width 11rem

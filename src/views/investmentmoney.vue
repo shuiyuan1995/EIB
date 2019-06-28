@@ -10,7 +10,7 @@
       color #ffffff
       i 
         margin-right 0.28rem
-        color #8c3eb3
+        color $font-active
     p:last-of-type
       font-size 1.2rem
       color #ffffff
@@ -37,7 +37,7 @@
     display block
     width 13rem
     margin 0 auto
-    background-color #8c3eb3
+    background $btn-background
     text-align center
     font-size 15px
     margin-top 0.8rem

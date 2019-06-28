@@ -1,8 +1,10 @@
 <style lang="stylus" scoped>
   .investmentinfo
     color #ffffff
+  .investmentinfo-topbar
+    height 0.96rem
+    background $btn-background
   .investmentinfo-top
-    border-bottom 0.96rem solid #8c3eb3
     padding-bottom 0.56rem
     .title
       display flex
@@ -18,7 +20,7 @@
       span 
         width 0.56rem
         height 0.56rem
-        background #8c3eb3
+        background $font-active
         text-align center
         line-height 0.56rem
       p
@@ -34,11 +36,11 @@
         height: 0;
         border-width: 0.28rem;
         border-style: solid;
-        border-color: transparent #8c3eb3 transparent transparent;
+        border-color: transparent $font-active transparent transparent;
       span 
         width 6rem
         height 0.56rem
-        background-color #8c3eb3
+        background $btn-background
         font-size 0.48rem
         line-height 0.56rem
         text-align center
@@ -51,7 +53,7 @@
         flex 1
         text-align center
       i 
-        color #8c3eb3
+        color $font-active
         font-size 1.6rem
       p:first-of-type
         margin-top 0.28rem
@@ -74,7 +76,7 @@
         left 0px
         width 10%
         height 100%
-        background-color #8c3eb3
+        background $btn-background
         border-radius 0.1rem
   .investmentinfo-center
     font-size 13px
@@ -90,14 +92,14 @@
         content ''
         width 0.24rem
         height 0.24rem
-        background-color #8c3eb3
+        background $btn-background
         border-radius 50%
   .investmentinfo-table
     margin-top 0.4rem
     .tabletitle
       height 1.52rem
-      border-top 1px solid #152061
-      border-bottom 2px solid #152061
+      border-top 1px solid $border-small
+      border-bottom 2px solid $border-small
       font-size 0.72rem
       display flex
       align-items center
@@ -105,9 +107,9 @@
         flex 1
         text-align center
         &.active
-          color #8c3eb3
+          color $font-active
           line-height 1.52rem
-          border-bottom 2px solid #8c3eb3
+          border-bottom 2px solid $font-active
     .tablebox1
       font-size 0.48rem
       .boxtxt,.boxtxt1
@@ -119,7 +121,7 @@
         line-height 0.88rem
         padding-left 0.44rem
         font-size 0.56rem
-        background-color #8c3eb3
+        background $btn-background
     .tablebox2
       min-height 4rem
       p
@@ -131,7 +133,7 @@
         font-size 12px
         height 1.2rem
         line-height 1.2rem
-        border-bottom 1px solid #152061
+        border-bottom 1px solid $border-small
       span 
         flex 1
         text-align center
@@ -149,7 +151,7 @@
         font-size 12px
         height 1.2rem
         line-height 1.2rem
-        border-bottom 1px solid #152061
+        border-bottom 1px solid $border-small
       span 
         flex 1
         text-align center
@@ -158,7 +160,7 @@
     width 14rem
     height 1.2rem
     margin 0 auto
-    background-color #8c3eb3
+    background $btn-background
     text-align center
     font-size 15px
     color #ffffff
@@ -204,6 +206,7 @@
         </div>
       </div>
     </div>
+    <div class="investmentinfo-topbar"></div>
     <ul class="investmentinfo-center">
       <li>开标时间：{{info.start}}</li>
       <li>停标时间：{{info.end}}</li>

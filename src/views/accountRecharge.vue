@@ -7,7 +7,7 @@
     margin 0 0.8rem
     padding 0 0.4rem
     height 1.2rem
-    background-color #8c3eb3
+    background $btn-background
     font-size 0.56rem
     display flex
     align-items center
@@ -24,7 +24,7 @@
       margin 1rem auto 0.56rem
     .save
       font-size 0.56rem
-      color #5570a6
+      color $font-active
       text-align center
       margin-bottom 1.08rem
       cursor pointer
@@ -34,7 +34,7 @@
       text-align center
       color #ffffff
   .rechargeBottom
-    background-color #8c3eb3
+    background $bg-box
     color #ffffff
     border-radius 0.2rem
     margin 0.56rem

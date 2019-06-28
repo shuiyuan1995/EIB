@@ -17,11 +17,11 @@
         width 1.24rem
         height 1.24rem
         border-radius 50%
-        border solid 1px #8c3eb3
+        border solid 1px $font-active
         margin-right 0.24rem
         text-align center
         line-height 1.24rem
-        color #8c3eb3
+        color $font-active
         font-size 0.8rem
       span:nth-of-type(2)
         flex 1

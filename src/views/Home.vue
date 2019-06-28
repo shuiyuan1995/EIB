@@ -20,7 +20,7 @@
       left -1.2rem
       top -0.16rem
       font-size 1.04rem
-      color #8c3eb3
+      color $font-active
   .swper1
     height 0.8rem
     padding-right 0.4rem
@@ -34,8 +34,8 @@
       white-space nowrap
   // 基础信息
   .basis-message
-    border-top 1px solid #8c3eb3
-    border-bottom 1px solid #8c3eb3
+    border-top 1px solid $font-active
+    border-bottom 1px solid $font-active
     display flex
     font-family AdobeHeitiStd-Regular
     text-align center
@@ -70,7 +70,7 @@
     .linkbox
       width 2.52rem
       height 2.52rem
-      background-color #8c3eb3
+      background $btn-background
       margin 0 auto
       border-radius 50%
       i 

@@ -42,7 +42,7 @@
     padding 0 0.64rem
   .registerbtn
     width 12rem
-    background-color #8c3eb3
+    background $btn-background
     font-family MicrosoftYaHei
     font-size 0.52rem
     color #ffffff

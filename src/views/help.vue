@@ -12,8 +12,7 @@
       display inline-block
       width 2.88rem
       height 2.88rem
-      border solid 1px #526ca3
-      background #8c3eb3
+      background $btn-background
       text-align center
       line-height 2.88rem
       border-radius 50%
@@ -29,7 +28,7 @@
     font-size 0.6rem
     padding 0 0.84rem
     color #ffffff
-    border-bottom 1px solid #526ca3
+    border-bottom 1px solid $border-small
     .icon 
       margin-right 0.24rem
 </style>

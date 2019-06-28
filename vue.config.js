@@ -12,7 +12,8 @@ module.exports = {
       stylus: {
         'resolve url': true,
         'import': [
-          './src/theme'
+          './src/theme',
+          './src/common/stylus/variable'
         ]
       }
     }

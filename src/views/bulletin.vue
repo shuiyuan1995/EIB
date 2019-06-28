@@ -9,7 +9,7 @@
     display flex
     height 1.6rem
     align-items center
-    border-bottom 2px solid #526ca3
+    border-bottom 2px solid $border-small
     span 
       flex 1
       text-align center
@@ -18,13 +18,13 @@
       color #ffffff
       cursor pointer
       &.active
-        color #8c3eb3
-        border-bottom 2px solid #8c3eb3
+        color $font-active
+        border-bottom 2px solid $font-active
   .tablelist
     margin-top 1.68rem
     li
       position relative
-      border-bottom 0.06rem solid #526ca3
+      border-bottom 0.06rem solid $border-small
       display flex
       align-items center
       height 1.6rem
@@ -40,7 +40,7 @@
         content ''
         width 0.24rem
         height 0.24rem
-        background #8c3eb3
+        background $btn-background
         border-radius 50%
       span:first-of-type
         width 7.52rem
@@ -59,7 +59,7 @@
     .list1-l
       width 1.6rem
       height 1.6rem
-      background #8c3eb3
+      background $btn-background
       border-radius 50%
       margin-right 0.8rem
       text-align center

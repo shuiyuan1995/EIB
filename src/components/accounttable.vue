@@ -11,10 +11,10 @@
         padding 0px
         color #ffffff
     ul
-      border-top 1px solid #526ca3
+      border-top 1px solid $border-small
       li
         display flex
-        border-bottom 1px solid #526ca3
+        border-bottom 1px solid $border-small
         color #ffffff
         font-size 0.48rem
         height 0.88rem

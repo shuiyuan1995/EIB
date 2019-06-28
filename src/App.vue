@@ -21,7 +21,7 @@
   .link
     color #ffffff
     &.router-link-exact-active
-      color #8c3eb3
+      color $font-active
   p
     margin-top 0.16rem
 

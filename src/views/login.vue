@@ -27,7 +27,7 @@
     padding-left 1.46rem
   .loginbtn
     width 12rem
-    background-color #8c3eb3
+    background $btn-background
     border none 
     outline none
     border-radius 0.2rem

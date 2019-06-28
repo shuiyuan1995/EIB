@@ -16,7 +16,7 @@
     margin-bottom 10px
   .itemtop
     display flex
-    background #8c3eb3
+    background $btn-background
     justify-content space-between
     align-items center
     height 0.96rem
@@ -30,7 +30,7 @@
     display flex
     padding 0 8px
     line-height 18px
-    border-bottom 1px solid #5570a6
+    border-bottom 1px solid $border-small
     span 
       flex 2
       white-space nowrap
@@ -39,7 +39,7 @@
       &:nth-of-type(1),&:nth-of-type(2)
         flex 1
   .itembottom
-    color #5570a6
+    color $font-active
 </style>
 
 <template>

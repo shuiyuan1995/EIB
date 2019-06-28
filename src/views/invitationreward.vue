@@ -3,7 +3,7 @@
     padding-bottom 2.48rem
     nav 
       margin 0 auto
-      background #1a2879
+      background $bg-box
       color #ffffff
       border-radius 0 0 0.2rem 0.2rem
       align-items center
@@ -20,8 +20,8 @@
         &:first-of-type
           border-right 1px solid #ffffff
         &.active
-          color #000000
-          background #8c3eb3
+          color #ffffff
+          background $btn-background
           font-weight bold
     .person
       float left
@@ -33,7 +33,7 @@
         position absolute
         font-size 29px
         left -16px
-        background #8c3eb3
+        background $btn-background
         color #ffffff
         border-radius 50%
         overflow hidden
@@ -43,7 +43,7 @@
         padding 2px 10px 2px 16px
         border-radius 4px
         span:first-of-type
-          color #8c3eb3
+          color $font-active
         span 
           display block
     .message
@@ -74,7 +74,7 @@
       margin-top -10px
       span 
         display block
-        background #8c3eb3
+        background $btn-background
         color #ffffff
         font-size 0.48rem
         text-align center
@@ -90,11 +90,11 @@
       justify-content space-between
       align-items center
       height 1.2rem
-      border-bottom 1px solid #526ca3
+      border-bottom 1px solid $border-small
       font-weight bold
       color #ffffff
       &:last-of-type
-        color #526ca3
+        color $font-active
         font-size 0.48rem
         font-weight normal
     .view-wrapper
@@ -108,7 +108,7 @@
       display flex
       font-size 0.48rem
       height 1.2rem
-      border-bottom 0.04rem solid #526ca3
+      border-bottom 0.04rem solid $border-small
       align-items center
       cursor pointer
       color #ffffff

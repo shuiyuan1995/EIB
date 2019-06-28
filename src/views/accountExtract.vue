@@ -7,7 +7,7 @@
     margin 0 0.8rem
     padding 0 0.4rem
     height 1.2rem
-    background-color #8c3eb3
+    background $btn-background
     font-size 0.56rem
     display flex
     align-items center
@@ -34,8 +34,9 @@
         flex 0 0 2.48rem
         padding-top 0.4rem
         padding-bottom 0.4rem
+        background $btn-background
     .formtxt
-      background #8c3eb3
+      background $bg-box
       font-size 0.48rem
       color #ffffff
       padding 0.4rem
@@ -52,7 +53,7 @@
     .inputappend
       margin-right 0.32rem
     .btn
-      background #8c3eb3
+      background $btn-background
     .btn1
       height 1.68rem
   .investmentgopay
@@ -77,9 +78,9 @@
         line-height 30px
         text-align center
         margin 0 0.16rem
-        border 1px solid #2440a8
+        border 1px solid $input-color
         &.active
-          border 1px solid #8c3eb3
+          border 1px solid $input-coloractive
     input 
       width 1px
       height 1px

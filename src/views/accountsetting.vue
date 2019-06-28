@@ -3,7 +3,7 @@
     bottom 0rem
     color #ffffff
   .settingnav
-    border-bottom 0.06rem solid #1a2879
+    border-bottom 0.06rem solid $border-small
     display flex
     font-size 0.64rem
     height 1.2rem
@@ -15,8 +15,8 @@
       line-height 1.2rem
       cursor pointer
       &.active
-        color #8c3eb3
-        border-bottom 0.06rem solid #8c3eb3
+        color $font-active
+        border-bottom 0.06rem solid $font-active
   .settingitem
     .itemtop
       padding 0.48rem 0.84rem 0.4rem 0.64rem
@@ -30,7 +30,7 @@
       i 
         color #b20202
       span:last-of-type
-        background-color #8c3eb3
+        background $btn-background
         border-radius 0.1rem
         color #ffffff
         padding 0.24rem 0.48rem
@@ -40,14 +40,14 @@
       font-size 0.56rem
       height 1.32rem
       align-items center
-      border-bottom 1px solid #5570a6
-      color #5570a6
+      border-bottom 1px solid $input-color
+      color $font-active
       span 
         flex 1
         text-align center
         line-height 1.32rem
     .itemtable
-      border-top 12px solid #8c3eb3
+      border-top 12px solid $font-active
     .view-wrapper
       position absolute
       width 100%
@@ -57,13 +57,13 @@
         display flex
         font-size 12px
         height 30px
-        border-bottom 1px solid #e5e5e5
+        border-bottom 1px solid $input-color
         align-items center
         span 
           flex 1
           text-align center
         .blue
-          color #5570a6
+          color $font-active
         .red
           color #b40000
   .settingitem1
@@ -79,13 +79,13 @@
       .icon
         color #ffffff
         &:before
-          color #8c3eb3
+          color $font-active
           margin-right 0.24rem
       .topbtn
         font-size 0.56rem
         padding 0.24rem 0.56rem
         border-radius 0.84rem
-        background #8c3eb3
+        background $btn-background
         color #ffffff
         cursor pointer
     .item1table
@@ -93,7 +93,7 @@
     .item1title
       display flex
       align-items center
-      background #8c3eb3
+      background $btn-background
       font-size 0.56rem
       height 1.6rem
       span 
@@ -103,7 +103,7 @@
       display flex
       font-size 0.56rem
       align-items center
-      border-bottom 0.04rem solid #526ca3
+      border-bottom 0.04rem solid $border-small
       padding 0.16rem 0
       span 
         flex 1
@@ -130,10 +130,10 @@
         height 30px
         line-height 30px
         text-align center
-        border 1px solid #2440a8
+        border 1px solid $border-small
         margin 0 0.16rem
         &.active
-          border 1px solid #8c3eb3
+          border 1px solid $font-active
     input 
       width 1px
       height 1px
@@ -142,7 +142,7 @@
   .btn
     width 90%
     margin 6px auto 0
-    background #8c3eb3
+    background $btn-background
 </style>
 
 <template>

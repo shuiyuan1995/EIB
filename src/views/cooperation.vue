@@ -1,6 +1,6 @@
 <style lang="stylus" scoped>
   h2
-    border-bottom 1px solid #526ca3
+    border-bottom 1px solid $border-small
     height 1.76rem
     line-height 1.76rem
     font-size 0.64rem
@@ -25,7 +25,7 @@
     margin-bottom 0.24rem
     margin-top 0.6rem
   .plast
-    border-bottom 1px solid #526ca3
+    border-bottom 1px solid $border-small
     padding-bottom 0.3rem
     margin-bottom 0.3rem
   form
@@ -33,15 +33,11 @@
     p
       font-size 12px
       color #b30303
-  // .cubeinput
-  //   margin-bottom 0.4rem
-  //   border 1px solid #526ca3
-  //   background rgba(0, 0, 0, 0.3)
-  //   &.cube-input_active
-  //     border 1px solid #8c3eb3
+  .cubeinput
+    margin-bottom 0.4rem
   .btn
     margin-top 1rem
-    background #8c3eb3
+    background $btn-background
 </style>
 
 <template>

@@ -47,7 +47,7 @@
   .menulist
     position absolute
     width 4.36rem
-    background-color #8c3eb3
+    background $btn-background
     z-index 1
     right 0
     top 1.8rem
@@ -58,7 +58,7 @@
     display flex
     align-items center
     height 1.2rem
-    border-bottom 1px solid #a1bedb
+    border-bottom 1px solid #000000
     line-height 1.2rem
     .icon
       color #ffffff

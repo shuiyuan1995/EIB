@@ -9,7 +9,7 @@
       position relative
       .icon
         margin-left 0.4rem
-        color #8c3eb3
+        color $font-active
       .clickinput
         padding-left 0.4rem
       .clickgo
@@ -43,8 +43,9 @@
     font-size 0.52rem
     color #ffffff
     margin 0 auto 0.4rem
+    background $btn-background
   .rechargeBottom
-    background-color #8c3eb3
+    background: $bg-box
     color #ffffff
     border-radius 0.2rem
     margin 0.56rem
@@ -64,12 +65,13 @@
       font-size 12px
       padding-top 10px
       padding-bottom 10px
-      background #8c3eb3
+      background $btn-background
       box-sizing border-box
       height 1.68rem
   .phoneaddress
     padding 11px 16px
     color #ffffff
+    background $btn-background
   .phonenum
     margin-left 6px
     color #ffffff

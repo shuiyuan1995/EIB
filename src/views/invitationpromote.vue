@@ -20,7 +20,7 @@
       height 1.68rem
       padding-top 10px
       padding-bottom 10px
-      background #8c3eb3
+      background $btn-background
     .input
       flex 1
   .img
@@ -31,7 +31,7 @@
   .savebtn
     width 90%
     margin 0 auto
-    background #8c3eb3
+    background $btn-background
 </style>
 
 <template>
