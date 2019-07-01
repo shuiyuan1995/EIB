@@ -86,7 +86,7 @@ export default {
     ]),
   },
   methods:{
-    goto(id){
+    goto(){
       if(this.userInfo.account){
         return false
       }else{

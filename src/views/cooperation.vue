@@ -50,11 +50,20 @@
     <p class="plast">3.增加一项安全有利的业务</p>
     <h2><i class="icon icon-hezuo-"></i>合作申请</h2>
     <form>
-      <cube-input class="cubeinput" v-model="value" placeholder="公司性质"></cube-input>
-      <cube-input class="cubeinput" v-model="value1" placeholder="公司名称"></cube-input>
-      <cube-input class="cubeinput" v-model="value2" placeholder="联系人"></cube-input>
-      <cube-input class="cubeinput" v-model="value3" placeholder="联系电话或邮箱"></cube-input>
-      <cube-input class="cubeinput" v-model="value4" placeholder="所在地区"></cube-input>
+      <cube-input class="cubeinput" v-model="name" placeholder="联系人"></cube-input>
+      <cube-validator ref="validator0" class="validator" v-model="valid[0]" :model="name" :rules="rules" :messages="messages"></cube-validator>
+      <cube-input class="cubeinput" v-model="adress" placeholder="所在地区"></cube-input>
+      <cube-validator ref="validator1" class="validator" v-model="valid[1]" :model="adress" :rules="rules" :messages="messages1"></cube-validator>
+      <cube-input class="cubeinput" v-model="phone" placeholder="联系电话"></cube-input>
+      <cube-validator ref="validator2" class="validator" v-model="valid[2]" :model="phone" :rules="rules" :messages="messages2"></cube-validator>
+      <cube-input class="cubeinput" v-model="email" placeholder="联系邮箱"></cube-input>
+      <cube-validator ref="validator3" class="validator" v-model="valid[3]" :model="email" :rules="rules1" :messages="messages3"></cube-validator>
+      <cube-input class="cubeinput" v-model="object" placeholder="项目名字"></cube-input>
+      <cube-validator ref="validator4" class="validator" v-model="valid[4]" :model="object" :rules="rules" :messages="messages4"></cube-validator>
+      <cube-input class="cubeinput" v-model="networkadress" placeholder="网站地址"></cube-input>
+      <cube-validator ref="validator5" class="validator" v-model="valid[5]" :model="networkadress" :rules="rules" :messages="messages5"></cube-validator>
+      <cube-input class="cubeinput" v-model="token" placeholder="代币token"></cube-input>
+      <cube-validator ref="validator6" class="validator" v-model="valid[6]" :model="token" :rules="rules" :messages="messages6"></cube-validator>
       <p>内容务必真实，我们将尽快电话回复您！</p>
       <cube-button class="btn" @click="goto">提交申请</cube-button>
     </form>
@@ -71,11 +80,42 @@ import {SET_LOADING} from "@store/mutation-types"
 export default {
   data(){
     return{
-      value:'',
-      value1:'',
-      value2:'',
-      value3:'',
-      value4:'',
+      name:'',
+      adress:'',
+      phone:'',
+      email:'',
+      object:'',
+      networkadress:'',
+      token:'',
+      valid:['undefined','undefined','undefined','undefined','undefined','undefined','undefined'],
+      rules:{
+        required: true,
+      },
+      rules1:{
+        required: true,
+        type: 'email',
+      },
+      messages:{
+        required:'姓名不能为空',
+      },
+      messages1:{
+        required:'地区不能为空',
+      },
+      messages2:{
+        required:'电话不能为空',
+      },
+      messages3:{
+        required:'邮箱不能为空',
+      },
+      messages4:{
+        required:'项目不能为空',
+      },
+      messages5:{
+        required:'网站不能为空',
+      },
+      messages6:{
+        required:'代币token不能为空',
+      },
     }
   },
   components:{
@@ -90,51 +130,37 @@ export default {
   methods:{
     goto(){
       let that = this
-      if(!this.userInfo.nick){
-        this.$createToast({
-          txt: `请先登录`,
-          type: 'txt',
-          time: 1000,
-          onTimeout(){
-            that.$router.push('/login')
+      const p1 = this.$refs.validator0.validate()
+      const p2 = this.$refs.validator1.validate()
+      const p3 = this.$refs.validator2.validate()
+      const p4 = this.$refs.validator3.validate()
+      const p5 = this.$refs.validator4.validate()
+      const p6 = this.$refs.validator5.validate()
+      const p7 = this.$refs.validator6.validate()
+      Promise.all([p1, p2, p3, p4, p5, p6, p7]).then(() => {
+        if (this.valid.every(item => item)) {
+          let data = {
+            name:this.name,
+            location:this.adress,
+            phone:this.phone,
+            email:this.email,
+            project:this.object,
+            url:this.networkadress,
+            token:this.token,
           }
-        }).show()
-        return false
-      }
-      if(!this.value||!this.value1){
-        this.$createToast({
-          txt: `公司信息不能为空`,
-          type: 'txt',
-          time: 1000,
-        }).show()
-        return false;
-      }
-      if(!this.value2||!this.value3){
-        this.$createToast({
-          txt: `联系人与电话不能为空`,
-          type: 'txt',
-          time: 1000,
-        }).show()
-        return false;
-      }
-      let data = {
-        nature:this.value,
-        name:this.value1,
-        people:this.value2,
-        phone:this.value3,
-        region:this.value4
-      }
-      this.SET_LOADING(true)
-      post('/cooperation',data).then(()=>{
-        this.SET_LOADING(false)
-        this.$createToast({
-          txt: `发送成功，我们将尽快联系您`,
-          type: 'txt',
-          time: 1000,
-          onTimeout(){
-            that.$router.push('/')
-          }
-        }).show()
+          this.SET_LOADING(true)
+          post('/cooperation',data).then(()=>{
+            this.SET_LOADING(false)
+            this.$createToast({
+              txt: `发送成功，我们将尽快联系您`,
+              type: 'txt',
+              time: 1000,
+              onTimeout(){
+                that.$router.push('/')
+              }
+            }).show()
+          })
+        }
       })
     },
     ...mapMutations({

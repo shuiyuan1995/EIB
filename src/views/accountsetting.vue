@@ -220,7 +220,6 @@
 
 <script>
 import myheader from '@components/myheader.vue'
-import myfooter from '@components/myfooter.vue'
 import {mapGetters,mapMutations} from 'vuex';
 import {get,post} from '@api/index'
 import {changedata,getEles} from '@common/js'
@@ -265,8 +264,7 @@ export default {
     }
   },
   components:{
-    myheader,
-    myfooter
+    myheader
   },
   computed:{
     ...mapGetters([

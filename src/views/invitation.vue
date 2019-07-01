@@ -44,6 +44,11 @@
         <span>好友投资奖励</span>
         <span class="icon icon-pagenext"></span>
       </li>
+      <li @click="$router.push('/agent')">
+        <span class="icon icon-dailiren"></span>
+        <span>超级代理人申请</span>
+        <span class="icon icon-pagenext"></span>
+      </li>
     </ul>
     <myfooter></myfooter>
   </div>
@@ -73,7 +78,6 @@ export default {
     getdata(){
       get('/inviation').then(json=>{
         this.SET_LOADING(false)
-        console.log(json)
         const {img_url,url,img} = json.data
         this.img_url = img_url
         this.SET_IMG(img)

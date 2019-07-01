@@ -205,7 +205,6 @@
 <script>
 import { get } from "@api/index";
 import myheader from "@components/myheader.vue";
-import myfooter from "@components/myfooter.vue";
 import {mapMutations} from 'vuex';
 import {SET_THIS_BIAO,SET_LOADING} from "@store/mutation-types"
 export default {
@@ -226,8 +225,7 @@ export default {
     };
   },
   components: {
-    myheader,
-    myfooter
+    myheader
   },
   computed:{
     thistype(){
@@ -237,7 +235,6 @@ export default {
   methods: {
     // 上拉加载
     onPullingUp() {
-      console.log(this.thedata[this.thisindex].page<this.thedata[this.thisindex].max_page)
       if(this.thedata[this.thisindex].page<this.thedata[this.thisindex].max_page){
         this.getdata(this.thedata[this.thisindex].page+1)
       }else{

@@ -25,7 +25,7 @@ import bulletinnotice from '@views/bulletinnotice.vue'
 import help from '@views/help.vue'
 import helpfinancial from '@views/helpfinancial.vue'
 import helpoperation from '@views/helpoperation.vue'
-import helplist from '@views/helplist.vue'
+import agent from '@views/agent.vue'
 import cooperation from '@views/cooperation.vue'
 import about from '@views/About.vue'
 import invitation from '@views/invitation.vue'
@@ -239,9 +239,9 @@ const router = new Router({
       }
     },
     {
-      path: '/helplist/:page',
-      name: 'helplist',
-      component:helplist,
+      path: '/agent',
+      name: 'agent',
+      component:agent,
       meta: {
         role: 'all'
       }

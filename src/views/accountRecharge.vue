@@ -88,7 +88,7 @@
 import myheader from '@components/myheader.vue'
 import myfooter from '@components/myfooter.vue'
 import {get} from '@api/index'
-import {mapGetters,mapMutations} from 'vuex';
+import {mapMutations} from 'vuex';
 import {SET_LOADING} from "@store/mutation-types"
 export default {
   activated(){

@@ -92,7 +92,6 @@
 
 <script>
 import myheader from '@components/myheader.vue'
-import myfooter from '@components/myfooter.vue'
 import {get} from '@api/index'
 import {changedata} from '@common/js'
 export default {
@@ -117,8 +116,7 @@ export default {
     }
   },
   components:{
-    myheader,
-    myfooter
+    myheader
   },
   methods: {
     // 上拉加载

@@ -96,12 +96,11 @@ export default {
     },
     // 一键保存图片
     downloadCodeImg(){
-      console.log('下载图片')
-      var a = document.createElement('a')
-      a.download = name || 'pic'
-      // 设置图片地址
-      a.href = this.img;
-      a.click();
+      var a = document.createElement('a')
+      a.download = name || 'pic'
+      // 设置图片地址
+      a.href = this.img;
+      a.click();
     }
   }
 }
