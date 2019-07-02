@@ -115,7 +115,7 @@
         <p>{{userInfo.nick}}</p>
       </div>
       <div class="nacenter">
-        <p>钱包资产估值</p>
+        <p>钱包资产折合</p>
         <p>{{Number(sum_money+due).toFixed(4)}} EOS</p>
         <p class="rmb">≈￥{{(eos_money*(sum_money+due)).toFixed(2)}}</p>
       </div>

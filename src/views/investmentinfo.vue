@@ -170,13 +170,13 @@
 
 <template>
   <div class="investmentinfo">
-    <myheader left="prev" center="投资详情"></myheader>
+    <myheader left="prev" center="项目详情"></myheader>
     <div class="investmentinfo-top">
       <div class="title">
         <div class="title-left">
           <span>{{info.type}}</span><p>{{info.title}}</p>
         </div>
-        <p>还需融资：{{info.surplus}} {{info.need}}</p>
+        <p>剩余金额：{{info.surplus}} {{info.need}}</p>
       </div>
       <div class="investmentinfo-type">
         <i></i>
@@ -185,7 +185,7 @@
       <div class="investmentinfo-msg">
         <div class="msg-item">
           <i class="icon icon-chuzhijine"></i>
-          <p>融资金额</p>
+          <p>项目金额</p>
           <p>{{info.total}} {{info.need}}</p>
         </div>
         <div class="msg-item">
@@ -208,9 +208,9 @@
     </div>
     <div class="investmentinfo-topbar"></div>
     <ul class="investmentinfo-center">
-      <li>开标时间：{{info.start}}</li>
-      <li>停标时间：{{info.end}}</li>
-      <li>还款日期：{{info.repay}}天</li>
+      <li>启动日期：{{info.start}}</li>
+      <li>截止日期：{{info.end}}</li>
+      <li>回款日期：{{info.repay}}天</li>
       <li>计息方式：{{info.compute}}</li>
       <li>计息币种：{{info.coin}}</li>
     </ul>

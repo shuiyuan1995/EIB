@@ -45,7 +45,7 @@
       </label>
       <p>请向以下账号转300个EOS的代理费，请勿更改memo值。</p>
       <div class="er">
-        <img src="http://www.eosfinance.com/api/agent_img" alt="">
+        <img src="https://admin.eosinvestmentbank.com/api/agent_img" alt="">
       </div>
       <p>注：若审核不通过，会将您的300个EOS返还,确认信息无误并转账后，同一地区最多两个代理人。</p>
       <cube-button class="registerbtn" @click="submit">确认提交</cube-button>
